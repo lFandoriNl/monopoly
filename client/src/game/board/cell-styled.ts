@@ -1,13 +1,14 @@
 import styled from 'styled-components/macro';
 
-export const CellWrapper = styled.div`
+export const CellWrapper = styled.div<{ type: string; orientation: string }>`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  width: ${(p) => (p.test == 'square' ? '10rem' : '5rem')};
-  height: ${(p) => (p.test == 'square' ? '10rem' : '5rem')};
+  width: ${(p) => (p.type === 'square' ? '10rem' : '5rem')};
+  height: ${(p) => (p.type === 'square' ? '10rem' : '5rem')};
+
   span {
     transform: rotate(-90deg);
   }

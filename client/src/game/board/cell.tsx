@@ -10,7 +10,7 @@ type CellProps = {
 
 const Cell = ({ image, price, priceColor, orientation, type }: CellProps) => {
   return (
-    <CellWrapper test1={orientation} test2={type}>
+    <CellWrapper type={type} orientation={orientation}>
       <Price color={priceColor}>{price}</Price>
       <span>{image}</span>
     </CellWrapper>
