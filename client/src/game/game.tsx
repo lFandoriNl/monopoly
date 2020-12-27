@@ -6,7 +6,7 @@ export function Game() {
   return (
     <Board>
       {board.map((item) => (
-        <Cell {...item} />
+        <Cell {...item} key={item.id} />
       ))}
     </Board>
   );
