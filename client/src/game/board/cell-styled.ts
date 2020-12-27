@@ -1,22 +1,22 @@
 import styled, { css } from 'styled-components/macro';
 
-function setWidth({ type }: { type: string }) {
-  if (type == 'square') {
+function setWidth({ figure }: { figure: string }) {
+  if (figure == 'square') {
     return '10rem';
-  } else if (type == 'vertical') {
+  } else if (figure == 'vertical') {
     return '3rem';
-  } else if (type == 'horizontal') {
+  } else if (figure == 'horizontal') {
     return '5rem';
   }
   return '';
 }
 
-function setHeight({ type }: { type: string }) {
-  if (type == 'square') {
+function setHeight({ figure }: { figure: string }) {
+  if (figure == 'square') {
     return '10rem';
-  } else if (type == 'vertical') {
+  } else if (figure == 'vertical') {
     return '5rem';
-  } else if (type == 'horizontal') {
+  } else if (figure == 'horizontal') {
     return '3rem';
   }
   return '';
@@ -65,7 +65,7 @@ function setPosition({ position, color }: { position: string; color: string }) {
   return '';
 }
 
-export const CellWrapper = styled.div<{ type: string; orientation: string }>`
+export const CellWrapper = styled.div<{ figure: string; orientation: string }>`
   position: relative;
   display: flex;
   align-items: center;
