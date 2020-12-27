@@ -1,15 +1,27 @@
+import http from 'http';
 import express from 'express';
+import { Server as ServerIO } from 'socket.io';
 
 const app: express.Application = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+const server = http.createServer(app);
+
+const io = new ServerIO(server, {
+  path: '/ws',
 });
 
 app.get('/api', (req, res) => {
-  res.send('Api');
+  res.send('API');
 });
 
-app.listen(8080, function () {
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
+server.listen(8080, () => {
   console.log('App is listening on port 8080!');
 });
