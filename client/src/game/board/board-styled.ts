@@ -148,7 +148,7 @@ export const Board = styled.div`
     top: 12%;
   }
 
-  .red {
+  /* .red {
     background-color: #ed1b24;
   }
 
@@ -178,7 +178,7 @@ export const Board = styled.div`
 
   .purple {
     background-color: #d93a96;
-  }
+  } */
 
   .rotation1 {
     transform: rotate(90deg);

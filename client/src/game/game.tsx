@@ -1,6 +1,6 @@
 import { Cell } from './board/cell';
-import { board } from './board-settings';
-import { Board } from './board-styled';
+import { boardBootstrap } from './board-settings';
+import { Board } from './board/board-styled';
 // To Do : add game table
 export function Game() {
   return (
@@ -8,69 +8,11 @@ export function Game() {
       <div className="responsive">
         <div className="mainSquare">
           <div className="row top">
-            <div className="square2">
-              <span className="corner corner1">
-                free <br /> parking
-              </span>
-            </div>
-            <div className="square1">
-              <div className="header header-top red"></div>
-              <div className="firstLine firstLine-top rotation2">
-                kentucky <br /> avenue
-              </div>
-            </div>
-            <div className="square1">
-              <div className="firstLine firstLine-top no-color rotation2">
-                chance
-              </div>
-            </div>
-            <div className="square1">
-              <div className="header header-top red"></div>
-              <div className="firstLine firstLine-top rotation2">
-                indiana <br /> avenue
-              </div>
-            </div>
-            <div className="square1">
-              <div className="header header-top red"></div>
-              <div className="firstLine firstLine-top rotation2">
-                illinios <br /> avenue
-              </div>
-            </div>
-            <div className="square1">
-              <div className="firstLine firstLine-top no-color rotation2">
-                b. & o. <br /> railroad
-              </div>
-            </div>
-            <div className="square1">
-              <div className="header header-top yellow"></div>
-              <div className="firstLine firstLine-top rotation2">
-                atlantic <br /> avenue
-              </div>
-            </div>
-            <div className="square1">
-              <div className="header header-top yellow"></div>
-              <div className="firstLine firstLine-top rotation2">
-                ventnor <br /> avenue
-              </div>
-            </div>
-            <div className="square1">
-              <div className="firstLine firstLine-top no-color rotation2">
-                water <br /> works
-              </div>
-            </div>
-            <div className="square1">
-              <div className="header header-top yellow"></div>
-              <div className="firstLine firstLine-top rotation2">
-                marvin <br /> gardens
-              </div>
-            </div>
-            <div className="square2">
-              <span className="corner corner2">
-                go to
-                <br />
-                jail
-              </span>
-            </div>
+            {boardBootstrap
+              .filter((e) => e.position === 'top')
+              .map((e) => (
+                <Cell {...e} />
+              ))}
           </div>
 
           <div className="row center">
@@ -207,10 +149,7 @@ export function Game() {
             <div className="square2">
               <span className="corner4-left">just</span>
               <div className="squareCorner">
-                <span className="corner corner4">
-                  in <br />
-                  jail
-                </span>
+                <span className="corner corner4">3</span>
               </div>
               <span className="corner4-bottom">visiting</span>
             </div>
@@ -270,13 +209,7 @@ export function Game() {
               </div>
             </div>
             <div className="square2">
-              <span className="corner corner3">
-                collect
-                <br />
-                M200 salary
-                <br />
-                as you pass
-              </span>
+              <span className="corner corner3">4</span>
             </div>
           </div>
         </div>
