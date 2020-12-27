@@ -2,6 +2,7 @@ import styled from 'styled-components/macro';
 
 export const BoardWrapper = styled.div`
   display: block;
+
   div {
     box-sizing: border-box;
     text-transform: uppercase;
@@ -147,38 +148,6 @@ export const BoardWrapper = styled.div`
   .firstLine-bottom.no-color {
     top: 12%;
   }
-
-  /* .red {
-    background-color: #ed1b24;
-  }
-
-  .yellow {
-    background-color: #fef200;
-  }
-
-  .lightblue {
-    background-color: #aae0fa;
-  }
-
-  .brown {
-    background-color: #955436;
-  }
-
-  .blue {
-    background-color: #0072bb;
-  }
-
-  .green {
-    background-color: #1fb25a;
-  }
-
-  .orange {
-    background-color: #f7941d;
-  }
-
-  .purple {
-    background-color: #d93a96;
-  } */
 
   .rotation1 {
     transform: rotate(90deg);
