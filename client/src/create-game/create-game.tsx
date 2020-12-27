@@ -6,7 +6,7 @@ import styled from 'styled-components/macro';
 
 import { Radio } from '../ui/radio';
 
-import { gameSetting } from './game-setting-store';
+import { gameSettingStore } from './game-setting-store';
 
 const Wrapper = styled.div`
   height: 100%;
@@ -49,20 +49,23 @@ export const CreateGame = observer(() => {
   const handleChangeCountPlayers = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    gameSetting.setCountPlayers(Number(event.target.value));
+    gameSettingStore.setCountPlayers(Number(event.target.value));
   };
 
   const handleSubmitCreateGame = (event: React.FormEvent) => {
     event.preventDefault();
-    gameSetting.createGame();
+    gameSettingStore.createGame();
   };
 
   useEffect(() => {
-    if (gameSetting.gameCreated) {
-      history.push(`/game/${gameSetting.gameId}`);
+    if (gameSettingStore.gameCreated) {
+      history.push({
+        pathname: '/game',
+        search: `?id=${gameSettingStore.gameId}`,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [history, gameSetting.gameCreated]);
+  }, [history, gameSettingStore.gameCreated]);
 
   return (
     <Wrapper>
@@ -79,7 +82,7 @@ export const CreateGame = observer(() => {
                 name="count-players"
                 label={value}
                 value={value}
-                checked={value === gameSetting.countPlayers}
+                checked={value === gameSettingStore.countPlayers}
                 onChange={handleChangeCountPlayers}
               />
             ))}
@@ -88,7 +91,7 @@ export const CreateGame = observer(() => {
 
         <Button
           type="submit"
-          disabled={!gameSetting.countPlayers}
+          disabled={!gameSettingStore.countPlayers}
           onClick={handleSubmitCreateGame}
         >
           Создать

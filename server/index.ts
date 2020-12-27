@@ -18,7 +18,7 @@ app.get('/api', (req, res) => {
 });
 
 const db = fs.readFileSync('db.json', 'utf8');
-const gameManager = new GameManager(db, (raw: string) => {
+const gameManager = new GameManager(db || '{}', (raw: string) => {
   fs.writeFile('db.json', raw, (error) => {
     if (error) {
       console.error(error);
@@ -29,14 +29,29 @@ const gameManager = new GameManager(db, (raw: string) => {
 io.on('connection', (socket) => {
   console.log('a user connected');
 
-  socket.on('game.create', (msg: { countPlayers: number }) => {
+  socket.on('game.create', ({ countPlayers }: { countPlayers: number }) => {
     const id = uuid();
-    gameManager.createGame(id, msg.countPlayers);
+    gameManager.createGame(id, countPlayers);
     gameManager.serialize();
 
-    console.log();
-
     io.emit('game.created', { id });
+  });
+
+  socket.on('game.join', ({ id, name }: { id: string; name: string }) => {
+    const game = gameManager.getGame(id);
+
+    if (game?.hasFreeSlot()) {
+      game.addPlayer({ name });
+
+      socket.join(id);
+
+      socket.emit('game.joined.self', { name });
+      io.emit('game.joined', { name });
+
+      return gameManager.serialize();
+    }
+
+    console.log('Game not found');
   });
 
   socket.on('disconnect', () => {

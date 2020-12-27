@@ -13,6 +13,18 @@ export class GameManager {
     this.gameMap[id] = new Game(countPlayers);
   }
 
+  getGame(id: string) {
+    return this.gameMap[id];
+  }
+
+  hasGame(id: string) {
+    return Boolean(this.gameMap[id]);
+  }
+
+  hasFreeGame(id: string) {
+    return this.gameMap[id].hasFreeSlot();
+  }
+
   serialize() {
     const plainGameMap: { [key: string]: GameType } = {};
 

@@ -15,6 +15,10 @@ class GameSetting {
     });
   }
 
+  setGameId(id: string) {
+    this.gameId = id;
+  }
+
   setCountPlayers(count: number) {
     this.countPlayers = count;
   }
@@ -26,4 +30,4 @@ class GameSetting {
   }
 }
 
-export const gameSetting = new GameSetting();
+export const gameSettingStore = new GameSetting();
