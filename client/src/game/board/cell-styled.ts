@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components/macro';
 
 function setWidth({ figure }: { figure: string }) {
   if (figure == 'square') {
-    return '10rem';
+    return '20rem';
   } else if (figure == 'vertical') {
-    return '3rem';
+    return '10rem';
   } else if (figure == 'horizontal') {
     return '5rem';
   }
@@ -15,7 +15,7 @@ function setHeight({ figure }: { figure: string }) {
   if (figure == 'square') {
     return '10rem';
   } else if (figure == 'vertical') {
-    return '5rem';
+    return '10rem';
   } else if (figure == 'horizontal') {
     return '3rem';
   }
