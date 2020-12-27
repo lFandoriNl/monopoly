@@ -1,0 +1,12 @@
+{
+  "name": "monopoly",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently \"cd server && yarn start\" \"cd client && yarn start\""
+  },
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
