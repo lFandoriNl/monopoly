@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { observer } from 'mobx-react';
 
 import styled from 'styled-components/macro';
 
 import { Radio } from '../ui/radio';
+
+import { gameSetting } from './game-setting-store';
 
 const Wrapper = styled.div`
   height: 100%;
@@ -39,17 +41,16 @@ const Button = styled.button`
   }
 `;
 
-export function CreateGame() {
-  const [countPlayers, setCountPlayers] = useState<string | undefined>();
-
+export const CreateGame = observer(() => {
   const handleChangeCountPlayers = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setCountPlayers(event.target.value);
+    gameSetting.setCountPlayers(Number(event.target.value));
   };
 
   const handleSubmitCreateGame = (event: React.FormEvent) => {
     event.preventDefault();
+    gameSetting.createGame();
   };
 
   return (
@@ -61,23 +62,27 @@ export function CreateGame() {
           <Paragraph>Выберите количество игроков</Paragraph>
 
           <div>
-            {['1', '2', '3', '4'].map((value) => (
+            {[1, 2, 3, 4].map((value) => (
               <Radio
                 key={value}
                 name="count-players"
                 label={value}
                 value={value}
-                checked={value === countPlayers}
+                checked={value === gameSetting.countPlayers}
                 onChange={handleChangeCountPlayers}
               />
             ))}
           </div>
         </div>
 
-        <Button type="submit" onClick={handleSubmitCreateGame}>
+        <Button
+          type="submit"
+          disabled={!gameSetting.countPlayers}
+          onClick={handleSubmitCreateGame}
+        >
           Создать
         </Button>
       </Form>
     </Wrapper>
   );
-}
+});

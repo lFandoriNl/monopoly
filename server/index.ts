@@ -17,6 +17,10 @@ app.get('/api', (req, res) => {
 io.on('connection', (socket) => {
   console.log('a user connected');
 
+  socket.on('game.create', (msg: { countPlayers: number }) => {
+    console.log(msg);
+  });
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });

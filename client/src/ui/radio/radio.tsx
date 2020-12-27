@@ -97,7 +97,7 @@ const Label = styled.label`
   }
 `;
 
-type RadioProps<T> = {
+type RadioProps = {
   name: string;
   label: React.ReactNode;
   checked?: boolean;
@@ -105,7 +105,7 @@ type RadioProps<T> = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export function Radio<T>({ label, ...otherProps }: RadioProps<T>) {
+export function Radio({ label, ...otherProps }: RadioProps) {
   return (
     <Label>
       <input type="radio" {...otherProps} />
