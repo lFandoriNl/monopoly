@@ -9,14 +9,12 @@ export function Game() {
         <div className="mainSquare">
           <div className="row top">
             <div className="square2">
-              <span className="corner corner1">
-                free <br /> parking
-              </span>
+              <span className="corner corner1"></span>
             </div>
             <div className="square1">
               <div className="header header-top red"></div>
               <div className="firstLine firstLine-top rotation2">
-                kentucky <br /> avenue
+                <br />
               </div>
             </div>
             <div className="square1">
