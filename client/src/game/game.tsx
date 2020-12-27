@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import { playersStore } from '../common/store/players-store';
 import { gameSettingStore } from '../create-game/game-setting-store';
 
+import { Players } from './players';
 import { Board } from './board';
 import { InputNameModal } from './input-name-modal';
 
@@ -22,11 +23,7 @@ export const Game = observer(() => {
 
   return (
     <div>
-      <div>
-        {playersStore.players.map((player) => (
-          <div>{player.name}</div>
-        ))}
-      </div>
+      <Players />
 
       <Board />
 
