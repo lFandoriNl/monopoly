@@ -188,7 +188,7 @@ export const boardBootstrap = [
     id: 25,
     image: 'Ford',
     price: 2000,
-    priceColor: '#98bd5d',
+    priceColor: '#be5053',
     position: 'bottom',
     type: 'company',
   },
