@@ -21,7 +21,7 @@ export function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={CreateGame} />
-          <Route exact path="/game/:id" component={Game} />
+          <Route path="/game/:id" component={Game} />
           <Route path="*">
             <Redirect to="/" />
           </Route>

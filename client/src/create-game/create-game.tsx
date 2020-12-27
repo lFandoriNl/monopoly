@@ -1,4 +1,6 @@
 import { observer } from 'mobx-react';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components/macro';
 
@@ -42,6 +44,8 @@ const Button = styled.button`
 `;
 
 export const CreateGame = observer(() => {
+  const history = useHistory();
+
   const handleChangeCountPlayers = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -52,6 +56,13 @@ export const CreateGame = observer(() => {
     event.preventDefault();
     gameSetting.createGame();
   };
+
+  useEffect(() => {
+    if (gameSetting.gameCreated) {
+      history.push(`/game/${gameSetting.gameId}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [history, gameSetting.gameCreated]);
 
   return (
     <Wrapper>
