@@ -1,9 +1,57 @@
-export const boardBootstrap = [
+type Position = 'top' | 'right' | 'bottom' | 'left';
+
+type Type =
+  | 'start'
+  | 'prison'
+  | 'jackpot'
+  | 'vacation'
+  | 'company'
+  | 'riddle'
+  | 'tax';
+
+type PriceColor =
+  | '#df8ac1'
+  | '#be5053'
+  | '#dbb756'
+  | '#71b6a4'
+  | '#722918'
+  | '#5787c7'
+  | '#98bd5d'
+  | '#6fbde1'
+  | '#8f7dd1'
+  | '#6d717a';
+
+type CellSquare = {
+  id: number;
+  image: string;
+  position: 'top' | 'bottom';
+  type: 'start' | 'prison' | 'jackpot' | 'vacation';
+  square: true;
+};
+
+type CellCompany = {
+  id: number;
+  image: string;
+  position: Position;
+  price: number;
+  priceColor: PriceColor;
+  type: Type;
+};
+
+type CellRandom = {
+  id: number;
+  image: string;
+  position: Position;
+  type: 'riddle' | 'tax';
+};
+
+export const boardCells: (CellSquare | CellCompany | CellRandom)[] = [
   {
     id: 0,
     image: 'Start',
     position: 'top',
     type: 'start',
+    square: true,
   },
   {
     id: 1,
@@ -76,6 +124,7 @@ export const boardBootstrap = [
     image: 'Prison',
     position: 'top',
     type: 'prison',
+    square: true,
   },
   {
     id: 11,
@@ -153,6 +202,7 @@ export const boardBootstrap = [
     image: 'JackPot',
     position: 'bottom',
     type: 'jackpot',
+    square: true,
   },
   {
     id: 21,
@@ -229,6 +279,7 @@ export const boardBootstrap = [
     image: 'Vacation',
     position: 'bottom',
     type: 'vacation',
+    square: true,
   },
   {
     id: 31,

@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 
-export const Board = styled.div`
+export const BoardWrapper = styled.div`
   display: block;
   div {
     box-sizing: border-box;
@@ -9,7 +9,7 @@ export const Board = styled.div`
 
   .responsive {
     background: #cde6d0;
-    width: calc(150vh - 2rem);
+    width: calc(120vh - 2rem);
     height: calc(100vh - 2rem);
     margin: 10px auto;
   }
