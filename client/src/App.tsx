@@ -13,7 +13,7 @@ import { Game } from './game';
 const Wrapper = styled.div`
   height: 100%;
   background-color: #2b2b2b;
-  padding: 3rem;
+  padding: 1rem;
 `;
 
 export function App() {

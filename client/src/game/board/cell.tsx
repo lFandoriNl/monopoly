@@ -1,5 +1,3 @@
-import { CellWrapper, Price } from './cell-styled';
-
 type CellProps = {
   image: string;
   price?: number;
@@ -19,14 +17,5 @@ export const Cell = ({
   position,
   type,
 }: CellProps) => {
-  return (
-    <CellWrapper figure={figure} orientation={orientation}>
-      {type === 'element' && (
-        <Price color={priceColor} position={position}>
-          {price}
-        </Price>
-      )}
-      <span>{image}</span>
-    </CellWrapper>
-  );
+  return;
 };
