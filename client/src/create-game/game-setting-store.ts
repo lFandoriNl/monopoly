@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { initializeSocket, events } from '../common/store/io';
+import { events } from '../common/store/io';
 
 class GameSetting {
   countPlayers?: number = 0;
@@ -14,8 +14,7 @@ class GameSetting {
 
   createGame() {
     if (this.countPlayers) {
-      initializeSocket();
-      events?.emit('game.create', { countPlayers: this.countPlayers });
+      events.emit('game.create', { countPlayers: this.countPlayers });
     }
   }
 }

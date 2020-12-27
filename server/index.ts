@@ -11,7 +11,7 @@ const io = new ServerIO(server, {
 });
 
 app.get('/api', (req, res) => {
-  res.send('API');
+  res.send('api');
 });
 
 io.on('connection', (socket) => {
