@@ -5,23 +5,30 @@ import {
   Redirect,
 } from 'react-router-dom';
 
+import styled from 'styled-components/macro';
+
 import { CreateGame } from './create-game';
-import { GameTable } from './game-table';
+import { Game } from './game';
 
 import './io';
 
+const Wrapper = styled.div`
+  height: 100%;
+  background-color: #2b2b2b;
+`;
+
 export function App() {
   return (
-    <div className="App">
+    <Wrapper>
       <Router>
         <Switch>
           <Route exact path="/" component={CreateGame} />
-          <Route exact path="/game/:id" component={GameTable} />
+          <Route exact path="/game/:id" component={Game} />
           <Route path="*">
             <Redirect to="/" />
           </Route>
         </Switch>
       </Router>
-    </div>
+    </Wrapper>
   );
 }
