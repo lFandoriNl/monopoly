@@ -1,0 +1,36 @@
+import { Game, GameType } from './game';
+
+type GameMap = { [key: string]: Game };
+
+export class GameManager {
+  gameMap: GameMap = {};
+
+  constructor(raw: string, private saveToDB: (raw: string) => void) {
+    this.gameMap = GameManager.deserialize(raw);
+  }
+
+  createGame(id: string, countPlayers: number) {
+    this.gameMap[id] = new Game(countPlayers);
+  }
+
+  serialize() {
+    const plainGameMap: { [key: string]: GameType } = {};
+
+    Object.keys(this.gameMap).forEach((key) => {
+      plainGameMap[key] = this.gameMap[key].toPlain();
+    });
+
+    this.saveToDB(JSON.stringify(plainGameMap));
+  }
+
+  static deserialize(raw: string) {
+    const gameMap: GameMap = {};
+    const parsed: { [key: string]: GameType } = JSON.parse(raw);
+
+    Object.keys(parsed).forEach((key) => {
+      gameMap[key] = Game.fromPlain(parsed[key]);
+    });
+
+    return gameMap;
+  }
+}
