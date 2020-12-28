@@ -1,4 +1,4 @@
-import { GameType, PlayerType } from 'shared-types';
+import { GameType } from 'shared-types';
 
 import { io } from 'socket.io-client';
 
