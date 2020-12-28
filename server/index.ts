@@ -2,7 +2,7 @@ import fs from 'fs';
 import http from 'http';
 import express from 'express';
 import { Server as ServerIO } from 'socket.io';
-import { v4 as uuid } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { GameManager } from './src/game-manager';
 
 const app: express.Application = express();
@@ -17,8 +17,18 @@ app.get('/api', (req, res) => {
   res.send('api');
 });
 
-const db = fs.readFileSync('db.json', 'utf8');
-const gameManager = new GameManager(db || '{}', (raw: string) => {
+const readDB = () => {
+  try {
+    const db = fs.readFileSync('db.json', 'utf8');
+    return db;
+  } catch (error) {
+    return '{}';
+  }
+};
+
+const db = readDB();
+
+const gameManager = new GameManager(db, (raw: string) => {
   fs.writeFile('db.json', raw, (error) => {
     if (error) {
       console.error(error);
@@ -26,36 +36,67 @@ const gameManager = new GameManager(db || '{}', (raw: string) => {
   });
 });
 
-io.on('connection', (socket) => {
+io.on('connection', (client) => {
   console.log('a user connected');
 
-  socket.on('game.create', ({ countPlayers }: { countPlayers: number }) => {
-    const id = uuid();
-    gameManager.createGame(id, countPlayers);
+  client.on(
+    'session.recovery.request',
+    (gameId: string | null, clientId: string | null) => {
+      if (clientId && gameId) {
+        const game = gameManager.getGame(gameId);
+
+        if (game.hasPlayer(clientId)) {
+          client.emit('session.recovery.response', game.toPlain());
+        }
+      }
+    },
+  );
+
+  client.on('game.create', ({ countPlayers }: { countPlayers: number }) => {
+    const uuid = uuidv4();
+    gameManager.createGame(uuid, countPlayers);
     gameManager.serialize();
 
-    io.emit('game.created', { id });
+    io.emit('game.created', { id: uuid });
   });
 
-  socket.on('game.join', ({ id, name }: { id: string; name: string }) => {
-    const game = gameManager.getGame(id);
+  client.on(
+    'game.join',
+    ({
+      gameId,
+      playerId,
+      namePlayer,
+    }: {
+      gameId: string;
+      playerId: string;
+      namePlayer: string;
+    }) => {
+      const game = gameManager.getGame(gameId);
 
-    if (game?.hasFreeSlot()) {
-      game.addPlayer({ name });
+      if (game?.hasFreeSlot()) {
+        game.addPlayer({ id: playerId, name: namePlayer });
 
-      socket.join(id);
+        client.join(gameId);
 
-      socket.emit('game.joined.self', { name });
-      io.emit('game.joined', { name });
+        client.emit('game.joined.self');
+        io.emit('game.joined', game.toPlain());
 
-      return gameManager.serialize();
-    }
+        return gameManager.serialize();
+      }
 
-    console.log('Game not found');
-  });
+      console.log('Game not found');
+    },
+  );
 
-  socket.on('disconnect', () => {
+  client.on('disconnect', () => {
     console.log('user disconnected');
+  });
+
+  client.on('connect_error', () => {
+    console.log('connect_error');
+    setTimeout(() => {
+      client.connect();
+    }, 1000);
   });
 });
 

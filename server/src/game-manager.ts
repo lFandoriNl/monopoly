@@ -1,4 +1,5 @@
-import { Game, GameType } from './game';
+import { GameType } from 'shared-types';
+import { Game } from './game';
 
 type GameMap = { [key: string]: Game };
 

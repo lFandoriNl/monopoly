@@ -1,37 +1,53 @@
-import { makeAutoObservable } from 'mobx';
-import { gameSettingStore } from '../../create-game/game-setting-store';
-import { events } from './io';
+import { GameType, PlayerType } from 'shared-types';
 
-type Player = {
-  name: string;
-};
+import { makeAutoObservable } from 'mobx';
+
+import { gameSettingStore } from '../../create-game/game-setting-store';
+import { events } from '../../api/io';
 
 class Players {
-  currentPlayerName = '';
   joined = false;
-  players: Player[] = [];
+  currentPlayerId? = '';
+  currentPlayerName? = '';
+  players: PlayerType[] = [];
 
   constructor() {
     makeAutoObservable(this);
+  }
 
-    events.on('game.joined.self', () => {
-      this.joined = true;
-    });
-
-    events.on('game.joined', ({ name }: { name: string }) => {
-      this.players.push({ name });
-    });
+  setJoined(joined: boolean) {
+    this.joined = joined;
   }
 
   setCurrentPlayerName(name: string) {
     this.currentPlayerName = name;
   }
 
+  addPlayer(player: PlayerType) {
+    this.players.push(player);
+  }
+
   joinToGame() {
-    events.emit('game.join', {
-      id: gameSettingStore.gameId,
-      name: this.currentPlayerName,
-    });
+    const playerId = localStorage.getItem('clientId');
+
+    if (playerId) {
+      this.currentPlayerId = playerId;
+
+      events.emit('game.join', {
+        gameId: gameSettingStore.gameId,
+        playerId: this.currentPlayerId,
+        namePlayer: this.currentPlayerName,
+      });
+    }
+  }
+
+  initFrom(game: GameType) {
+    const clientId = localStorage.getItem('clientId');
+    const currentPlayer = game.players.find((player) => player.id === clientId);
+    this.joined = true;
+    this.currentPlayerId = currentPlayer?.id;
+    this.currentPlayerName = currentPlayer?.name;
+    this.players = game.players;
   }
 }
 

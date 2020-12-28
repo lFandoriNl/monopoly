@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { events } from '../common/store/io';
+import { events } from '../api/io';
 
 class GameSetting {
   gameId = '';
@@ -8,15 +8,14 @@ class GameSetting {
 
   constructor() {
     makeAutoObservable(this);
-
-    events.on('game.created', ({ id }: { id: string }) => {
-      this.gameId = id;
-      this.gameCreated = true;
-    });
   }
 
   setGameId(id: string) {
     this.gameId = id;
+  }
+
+  setGameCreated(created: boolean) {
+    this.gameCreated = created;
   }
 
   setCountPlayers(count: number) {

@@ -1,19 +1,16 @@
-type Player = {
-  name: string;
-};
-
-export type GameType = {
-  countPlayers: number;
-  players: Player[];
-};
+import { GameType, PlayerType } from 'shared-types';
 
 export class Game {
-  players: Player[] = [];
+  players: PlayerType[] = [];
 
   constructor(private countPlayers: number) {}
 
-  addPlayer({ name }: { name: string }) {
-    this.players.push({ name });
+  addPlayer(player: PlayerType) {
+    this.players.push(player);
+  }
+
+  hasPlayer(id: string) {
+    return Boolean(this.players.find((player) => player.id === id));
   }
 
   hasFreeSlot() {
