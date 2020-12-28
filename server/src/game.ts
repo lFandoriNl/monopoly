@@ -1,15 +1,16 @@
 import { GameType, PlayerType } from 'shared-types';
 
 export class Game {
-  players: PlayerType[] = [];
-
-  constructor(private countPlayers: number) {}
+  constructor(
+    private countPlayers: number,
+    private players: PlayerType[] = [],
+  ) {}
 
   addPlayer(player: PlayerType) {
     this.players.push(player);
   }
 
-  hasPlayer(id: string) {
+  hasPlayer(id: PlayerType['id']) {
     return Boolean(this.players.find((player) => player.id === id));
   }
 
@@ -25,7 +26,7 @@ export class Game {
   }
 
   static fromPlain(object: GameType) {
-    const game = new Game(object.countPlayers);
+    const game = new Game(object.countPlayers, object.players);
     return game;
   }
 }
