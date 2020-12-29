@@ -14,17 +14,32 @@ const ChipWrapper = styled(animated.div)`
   z-index: 1;
 `;
 
+type Point = { x: number; y: number; duration: number };
+
 type ChipProps = {
-  x: number;
-  y: number;
-  duration: number;
   color: string;
+  points: Point[];
 };
 
-export const Chip = memo(({ x, y, duration, color }: ChipProps) => {
+export const Chip = memo(({ points, color }: ChipProps) => {
+  const handleEndAnimation = () => {
+    console.log('animation end');
+  };
+
   const props = useSpring({
-    config: { easing: easeQuadInOut, duration },
-    transform: `translate(${x}px, ${y}px)`,
+    // @ts-ignore
+    to: async (animate: any) => {
+      for (const point of points) {
+        await animate({
+          transform: `translate(${point.x}px, ${point.y}px)`,
+          config: { easing: easeQuadInOut, duration: point.duration },
+        });
+      }
+    },
+    from: {
+      transform: `translate(${0}px, ${0}px)`,
+    },
+    onRest: handleEndAnimation,
   });
 
   return <ChipWrapper color={color} style={props} />;

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 
 import { Cell } from './cell';
 import { BoardWrapper } from './board-styled';
@@ -68,6 +68,15 @@ export const Board = () => {
     }
   };
 
+  const points = useMemo(
+    () => [
+      { x: 50, y: 50, duration: 1000 },
+      { x: 50, y: 500, duration: 1500 },
+      { x: 500, y: 500, duration: 1500 },
+    ],
+    [],
+  );
+
   return (
     <BoardWrapper>
       <form onSubmit={handleStartMove}>
@@ -90,7 +99,8 @@ export const Board = () => {
       </form>
       <div className="responsive">
         <div className="mainSquare" ref={boardRef}>
-          <Chip color="#ff4e4e" {...positionChip} />
+          {/* {...positionChip} */}
+          <Chip color="#ff4e4e" points={points} />
 
           <div className="row top cells-top">
             {boardCells
