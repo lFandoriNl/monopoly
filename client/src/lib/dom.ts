@@ -25,29 +25,48 @@ function calcNumberMoveCells(index: number, prevIndex: number) {
   return Math.abs(index - prevIndex);
 }
 
+function getCellElementByPathAndIndex(
+  container: HTMLDivElement,
+  cell: CellType,
+) {
+  const cellsElements = container.querySelectorAll<HTMLDivElement>(
+    `.cells-${cell.path} .cell`,
+  );
+  return cellsElements[cell.index];
+}
+
 export function getPointsFromCells(
   boardElement: HTMLDivElement,
   cells: CellType[],
   prevCell: CellType,
 ): PointType[] {
   return cells.map((cell, idx, array) => {
-    const cellsElements = boardElement.querySelectorAll<HTMLDivElement>(
-      `.cells-${cell.path} .cell`,
+    const prevCellCorrect = idx === 0 ? prevCell : array[idx - 1];
+
+    const cellElement = getCellElementByPathAndIndex(boardElement, cell);
+
+    const prevCellElement = getCellElementByPathAndIndex(
+      boardElement,
+      prevCellCorrect,
     );
-    const target = cellsElements[cell.index];
 
-    const { x, y } = getPositionRelativeToParent(boardElement, target);
-    const rect = target.getBoundingClientRect();
+    const positionRelative = getPositionRelativeToParent(
+      boardElement,
+      cellElement,
+    );
 
-    const prevIndex = idx === 0 ? prevCell.index : array[idx - 1].index;
-    const numberMoveCells = calcNumberMoveCells(cell.index, prevIndex);
+    const cellRect = cellElement.getBoundingClientRect();
+    const prevCellRect = prevCellElement.getBoundingClientRect();
 
-    const msForOneCell = 200;
-    const duration = numberMoveCells * msForOneCell;
+    const distanceBetweenCells = Math.sqrt(
+      (cellRect.x - prevCellRect.x) ** 2 + (cellRect.y - prevCellRect.y) ** 2,
+    );
+
+    const duration = distanceBetweenCells;
 
     return {
-      x: x + rect.width / 2 - 12,
-      y: y + rect.height / 2 - 12,
+      x: positionRelative.x + cellRect.width / 2 - 12,
+      y: positionRelative.y + cellRect.height / 2 - 12,
       duration: duration > 1000 ? duration : 1000,
     };
   });
