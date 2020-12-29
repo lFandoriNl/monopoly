@@ -1,20 +1,25 @@
 import fs from 'fs';
 import http from 'http';
-import express from 'express';
 import { Server as ServerIO } from 'socket.io';
 import { v4 as uuidv4 } from 'uuid';
 import { GameManager } from './src/game-manager';
 
-const app: express.Application = express();
-
-const server = http.createServer(app);
+const server = http.createServer();
 
 const io = new ServerIO(server, {
   path: '/ws',
 });
 
-app.get('/api', (req, res) => {
-  res.send('api');
+process.on('uncaughtException', () => {
+  console.error('uncaughtException');
+});
+
+process.on('SIGTERM', () => {
+  console.info('SIGTERM signal received');
+});
+
+server.listen(8080, () => {
+  console.log('App is listening on port 8080!');
 });
 
 const readDB = () => {
@@ -98,8 +103,4 @@ io.on('connection', (client) => {
       client.connect();
     }, 1000);
   });
-});
-
-server.listen(8080, () => {
-  console.log('App is listening on port 8080!');
 });
