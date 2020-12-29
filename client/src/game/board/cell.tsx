@@ -19,7 +19,7 @@ export const Cell = ({
 }: CellProps) => {
   if (position === 'top' && !square) {
     return (
-      <div className="square1">
+      <div className="cell square1">
         {priceColor && (
           <Price color={priceColor} className="header header-top">
             {price}
@@ -32,7 +32,7 @@ export const Cell = ({
 
   if (position === 'bottom' && !square) {
     return (
-      <div className="square1">
+      <div className="cell square1">
         {priceColor && (
           <Price color={priceColor} className="header header-bottom">
             {price}
@@ -45,7 +45,7 @@ export const Cell = ({
 
   if (position === 'right') {
     return (
-      <div className="squareSide">
+      <div className="cell squareSide">
         {priceColor && (
           <Price color={priceColor} className="headerSide header-right">
             {price}
@@ -58,7 +58,7 @@ export const Cell = ({
 
   if (position === 'left') {
     return (
-      <div className="squareSide">
+      <div className="cell squareSide">
         {priceColor && (
           <Price color={priceColor} className="headerSide header-left">
             {price}
@@ -71,7 +71,7 @@ export const Cell = ({
 
   if (type === 'start') {
     return (
-      <div className="square2">
+      <div className="cell square2">
         <span className="corner corner1">1</span>
       </div>
     );
@@ -79,7 +79,7 @@ export const Cell = ({
 
   if (type === 'prison') {
     return (
-      <div className="square2">
+      <div className="cell square2">
         <span className="corner corner2">2</span>
       </div>
     );
@@ -87,7 +87,7 @@ export const Cell = ({
 
   if (type === 'jackpot') {
     return (
-      <div className="square2">
+      <div className="cell square2">
         <span className="corner corner3">3</span>
       </div>
     );
@@ -95,7 +95,7 @@ export const Cell = ({
 
   if (type === 'vacation') {
     return (
-      <div className="square2">
+      <div className="cell square2">
         <span className="corner corner4">4</span>
       </div>
     );

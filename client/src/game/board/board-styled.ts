@@ -16,6 +16,7 @@ export const BoardWrapper = styled.div`
   }
 
   .mainSquare {
+    position: relative;
     height: 100%;
     outline: 1px dashed #c2dec5;
     outline-offset: -13px;
