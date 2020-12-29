@@ -1,13 +1,4 @@
-type Position = 'top' | 'right' | 'bottom' | 'left';
-
-type Type =
-  | 'start'
-  | 'prison'
-  | 'jackpot'
-  | 'vacation'
-  | 'company'
-  | 'riddle'
-  | 'tax';
+import { CellKind, Position } from 'shared-types';
 
 type PriceColor =
   | '#df8ac1'
@@ -35,7 +26,7 @@ type CellCompany = {
   position: Position;
   price: number;
   priceColor: PriceColor;
-  type: Type;
+  type: CellKind;
 };
 
 type CellRandom = {

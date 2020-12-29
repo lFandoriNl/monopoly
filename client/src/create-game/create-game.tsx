@@ -76,7 +76,7 @@ export const CreateGame = observer(() => {
           <Paragraph>Выберите количество игроков</Paragraph>
 
           <div>
-            {[1, 2, 3, 4].map((value) => (
+            {[2, 3, 4].map((value) => (
               <Radio
                 key={value}
                 name="count-players"

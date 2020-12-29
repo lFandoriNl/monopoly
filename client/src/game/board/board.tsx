@@ -1,12 +1,14 @@
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef } from 'react';
+
+import { CellType } from 'shared-types';
 
 import { Cell } from './cell';
 import { BoardWrapper } from './board-styled';
 
 import { boardCells } from './board-cells';
-import { Chip } from './chip';
+import { Chip, PointType } from './chip';
 
-import { getPositionRelativeToParent } from '../../lib/dom';
+import { getPointsFromCells } from '../../lib/dom';
 
 // const sequencePaths = ['top', 'right', 'bottom', 'left'];
 const sequencePaths = {
@@ -16,18 +18,22 @@ const sequencePaths = {
   left: 'top',
 } as const;
 
-function calcNumberMoveCells(index: number, prevIndex: number) {
-  return Math.abs(index - prevIndex);
-}
+const cells: CellType[] = [
+  {
+    path: 'top',
+    index: 10,
+  },
+  {
+    path: 'right',
+    index: 5,
+  },
+];
 
 export const Board = () => {
-  const [position, setPosition] = useState({
+  const [points, setPoints] = useState<PointType[]>([]);
+  const [prevPosition, setPrevPosition] = useState<CellType>({
     path: 'top',
-    index: '0',
-  });
-  const [prevPosition, setPrevPosition] = useState({
-    path: 'top',
-    index: '0',
+    index: 0,
   });
 
   const [positionChip, setPositionChip] = useState({ x: 0, y: 0, duration: 0 });
@@ -40,48 +46,30 @@ export const Board = () => {
     const boardElement = boardRef.current;
 
     if (boardElement) {
-      const cells = boardElement.querySelectorAll<HTMLDivElement>(
-        `.cells-${position.path} .cell`,
+      const newPositions = getPointsFromCells(
+        boardElement,
+        cells,
+        prevPosition,
       );
-      const target = cells[Number(position.index)];
 
-      if (target) {
-        const { x, y } = getPositionRelativeToParent(boardElement, target);
-        const rect = target.getBoundingClientRect();
-
-        setPrevPosition(position);
-
-        const numberMoveCells = calcNumberMoveCells(
-          Number(position.index),
-          Number(prevPosition.index),
-        );
-
-        const msForOneCell = 200;
-        const duration = numberMoveCells * msForOneCell;
-
-        setPositionChip({
-          x: x + rect.width / 2 - 12,
-          y: y + rect.height / 2 - 12,
-          duration: duration > 1000 ? duration : 1000,
-        });
-      }
+      setPoints(newPositions);
     }
   };
 
-  const points = useMemo(
-    () => [
-      { x: 50, y: 50, duration: 1000 },
-      { x: 50, y: 500, duration: 1500 },
-      { x: 500, y: 500, duration: 1500 },
-    ],
-    [],
-  );
+  // const points = useMemo(
+  //   () => [
+  //     { x: 50, y: 50, duration: 1000 },
+  //     { x: 50, y: 500, duration: 1500 },
+  //     { x: 500, y: 500, duration: 1500 },
+  //   ],
+  //   [],
+  // );
 
   return (
     <BoardWrapper>
       <form onSubmit={handleStartMove}>
         <button type="submit">Start</button>
-        <input
+        {/* <input
           value={position.path}
           onChange={(event) =>
             setPosition((prev) => ({ ...prev, path: event.target.value }))
@@ -95,7 +83,7 @@ export const Board = () => {
               index: event.target.value,
             }))
           }
-        />
+        /> */}
       </form>
       <div className="responsive">
         <div className="mainSquare" ref={boardRef}>

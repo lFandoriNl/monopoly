@@ -14,11 +14,11 @@ const ChipWrapper = styled(animated.div)`
   z-index: 1;
 `;
 
-type Point = { x: number; y: number; duration: number };
+export type PointType = { x: number; y: number; duration: number };
 
 type ChipProps = {
   color: string;
-  points: Point[];
+  points: PointType[];
 };
 
 export const Chip = memo(({ points, color }: ChipProps) => {
