@@ -2,8 +2,8 @@ import { events } from '../api/io';
 import { playersStore } from '../common/store/players-store';
 
 export class PlayerEvents {
-  roleDice(): void {
-    events.emit('game.cubes', {
+  roleDice() {
+    events.emit('game.events.roll-dice', {
       playerId: playersStore.currentPlayerId,
     });
   }
