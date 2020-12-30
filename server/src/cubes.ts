@@ -1,10 +1,15 @@
-import { getRandomInt } from './get-random-value';
+import { getRandomInt } from './lib/get-random-value';
 
-export default class Cubes {
-  static getCubes(): object {
+type CubesValueType = {
+  firstCube: number;
+  secondCube: number;
+};
+
+export class Cubes {
+  static generateCubes(): CubesValueType {
     return {
-      firstCube: getRandomInt(1, 6),
-      secondCube: getRandomInt(1, 6),
+      firstCube: getRandomInt(1, 7),
+      secondCube: getRandomInt(1, 7),
     };
   }
 }
