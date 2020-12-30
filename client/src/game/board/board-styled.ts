@@ -9,7 +9,6 @@ export const BoardWrapper = styled.div`
   }
 
   .responsive {
-    background: #cde6d0;
     width: calc(120vh - 2rem);
     height: calc(100vh - 2rem);
     margin: 10px auto;
@@ -18,13 +17,16 @@ export const BoardWrapper = styled.div`
   .mainSquare {
     position: relative;
     height: 100%;
-    outline: 1px dashed #c2dec5;
     outline-offset: -13px;
   }
 
   .row {
     width: 100%;
     display: flex;
+  }
+
+  .cell {
+    background-color: #fff;
   }
 
   .top {
@@ -35,14 +37,14 @@ export const BoardWrapper = styled.div`
     height: 69.23076923%;
   }
   .square1 {
-    outline: 1px solid black;
+    outline: 2px solid #212121;
     flex-grow: 1;
     position: relative;
   }
 
   .square2 {
     flex-grow: 2;
-    outline: 1px solid black;
+    outline: 2px solid #212121;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -50,11 +52,11 @@ export const BoardWrapper = styled.div`
 
   .square9 {
     flex-grow: 9;
-    outline: 1px solid black;
+    outline: 1px solid #212121;
   }
 
   .squareSide {
-    outline: 1px solid black;
+    outline: 2px solid #212121;
     width: 100%;
     flex-grow: 1;
     position: relative;
@@ -77,28 +79,48 @@ export const BoardWrapper = styled.div`
 
   .header-top {
     bottom: 1px;
-    left: 1px;
+    left: 0;
     right: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header-right {
+    top: 0;
+    bottom: 1px;
+    left: 1px;
+    background: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > .price {
+      transform: rotate(90deg);
+    }
   }
 
   .header-bottom {
     top: 1px;
-    left: 1px;
+    left: 0;
     right: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .header-left {
-    top: 1px;
+    top: 0;
     bottom: 1px;
     right: 1px;
     background: grey;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  .header-right {
-    top: 1px;
-    bottom: 1px;
-    left: 1px;
-    background: grey;
+    > .price {
+      transform: rotate(-90deg);
+    }
   }
 
   .firstLine {

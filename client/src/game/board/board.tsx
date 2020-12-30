@@ -2,11 +2,13 @@ import { useState, useRef } from 'react';
 
 import { CellType } from 'shared-types';
 
+import { ActionsPopup } from './actions-popup';
 import { Cell } from './cell';
+import { Chip, PointType } from './chip';
+
 import { BoardWrapper } from './board-styled';
 
 import { boardCells } from './board-cells';
-import { Chip, PointType } from './chip';
 
 import { getPointsFromCells } from '../../lib/dom';
 
@@ -56,38 +58,14 @@ export const Board = () => {
     }
   };
 
-  // const points = useMemo(
-  //   () => [
-  //     { x: 50, y: 50, duration: 1000 },
-  //     { x: 50, y: 500, duration: 1500 },
-  //     { x: 500, y: 500, duration: 1500 },
-  //   ],
-  //   [],
-  // );
-
   return (
     <BoardWrapper>
       <form onSubmit={handleStartMove}>
         <button type="submit">Start</button>
-        {/* <input
-          value={position.path}
-          onChange={(event) =>
-            setPosition((prev) => ({ ...prev, path: event.target.value }))
-          }
-        />
-        <input
-          value={position.index}
-          onChange={(event) =>
-            setPosition((prev) => ({
-              ...prev,
-              index: event.target.value,
-            }))
-          }
-        /> */}
       </form>
+
       <div className="responsive">
         <div className="mainSquare" ref={boardRef}>
-          {/* {...positionChip} */}
           <Chip color="#ff4e4e" points={points} />
 
           <div className="row top cells-top">
@@ -106,7 +84,11 @@ export const Board = () => {
                   <Cell key={cell.id} {...cell} />
                 ))}
             </div>
-            <div className="square9"></div>
+
+            <div className="square9" style={{ position: 'relative' }}>
+              <ActionsPopup />
+            </div>
+
             <div className="square2 cells-right">
               {boardCells
                 .filter((cell) => cell.position === 'right')

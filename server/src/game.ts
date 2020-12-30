@@ -26,7 +26,6 @@ export class Game {
   }
 
   static fromPlain(object: GameType) {
-    const game = new Game(object.countPlayers, object.players);
-    return game;
+    return new Game(object.countPlayers, object.players);
   }
 }

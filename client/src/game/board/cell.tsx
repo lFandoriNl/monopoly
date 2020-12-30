@@ -22,7 +22,7 @@ export const Cell = ({
       <div className="cell square1">
         {priceColor && (
           <Price color={priceColor} className="header header-top">
-            {price}
+            {price}$
           </Price>
         )}
         <div className="firstLine firstLine-top rotation2">{image}</div>
@@ -35,7 +35,7 @@ export const Cell = ({
       <div className="cell square1">
         {priceColor && (
           <Price color={priceColor} className="header header-bottom">
-            {price}
+            {price}$
           </Price>
         )}
         <div className="firstLine firstLine-bottom">{image}</div>
@@ -48,7 +48,7 @@ export const Cell = ({
       <div className="cell squareSide">
         {priceColor && (
           <Price color={priceColor} className="headerSide header-right">
-            {price}
+            <span className="price">{price}$</span>
           </Price>
         )}
         <div className="firstLine firstLine-right rotation3">{image}</div>
@@ -61,7 +61,7 @@ export const Cell = ({
       <div className="cell squareSide">
         {priceColor && (
           <Price color={priceColor} className="headerSide header-left">
-            {price}
+            <span className="price">{price}$</span>
           </Price>
         )}
         <div className="firstLine firstLine-left rotation1">{image}</div>
