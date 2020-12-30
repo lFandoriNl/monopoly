@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { playerEvents } from '../../../core/player-events';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -30,7 +31,9 @@ const ActionButton = styled.button`
 export const ActionsPopup = () => {
   return (
     <Wrapper>
-      <ActionButton>Бросить кубики</ActionButton>
+      <ActionButton onClick={playerEvents.roleDice}>
+        Бросить кубики
+      </ActionButton>
     </Wrapper>
   );
 };
