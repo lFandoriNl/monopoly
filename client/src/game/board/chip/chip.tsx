@@ -32,7 +32,11 @@ export const Chip = memo(({ points, color }: ChipProps) => {
       for (const point of points) {
         await animate({
           transform: `translate(${point.x}px, ${point.y}px)`,
-          config: { easing: easeQuadInOut, duration: point.duration },
+          config: {
+            easing: easeQuadInOut,
+            duration: point.duration,
+            precision: 0.01,
+          },
         });
       }
     },
