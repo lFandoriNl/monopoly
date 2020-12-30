@@ -84,7 +84,7 @@ io.on('connection', (client) => {
         client.join(gameId);
 
         client.emit('game.joined.self');
-        io.emit('game.joined', game.toPlain());
+        io.sockets.to(gameId).emit('game.joined', game.toPlain());
 
         return gameManager.serialize();
       }
