@@ -1,6 +1,14 @@
 import { PlayerType } from '../player';
+import { CubesValueType } from '../board/cuber';
 
-export type GameType = {
-  countPlayers: number;
-  players: PlayerType[];
-};
+export interface IGame {
+  currentPlayerId?: string;
+  currentDiceValue?: CubesValueType;
+  countPlayers?: number;
+  players?: PlayerType[];
+}
+
+export interface IPlayer {
+  id: string;
+  name: string;
+}

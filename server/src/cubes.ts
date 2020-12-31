@@ -1,9 +1,5 @@
+import { CubesValueType } from 'shared-types/board/cuber';
 import { getRandomInt } from './lib/get-random-value';
-
-type CubesValueType = {
-  firstCube: number;
-  secondCube: number;
-};
 
 export class Cubes {
   static generateCubes(): CubesValueType {

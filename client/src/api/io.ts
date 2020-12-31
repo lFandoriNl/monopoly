@@ -1,4 +1,4 @@
-import { GameType } from 'shared-types';
+import { IGame } from 'shared-types';
 
 import { io } from 'socket.io-client';
 
@@ -20,7 +20,9 @@ events.on('connect', () => {
   const gameId = getSearchParam('id');
   const clientId = localStorage.getItem('clientId');
 
-  events.emit('session.recovery.request', gameId, clientId);
+  if (clientId) {
+    events.emit('session.recovery.request', gameId, clientId);
+  }
 
   if (!clientId) {
     const uuid = uuidv4();
@@ -28,7 +30,8 @@ events.on('connect', () => {
   }
 });
 
-events.on('session.recovery.response', (game: GameType) => {
+events.on('session.recovery.response', (gameRaw: string) => {
+  const game: IGame = JSON.parse(gameRaw);
   playersStore.initFrom(game);
 });
 
@@ -41,6 +44,13 @@ events.on('game.joined.self', () => {
   playersStore.setJoined(true);
 });
 
-events.on('game.joined', (game: GameType) => {
+events.on('game.joined', (gameRaw: string) => {
+  const game: IGame = JSON.parse(gameRaw);
+  playersStore.initFrom(game);
+});
+
+events.on('game.update', (gameRaw: string) => {
+  const game: IGame = JSON.parse(gameRaw);
+  console.log(game);
   playersStore.initFrom(game);
 });

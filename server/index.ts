@@ -1,7 +1,10 @@
 import fs from 'fs';
 import http from 'http';
+import { emit } from 'process';
+import { IGame } from 'shared-types';
 import { Server as ServerIO } from 'socket.io';
 import { v4 as uuidv4 } from 'uuid';
+import { Game } from './src/game';
 import { GameManager } from './src/game-manager';
 
 const server = http.createServer();
@@ -10,7 +13,8 @@ const io = new ServerIO(server, {
   path: '/ws',
 });
 
-process.on('uncaughtException', () => {
+process.on('uncaughtException', (error) => {
+  console.log(error);
   console.error('uncaughtException');
 });
 
@@ -27,7 +31,7 @@ const readDB = () => {
     const db = fs.readFileSync('db.json', 'utf8');
     return db;
   } catch (error) {
-    return '{}';
+    return '{"gameMap":{}}';
   }
 };
 
@@ -51,15 +55,15 @@ io.on('connection', (client) => {
         const game = gameManager.getGame(gameId);
 
         if (game.hasPlayer(clientId)) {
-          client.emit('session.recovery.response', game.toPlain());
+          client.emit('session.recovery.response', JSON.stringify(game));
         }
       }
     },
   );
 
-  client.on('game.create', ({ countPlayers }: { countPlayers: number }) => {
+  client.on('game.create', ({ countPlayers }: IGame) => {
     const uuid = uuidv4();
-    gameManager.createGame(uuid, countPlayers);
+    gameManager.createGame(uuid, new Game({ countPlayers }));
     gameManager.serialize();
 
     io.emit('game.created', { id: uuid });
@@ -84,12 +88,25 @@ io.on('connection', (client) => {
         client.join(gameId);
 
         client.emit('game.joined.self');
-        io.sockets.to(gameId).emit('game.joined', game.toPlain());
+        io.sockets.to(gameId).emit('game.joined', JSON.stringify(game));
 
         return gameManager.serialize();
       }
 
       console.log('Game not found');
+    },
+  );
+
+  client.on(
+    'game.events.roll-dice',
+    ({ gameId, playerId }: { gameId: string; playerId: string }) => {
+      const game = gameManager.getGame(gameId);
+
+      game.rollDice();
+      gameManager.serialize();
+
+      // io.sockets.to(gameId).emit('game.update', JSON.stringify(game));
+      client.emit('game.update', JSON.stringify(game));
     },
   );
 

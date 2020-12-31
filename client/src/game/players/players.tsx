@@ -18,7 +18,7 @@ const PlayerCard = styled.div`
 export const Players = observer(() => {
   return (
     <Wrapper>
-      {playersStore.players.map((player) => (
+      {playersStore.players?.map((player) => (
         <PlayerCard>
           <div>{player.name}</div>
           <div>{15000}$</div>

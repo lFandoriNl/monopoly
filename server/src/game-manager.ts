@@ -1,4 +1,4 @@
-import { GameType } from 'shared-types';
+import { IGame } from 'shared-types';
 import { Game } from './game';
 
 type GameMap = { [key: string]: Game };
@@ -10,8 +10,8 @@ export class GameManager {
     this.gameMap = GameManager.deserialize(raw);
   }
 
-  createGame(id: string, countPlayers: number) {
-    this.gameMap[id] = new Game(countPlayers);
+  createGame(id: string, game: IGame) {
+    this.gameMap[id] = new Game(game);
   }
 
   getGame(id: string) {
@@ -27,21 +27,21 @@ export class GameManager {
   }
 
   serialize() {
-    const plainGameMap: { [key: string]: GameType } = {};
+    // const plainGameMap: { [key: string]: IGame } = {};
 
-    Object.keys(this.gameMap).forEach((key) => {
-      plainGameMap[key] = this.gameMap[key].toPlain();
-    });
+    // Object.keys(this.gameMap).forEach((key) => {
+    //   plainGameMap[key] = this.gameMap[key];
+    // });
 
-    this.saveToDB(JSON.stringify(plainGameMap));
+    this.saveToDB(JSON.stringify(this));
   }
 
   static deserialize(raw: string) {
     const gameMap: GameMap = {};
-    const parsed: { [key: string]: GameType } = JSON.parse(raw);
+    const parsed: { gameMap: { [key: string]: IGame } } = JSON.parse(raw);
 
-    Object.keys(parsed).forEach((key) => {
-      gameMap[key] = Game.fromPlain(parsed[key]);
+    Object.keys(parsed.gameMap).forEach((key) => {
+      gameMap[key] = new Game(parsed.gameMap[key]);
     });
 
     return gameMap;
