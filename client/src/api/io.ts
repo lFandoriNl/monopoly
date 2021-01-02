@@ -2,7 +2,7 @@ import { IGame } from 'shared-types';
 
 import { io } from 'socket.io-client';
 
-import { playersStore } from '../common/store/players-store';
+import { playerStore } from '../core/player-store';
 
 import { uuidv4 } from '../lib/uuid';
 import { getSearchParam } from '../lib/search-param';
@@ -32,7 +32,7 @@ events.on('connect', () => {
 
 events.on('session.recovery.response', (gameRaw: string) => {
   const game: IGame = JSON.parse(gameRaw);
-  playersStore.initFrom(game);
+  playerStore.initFrom(game);
 });
 
 events.on('game.created', ({ id }: { id: string }) => {
@@ -41,16 +41,16 @@ events.on('game.created', ({ id }: { id: string }) => {
 });
 
 events.on('game.joined.self', () => {
-  playersStore.setJoined(true);
+  playerStore.setJoined(true);
 });
 
 events.on('game.joined', (gameRaw: string) => {
   const game: IGame = JSON.parse(gameRaw);
-  playersStore.initFrom(game);
+  playerStore.initFrom(game);
 });
 
 events.on('game.update', (gameRaw: string) => {
   const game: IGame = JSON.parse(gameRaw);
   console.log(game);
-  playersStore.initFrom(game);
+  playerStore.initFrom(game);
 });

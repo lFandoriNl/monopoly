@@ -1,12 +1,12 @@
 import { events } from '../api/io';
-import { playersStore } from '../common/store/players-store';
+import { playerStore } from './player-store';
 import { gameSettingStore } from '../create-game/game-setting-store';
 
 export class PlayerEvents {
   roleDice() {
     events.emit('game.events.roll-dice', {
       gameId: gameSettingStore.gameId,
-      playerId: playersStore.currentPlayerId,
+      playerId: playerStore.currentPlayerId,
     });
   }
 }

@@ -2,10 +2,10 @@ import { IGame, PlayerType } from 'shared-types';
 
 import { makeAutoObservable } from 'mobx';
 
-import { gameSettingStore } from '../../create-game/game-setting-store';
-import { events } from '../../api/io';
+import { gameSettingStore } from '../create-game/game-setting-store';
+import { events } from '../api/io';
 
-class Players {
+class Player {
   joined = false;
   currentPlayerId? = '';
   currentPlayerName? = '';
@@ -57,4 +57,4 @@ class Players {
   }
 }
 
-export const playersStore = new Players();
+export const playerStore = new Player();

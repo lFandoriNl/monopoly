@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
 import { observer } from 'mobx-react';
-import { playersStore } from '../common/store/players-store';
+import { playerStore } from '../core/player-store';
 import { gameSettingStore } from '../create-game/game-setting-store';
 
 import { Players } from './players';
@@ -34,7 +34,7 @@ export const Game = observer(() => {
 
       <Board />
 
-      {playersStore.joined === false && <InputNameModal />}
+      {playerStore.joined === false && <InputNameModal />}
     </Wrapper>
   );
 });
