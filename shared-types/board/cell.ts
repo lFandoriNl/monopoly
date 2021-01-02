@@ -2,7 +2,7 @@ export type Position = 'top' | 'right' | 'bottom' | 'left';
 
 export type CellType = {
   path: Position;
-  index: number;
+  order: number;
 };
 
 export type CellKind =

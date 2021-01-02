@@ -45,7 +45,7 @@ class Player {
     }
   }
 
-  initFrom(game: IGame) {
+  update(game: IGame) {
     const clientId = localStorage.getItem('clientId');
     const currentPlayer = game.players?.find(
       (player) => player.id === clientId,

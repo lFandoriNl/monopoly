@@ -1,6 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { autorun } from 'mobx';
+import { observer } from 'mobx-react';
 
 import { CellType } from 'shared-types';
+
+import { gameStore } from '../../core/game-store';
 
 import { ActionsPopup } from './actions-popup';
 import { Cell } from './cell';
@@ -12,58 +16,30 @@ import { boardCells } from './board-cells';
 
 import { getPointsFromCells } from '../../lib/dom';
 
-// const sequencePaths = ['top', 'right', 'bottom', 'left'];
-const sequencePaths = {
-  top: 'right',
-  right: 'bottom',
-  bottom: 'left',
-  left: 'top',
-} as const;
-
-const cells: CellType[] = [
-  {
-    path: 'top',
-    index: 10,
-  },
-  {
-    path: 'right',
-    index: 5,
-  },
-];
-
-export const Board = () => {
+export const Board = observer(() => {
   const [points, setPoints] = useState<PointType[]>([]);
-  const [prevPosition, setPrevPosition] = useState<CellType>({
-    path: 'top',
-    index: 0,
-  });
-
-  const [positionChip, setPositionChip] = useState({ x: 0, y: 0, duration: 0 });
 
   const boardRef = useRef<HTMLDivElement>(null);
 
-  const handleStartMove = (event: React.FormEvent) => {
-    event.preventDefault();
+  useEffect(() => {
+    const disposer = autorun(() => {
+      const boardElement = boardRef.current;
 
-    const boardElement = boardRef.current;
+      if (boardElement) {
+        const newPositions = getPointsFromCells(
+          boardElement,
+          gameStore.moveCells,
+        );
 
-    if (boardElement) {
-      const newPositions = getPointsFromCells(
-        boardElement,
-        cells,
-        prevPosition,
-      );
+        setPoints(newPositions);
+      }
+    });
 
-      setPoints(newPositions);
-    }
-  };
+    return disposer;
+  }, []);
 
   return (
     <BoardWrapper>
-      <form onSubmit={handleStartMove}>
-        <button type="submit">Start</button>
-      </form>
-
       <div className="responsive">
         <div className="mainSquare" ref={boardRef}>
           <Chip color="#ff4e4e" points={points} />
@@ -80,6 +56,7 @@ export const Board = () => {
             <div className="square2 cells-left">
               {boardCells
                 .filter((cell) => cell.position === 'left')
+                .reverse()
                 .map((cell) => (
                   <Cell key={cell.id} {...cell} />
                 ))}
@@ -101,6 +78,7 @@ export const Board = () => {
           <div className="row top cells-bottom">
             {boardCells
               .filter((cell) => cell.position === 'bottom')
+              .reverse()
               .map((cell) => (
                 <Cell key={cell.id} {...cell} />
               ))}
@@ -109,4 +87,4 @@ export const Board = () => {
       </div>
     </BoardWrapper>
   );
-};
+});

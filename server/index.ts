@@ -88,7 +88,7 @@ io.on('connection', (client) => {
         client.join(gameId);
 
         client.emit('game.joined.self');
-        io.sockets.to(gameId).emit('game.joined', JSON.stringify(game));
+        io.to(gameId).emit('game.joined', JSON.stringify(game));
 
         return gameManager.serialize();
       }
@@ -105,8 +105,7 @@ io.on('connection', (client) => {
       game.rollDice();
       gameManager.serialize();
 
-      // io.sockets.to(gameId).emit('game.update', JSON.stringify(game));
-      client.emit('game.update', JSON.stringify(game));
+      io.to(gameId).emit('game.update', JSON.stringify(game));
     },
   );
 

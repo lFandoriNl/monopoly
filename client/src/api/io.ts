@@ -7,6 +7,7 @@ import { playerStore } from '../core/player-store';
 import { uuidv4 } from '../lib/uuid';
 import { getSearchParam } from '../lib/search-param';
 import { gameSettingStore } from '../create-game/game-setting-store';
+import { gameStore } from '../core/game-store';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -32,7 +33,9 @@ events.on('connect', () => {
 
 events.on('session.recovery.response', (gameRaw: string) => {
   const game: IGame = JSON.parse(gameRaw);
-  playerStore.initFrom(game);
+
+  playerStore.update(game);
+  gameStore.update(game);
 });
 
 events.on('game.created', ({ id }: { id: string }) => {
@@ -46,11 +49,14 @@ events.on('game.joined.self', () => {
 
 events.on('game.joined', (gameRaw: string) => {
   const game: IGame = JSON.parse(gameRaw);
-  playerStore.initFrom(game);
+
+  playerStore.update(game);
+  gameStore.update(game);
 });
 
 events.on('game.update', (gameRaw: string) => {
   const game: IGame = JSON.parse(gameRaw);
-  console.log(game);
-  playerStore.initFrom(game);
+
+  playerStore.update(game);
+  gameStore.update(game);
 });

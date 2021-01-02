@@ -1,62 +1,51 @@
 import { CellType } from 'shared-types';
 import { PointType } from '../game/board/chip';
 
-export function getPositionRelativeToParent(
+export function getPositionRelativeOfParent(
   parent: HTMLElement,
   child: HTMLElement,
 ) {
   let childTemp: HTMLElement | null | undefined = child;
   let x = 0;
   let y = 0;
-
   while (parent !== childTemp) {
     if (childTemp) {
       x += childTemp.offsetLeft;
       y += childTemp.offsetTop;
     }
-
-    childTemp = childTemp?.parentElement;
+    // @ts-ignore
+    childTemp = childTemp?.offsetParent;
   }
-
   return { x, y };
 }
 
-function calcNumberMoveCells(index: number, prevIndex: number) {
-  return Math.abs(index - prevIndex);
-}
-
-function getCellElementByPathAndIndex(
+function getCellElementByPathAndOrder(
   container: HTMLDivElement,
-  cell: CellType,
+  { path, order }: CellType,
 ) {
-  const cellsElements = container.querySelectorAll<HTMLDivElement>(
-    `.cells-${cell.path} .cell`,
-  );
-  return cellsElements[cell.index];
+  return container.querySelector<HTMLDivElement>(`.${path}-${order}`);
 }
 
 export function getPointsFromCells(
   boardElement: HTMLDivElement,
   cells: CellType[],
-  prevCell: CellType,
 ): PointType[] {
-  return cells.map((cell, idx, array) => {
-    const prevCellCorrect = idx === 0 ? prevCell : array[idx - 1];
+  const prevCellCorrect = cells[cells.length - 1];
+  return cells.map((cell) => {
+    const cellElement = getCellElementByPathAndOrder(boardElement, cell);
 
-    const cellElement = getCellElementByPathAndIndex(boardElement, cell);
-
-    const prevCellElement = getCellElementByPathAndIndex(
+    const prevCellElement = getCellElementByPathAndOrder(
       boardElement,
       prevCellCorrect,
     );
 
-    const positionRelative = getPositionRelativeToParent(
+    const positionRelative = getPositionRelativeOfParent(
       boardElement,
-      cellElement,
+      cellElement!,
     );
 
-    const cellRect = cellElement.getBoundingClientRect();
-    const prevCellRect = prevCellElement.getBoundingClientRect();
+    const cellRect = cellElement!.getBoundingClientRect();
+    const prevCellRect = prevCellElement!.getBoundingClientRect();
 
     const distanceBetweenCells = Math.sqrt(
       (cellRect.x - prevCellRect.x) ** 2 + (cellRect.y - prevCellRect.y) ** 2,

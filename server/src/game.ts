@@ -1,15 +1,18 @@
-import { IGame, PlayerType } from 'shared-types';
-import { CubesValueType } from 'shared-types/board/cuber';
+import { CellType, IGame, PlayerType } from 'shared-types';
+import { CubesValueType } from 'shared-types';
+import { calcCellsPath } from './lib/calc-cells-path';
 import { Player } from './player';
 
 export class Game implements IGame {
   currentPlayerId = '';
-  currentDiceValue: CubesValueType = { firstCube: 0, secondCube: 0 };
   countPlayers: number = 0;
   players: Player[] = [];
+  currentDiceValue: CubesValueType = { firstCube: 0, secondCube: 0 };
+  moveCells: CellType[] = [];
 
   constructor(game: Partial<IGame>) {
     const players = game.players?.map((player) => new Player(player)) || [];
+
     Object.assign(this, {
       ...game,
       currentPlayerId: players[0]?.id || '',
@@ -19,6 +22,7 @@ export class Game implements IGame {
 
   startGame() {
     this.currentPlayerId = this.players[0].id;
+    this.moveCells = [{ path: 'top', order: 0 }];
   }
 
   addPlayer(player: PlayerType) {
@@ -46,6 +50,11 @@ export class Game implements IGame {
 
     if (player) {
       this.currentDiceValue = player.rollDice();
+
+      const sumDiceValue =
+        this.currentDiceValue.firstCube + this.currentDiceValue.secondCube;
+
+      this.moveCells = calcCellsPath(this.moveCells, sumDiceValue);
     }
   }
 

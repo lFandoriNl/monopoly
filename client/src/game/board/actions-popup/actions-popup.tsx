@@ -1,4 +1,7 @@
+import { observer } from 'mobx-react';
 import styled from 'styled-components/macro';
+
+import { gameStore } from '../../../core/game-store';
 import { playerEvents } from '../../../core/player-events';
 
 const Wrapper = styled.div`
@@ -28,12 +31,17 @@ const ActionButton = styled.button`
   }
 `;
 
-export const ActionsPopup = () => {
+export const ActionsPopup = observer(() => {
   return (
     <Wrapper>
+      <div style={{ marginRight: '1rem' }}>
+        {gameStore.currentDiceValue.firstCube}{' '}
+        {gameStore.currentDiceValue.secondCube}
+      </div>
+
       <ActionButton onClick={playerEvents.roleDice}>
         Бросить кубики
       </ActionButton>
     </Wrapper>
   );
-};
+});
