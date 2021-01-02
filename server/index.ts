@@ -61,7 +61,7 @@ io.on('connection', (client) => {
     },
   );
 
-  client.on('game.create', ({ countPlayers }: IGame) => {
+  client.on('game.create', ({ countPlayers }: Partial<IGame>) => {
     const uuid = uuidv4();
     gameManager.createGame(uuid, new Game({ countPlayers }));
     gameManager.serialize();

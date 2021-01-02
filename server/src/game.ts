@@ -4,11 +4,11 @@ import { Player } from './player';
 
 export class Game implements IGame {
   currentPlayerId = '';
-  currentDiceValue?: CubesValueType;
+  currentDiceValue: CubesValueType = { firstCube: 0, secondCube: 0 };
   countPlayers: number = 0;
   players: Player[] = [];
 
-  constructor(game: IGame) {
+  constructor(game: Partial<IGame>) {
     const players = game.players?.map((player) => new Player(player)) || [];
     Object.assign(this, {
       ...game,
@@ -17,8 +17,16 @@ export class Game implements IGame {
     });
   }
 
+  startGame() {
+    this.currentPlayerId = this.players[0].id;
+  }
+
   addPlayer(player: PlayerType) {
     this.players.push(new Player(player));
+
+    // if (this.hasFreeSlot() === false) {
+    this.startGame();
+    // }
   }
 
   getPlayer(id: PlayerType['id']) {
@@ -34,7 +42,11 @@ export class Game implements IGame {
   }
 
   rollDice() {
-    this.currentDiceValue = this.getPlayer(this.currentPlayerId)?.rollDice();
+    const player = this.getPlayer(this.currentPlayerId);
+
+    if (player) {
+      this.currentDiceValue = player.rollDice();
+    }
   }
 
   static fromPlain(object: IGame) {
