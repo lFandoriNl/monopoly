@@ -1,8 +1,7 @@
 import fs from 'fs';
 import http from 'http';
-import { emit } from 'process';
 import { IGame } from 'shared-types';
-import { Server as ServerIO } from 'socket.io';
+import { Server as ServerIO, Socket } from 'socket.io';
 import { v4 as uuidv4 } from 'uuid';
 import { Game } from './src/game';
 import { GameManager } from './src/game-manager';
@@ -45,7 +44,7 @@ const gameManager = new GameManager(db, (raw: string) => {
   });
 });
 
-io.on('connection', (client) => {
+io.on('connection', (client: Socket) => {
   console.log('a user connected');
 
   client.on(
@@ -111,12 +110,5 @@ io.on('connection', (client) => {
 
   client.on('disconnect', () => {
     console.log('user disconnected');
-  });
-
-  client.on('connect_error', () => {
-    console.log('connect_error');
-    setTimeout(() => {
-      client.connect();
-    }, 1000);
   });
 });
