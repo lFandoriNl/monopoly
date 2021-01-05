@@ -3,15 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "workspaces": [
-    "server",
-    "client",
-    "shared-types"
-  ],
   "scripts": {
-    "start": "concurrently \"cd server && yarn start\" \"cd client && yarn start\""
+    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\""
   },
   "dependencies": {
     "concurrently": "^5.3.0"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1"
   }
 }

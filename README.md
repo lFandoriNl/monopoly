@@ -3,12 +3,15 @@
 ## Как запустить
 
 ```
-1. yarn
-2. cd ./server && yarn
-3. cd ../client && yarn
-4. cd ../shared-types && yarn
-5. cd .. && yarn start
+1. npx lerna bootstrap
+2. npm start
 ```
+
+Могут возникать ошибки при использовании новых версий npm и yarn, желательно использывать следующие версии:
+
+npm < 7 version
+
+yarn < 2 version
 
 ---
 
