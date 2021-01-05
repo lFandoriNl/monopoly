@@ -3,11 +3,6 @@ import styled from 'styled-components/macro';
 export const BoardWrapper = styled.div`
   display: block;
 
-  div {
-    box-sizing: border-box;
-    text-transform: uppercase;
-  }
-
   .responsive {
     width: calc(120vh - 2rem);
     height: calc(100vh - 2rem);
@@ -69,11 +64,9 @@ export const BoardWrapper = styled.div`
     position: absolute;
     outline: 2px solid black;
     background: grey;
-    /* width: 100%; */
   }
 
   .headerSide {
-    /* height: 100%; */
     width: 21%;
     position: absolute;
     outline: 2px solid black;
@@ -125,13 +118,13 @@ export const BoardWrapper = styled.div`
     }
   }
 
-  .firstLine {
+  .side {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .firstLine-top {
+  .side-top {
     height: 77%;
     left: 1px;
     right: 1px;
@@ -142,7 +135,7 @@ export const BoardWrapper = styled.div`
     }
   }
 
-  .firstLine-right {
+  .side-right {
     position: relative;
     top: 0;
     bottom: 0;
@@ -156,7 +149,7 @@ export const BoardWrapper = styled.div`
     }
   }
 
-  .firstLine-bottom {
+  .side-bottom {
     position: relative;
     left: 0;
     right: 0;
@@ -169,7 +162,7 @@ export const BoardWrapper = styled.div`
     }
   }
 
-  .firstLine-left {
+  .side-left {
     position: relative;
     top: 0px;
     bottom: 0px;
@@ -182,68 +175,8 @@ export const BoardWrapper = styled.div`
     }
   }
 
-  .rotation1 {
-    transform: rotate(90deg);
-  }
-
-  .rotation2 {
+  .left-rotation {
     transform: rotate(-90deg);
-  }
-
-  .rotation3 {
-    transform: rotate(0deg);
-  }
-
-  .logoBox {
-    width: 46%;
-    background: #ed1b24;
-    position: absolute;
-    transform: rotateZ(-45deg) translateX(-27%) translateY(237%);
-    border: 3px solid black;
-    text-align: center;
-    box-shadow: inset 0px 2px 12px 0px white;
-  }
-
-  .logoName {
-    font-size: 7.1vw;
-    color: white;
-    font-family: futura;
-    text-shadow: -4px 3px 0px black;
-    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #cfc2c3;
-  }
-
-  .card-box {
-    position: absolute;
-    width: 15%;
-    height: 9vw;
-  }
-
-  .card-blue {
-    background: linear-gradient(#4ccaf4, #a3dff9);
-    transform: rotateZ(-45deg) translateX(-13%) translateY(66%);
-  }
-
-  .card-blue-inside {
-    background: linear-gradient(#a3dff9, #4ccaf4);
-    width: 94%;
-    height: 94%;
-    margin: 0.3vw auto;
-    position: relative;
-  }
-
-  .card-orange {
-    background: linear-gradient(#f99120, #f57420);
-    transform: rotateZ(-45deg) translateX(-13%) translateY(610%);
-  }
-
-  .card-orange-inside {
-    background: linear-gradient(#f57420, #f99120);
-    width: 94%;
-    height: 94%;
-    margin: 0.3vw auto;
-    position: relative;
   }
 
   .corner {
@@ -252,29 +185,6 @@ export const BoardWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  .squareCorner {
-    height: 65%;
-    width: 65%;
-    border: 2px solid black;
-    right: -1px;
-    top: -1px;
-    position: absolute;
-  }
-
-  .corner4-left {
-    position: absolute;
-    transform: rotateZ(90deg) translateX(80%) translateY(-36%);
-    font-size: 1.2vw;
-    font-weight: 500;
-  }
-
-  .corner4-bottom {
-    position: absolute;
-    transform: translateX(112%) translateY(720%);
-    font-size: 1.2vw;
-    font-weight: 500;
   }
 
   .cell-image {

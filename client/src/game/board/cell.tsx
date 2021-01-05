@@ -66,9 +66,9 @@ export const Cell = (props: CellProps) => {
             {props.price}$
           </Price>
         )}
-        <div className="firstLine firstLine-top">
+        <div className="side side-top">
           <div
-            className="cell-image rotation2"
+            className="cell-image left-rotation"
             style={{ backgroundImage: `url(${props.image})` }}
           />
         </div>
@@ -84,9 +84,9 @@ export const Cell = (props: CellProps) => {
             <span className="price">{props.price}$</span>
           </Price>
         )}
-        <div className="firstLine firstLine-right">
+        <div className="side side-right">
           <div
-            className="cell-image rotation3"
+            className="cell-image"
             style={{ backgroundImage: `url(${props.image})` }}
           />
         </div>
@@ -102,9 +102,9 @@ export const Cell = (props: CellProps) => {
             {props.price}$
           </Price>
         )}
-        <div className="firstLine firstLine-bottom">
+        <div className="side side-bottom">
           <div
-            className="cell-image rotation2"
+            className="cell-image left-rotation"
             style={{ backgroundImage: `url(${props.image})` }}
           />
         </div>
@@ -120,7 +120,7 @@ export const Cell = (props: CellProps) => {
             <span className="price">{props.price}$</span>
           </Price>
         )}
-        <div className="firstLine firstLine-left">
+        <div className="side side-left">
           <div
             className="cell-image"
             style={{ backgroundImage: `url(${props.image})` }}
