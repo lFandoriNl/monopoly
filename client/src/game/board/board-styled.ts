@@ -56,15 +56,17 @@ export const BoardWrapper = styled.div`
   }
 
   .header {
-    height: 21%;
     position: absolute;
+    height: 21%;
+    font-size: 14px;
     outline: 2px solid black;
     background: grey;
   }
 
   .headerSide {
-    width: 21%;
     position: absolute;
+    width: 21%;
+    font-size: 14px;
     outline: 2px solid black;
   }
 
