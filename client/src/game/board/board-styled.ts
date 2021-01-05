@@ -27,6 +27,7 @@ export const BoardWrapper = styled.div`
 
   .cell {
     background-color: #fff;
+    cursor: pointer;
   }
 
   .top {
@@ -36,6 +37,7 @@ export const BoardWrapper = styled.div`
   .center {
     height: 69.23076923%;
   }
+
   .square1 {
     outline: 2px solid #212121;
     flex-grow: 1;
@@ -124,52 +126,60 @@ export const BoardWrapper = styled.div`
   }
 
   .firstLine {
-    position: absolute;
-    font-size: 0.7vw;
-    font-weight: 500;
-    line-height: 1vw;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .firstLine-top {
+    height: 77%;
     left: 1px;
     right: 1px;
-    bottom: 30%;
-    height: 10%;
-  }
 
-  .firstLine-top.no-color {
-    bottom: 12%;
-  }
-
-  .firstLine-left {
-    top: 0px;
-    bottom: 0px;
-    right: 42%;
-  }
-
-  .firstLine-left.no-color {
-    right: 23%;
+    .cell-image {
+      width: 90%;
+      height: 60%;
+    }
   }
 
   .firstLine-right {
+    position: relative;
     top: 0;
     bottom: 0;
-    left: 42%;
-  }
+    left: 21%;
+    width: 77%;
+    height: 100%;
 
-  .firstLine-right.no-color {
-    left: 23%;
+    .cell-image {
+      width: 80%;
+      height: 60%;
+    }
   }
 
   .firstLine-bottom {
+    position: relative;
     left: 0;
     right: 0;
-    top: 30%;
+    top: 21%;
+    height: 77%;
+
+    .cell-image {
+      width: 90%;
+      height: 60%;
+    }
   }
 
-  .firstLine-bottom.no-color {
-    top: 12%;
+  .firstLine-left {
+    position: relative;
+    top: 0px;
+    bottom: 0px;
+    width: 77%;
+    height: 100%;
+
+    .cell-image {
+      width: 80%;
+      height: 60%;
+    }
   }
 
   .rotation1 {
@@ -177,11 +187,11 @@ export const BoardWrapper = styled.div`
   }
 
   .rotation2 {
-    transform: rotate(180deg);
+    transform: rotate(-90deg);
   }
 
   .rotation3 {
-    transform: rotate(-90deg);
+    transform: rotate(0deg);
   }
 
   .logoBox {
@@ -237,31 +247,11 @@ export const BoardWrapper = styled.div`
   }
 
   .corner {
-    position: absolute;
-    text-align: center;
-    line-height: 8vw;
-    font-size: 1.2vw;
-    font-weight: 500;
-  }
-
-  .corner1 {
-    transform: rotateZ(135deg) translateX(-66%) translateY(-15%);
-  }
-
-  .corner2 {
-    transform: rotateZ(-135deg) translateX(-30%) translateY(23%);
-    line-height: 9vw;
-  }
-
-  .corner3 {
-    transform: rotateZ(-45deg) translateX(-14%) translateY(26%);
-    line-height: 1.4vw;
-    font-size: 1vw;
-  }
-
-  .corner4 {
-    transform: rotateZ(45deg) translateX(-9%) translateY(-31%);
-    line-height: 7vw;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .squareCorner {
@@ -285,5 +275,13 @@ export const BoardWrapper = styled.div`
     transform: translateX(112%) translateY(720%);
     font-size: 1.2vw;
     font-weight: 500;
+  }
+
+  .cell-image {
+    width: 80%;
+    height: 80%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 `;

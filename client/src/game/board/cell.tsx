@@ -9,7 +9,12 @@ export const Cell = (props: CellProps) => {
   if (props.type === 'start') {
     return (
       <div className={`cell square2 ${classNameId}`}>
-        <span className="corner corner1">1</span>
+        <span className="corner">
+          <div
+            className="cell-image"
+            style={{ backgroundImage: `url(${props.image})` }}
+          />
+        </span>
       </div>
     );
   }
@@ -17,7 +22,12 @@ export const Cell = (props: CellProps) => {
   if (props.type === 'prison') {
     return (
       <div className={`cell square2 ${classNameId}`}>
-        <span className="corner corner2">2</span>
+        <span className="corner">
+          <div
+            className="cell-image"
+            style={{ backgroundImage: `url(${props.image})` }}
+          />
+        </span>
       </div>
     );
   }
@@ -25,7 +35,12 @@ export const Cell = (props: CellProps) => {
   if (props.type === 'jackpot') {
     return (
       <div className={`cell square2 ${classNameId}`}>
-        <span className="corner corner3">3</span>
+        <span className="corner">
+          <div
+            className="cell-image"
+            style={{ backgroundImage: `url(${props.image})` }}
+          />
+        </span>
       </div>
     );
   }
@@ -33,7 +48,12 @@ export const Cell = (props: CellProps) => {
   if (props.type === 'vacation') {
     return (
       <div className={`cell square2 ${classNameId}`}>
-        <span className="corner corner4">4</span>
+        <span className="corner">
+          <div
+            className="cell-image"
+            style={{ backgroundImage: `url(${props.image})` }}
+          />
+        </span>
       </div>
     );
   }
@@ -46,20 +66,12 @@ export const Cell = (props: CellProps) => {
             {props.price}$
           </Price>
         )}
-        <div className="firstLine firstLine-top rotation2">{props.image}</div>
-      </div>
-    );
-  }
-
-  if (props.position === 'bottom') {
-    return (
-      <div className={`cell square1 ${classNameId}`}>
-        {props.type === 'company' && (
-          <Price color={props.priceColor} className="header header-bottom">
-            {props.price}$
-          </Price>
-        )}
-        <div className="firstLine firstLine-bottom">{props.image}</div>
+        <div className="firstLine firstLine-top">
+          <div
+            className="cell-image rotation2"
+            style={{ backgroundImage: `url(${props.image})` }}
+          />
+        </div>
       </div>
     );
   }
@@ -72,7 +84,30 @@ export const Cell = (props: CellProps) => {
             <span className="price">{props.price}$</span>
           </Price>
         )}
-        <div className="firstLine firstLine-right rotation3">{props.image}</div>
+        <div className="firstLine firstLine-right">
+          <div
+            className="cell-image rotation3"
+            style={{ backgroundImage: `url(${props.image})` }}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (props.position === 'bottom') {
+    return (
+      <div className={`cell square1 ${classNameId}`}>
+        {props.type === 'company' && (
+          <Price color={props.priceColor} className="header header-bottom">
+            {props.price}$
+          </Price>
+        )}
+        <div className="firstLine firstLine-bottom">
+          <div
+            className="cell-image rotation2"
+            style={{ backgroundImage: `url(${props.image})` }}
+          />
+        </div>
       </div>
     );
   }
@@ -85,7 +120,12 @@ export const Cell = (props: CellProps) => {
             <span className="price">{props.price}$</span>
           </Price>
         )}
-        <div className="firstLine firstLine-left rotation1">{props.image}</div>
+        <div className="firstLine firstLine-left">
+          <div
+            className="cell-image"
+            style={{ backgroundImage: `url(${props.image})` }}
+          />
+        </div>
       </div>
     );
   }

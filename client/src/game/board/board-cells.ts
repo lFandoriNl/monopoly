@@ -1,4 +1,40 @@
-import { CellKind, Position } from 'shared-types';
+import { Position } from 'shared-types';
+
+import startImage from './images/start.png';
+import chanelImage from './images/chanel.svg';
+import chanceImage from './images/chance.png';
+import hugoBossImage from './images/hugo-boss.svg';
+import taxIncomeImage from './images/tax-income.png';
+import mercedesImage from './images/mercedes.svg';
+import adidasImage from './images/adidas.svg';
+import pumaImage from './images/puma.svg';
+import lacosteImage from './images/lacoste.svg';
+import jailImage from './images/jail.png';
+import vkImage from './images/vk.svg';
+import rockstarImage from './images/rockstar.svg';
+import facebookImage from './images/facebook.svg';
+import twitterImage from './images/twitter.svg';
+import audiImage from './images/audi.svg';
+import cocaColaImage from './images/coca-cola.svg';
+import pepsiImage from './images/pepsi.svg';
+import fantaImage from './images/fanta.svg';
+import jackpotImage from './images/jackpot.svg';
+import americanAirlinesImage from './images/american-airlines.svg';
+import lufthansaImage from './images/lufthansa.svg';
+import britishAirwaysImage from './images/british-airways.svg';
+import fordImage from './images/ford.svg';
+import mcdonaldsImage from './images/mcdonalds.svg';
+import burgerKingImage from './images/burger-king.svg';
+import rovioImage from './images/rovio.svg';
+import kfcImage from './images/kfc.svg';
+import goToJailImage from './images/go-to-jail.png';
+import holidayInnImage from './images/holiday-inn.svg';
+import radissonImage from './images/radisson.svg';
+import novotelImage from './images/novotel.svg';
+import landRoverImage from './images/land-rover.svg';
+import taxLuxuryImage from './images/tax-luxury.png';
+import nokiaImage from './images/nokia.svg';
+import appleImage from './images/apple.svg';
 
 type PriceColor =
   | '#df8ac1'
@@ -46,7 +82,7 @@ export const boardCells: CellVariant[] = [
     id: 0,
     order: 0,
     position: 'top',
-    image: 'Start',
+    image: startImage,
     type: 'start',
     square: true,
   },
@@ -54,7 +90,7 @@ export const boardCells: CellVariant[] = [
     id: 1,
     order: 1,
     position: 'top',
-    image: 'Channel',
+    image: chanelImage,
     price: 600,
     priceColor: '#df8ac1',
     type: 'company',
@@ -63,14 +99,14 @@ export const boardCells: CellVariant[] = [
     id: 2,
     order: 2,
     position: 'top',
-    image: 'riddle',
+    image: chanceImage,
     type: 'riddle',
   },
   {
     id: 3,
     order: 3,
     position: 'top',
-    image: 'Boss',
+    image: hugoBossImage,
     price: 600,
     priceColor: '#df8ac1',
     type: 'company',
@@ -79,14 +115,14 @@ export const boardCells: CellVariant[] = [
     id: 4,
     order: 4,
     position: 'top',
-    image: 'Tax',
+    image: taxIncomeImage,
     type: 'tax',
   },
   {
     id: 5,
     order: 5,
     position: 'top',
-    image: 'Mersedes',
+    image: mercedesImage,
     price: 2000,
     priceColor: '#be5053',
     type: 'company',
@@ -95,7 +131,7 @@ export const boardCells: CellVariant[] = [
     id: 6,
     order: 6,
     position: 'top',
-    image: 'Adidas',
+    image: adidasImage,
     price: 1000,
     priceColor: '#dbb756',
     type: 'company',
@@ -104,14 +140,14 @@ export const boardCells: CellVariant[] = [
     id: 7,
     order: 7,
     position: 'top',
-    image: 'riddle',
+    image: chanceImage,
     type: 'riddle',
   },
   {
     id: 8,
     order: 8,
     position: 'top',
-    image: 'Puma',
+    image: pumaImage,
     price: 1000,
     priceColor: '#dbb756',
     type: 'company',
@@ -120,7 +156,7 @@ export const boardCells: CellVariant[] = [
     id: 9,
     order: 9,
     position: 'top',
-    image: 'Lacoste',
+    image: lacosteImage,
     price: 1200,
     priceColor: '#dbb756',
     type: 'company',
@@ -129,7 +165,7 @@ export const boardCells: CellVariant[] = [
     id: 10,
     order: 10,
     position: 'top',
-    image: 'Prison',
+    image: jailImage,
     type: 'prison',
     square: true,
   },
@@ -137,7 +173,7 @@ export const boardCells: CellVariant[] = [
     id: 11,
     order: 11,
     position: 'right',
-    image: 'VK',
+    image: vkImage,
     price: 1400,
     priceColor: '#71b6a4',
     type: 'company',
@@ -146,17 +182,16 @@ export const boardCells: CellVariant[] = [
     id: 12,
     order: 12,
     position: 'right',
-    image: 'RockStar',
+    image: rockstarImage,
     price: 1500,
     priceColor: '#722918',
     type: 'company',
   },
-
   {
     id: 13,
     order: 13,
     position: 'right',
-    image: 'Facebook',
+    image: facebookImage,
     price: 1400,
     priceColor: '#71b6a4',
     type: 'company',
@@ -165,7 +200,7 @@ export const boardCells: CellVariant[] = [
     id: 14,
     order: 14,
     position: 'right',
-    image: 'Twitter',
+    image: twitterImage,
     price: 1600,
     priceColor: '#71b6a4',
     type: 'company',
@@ -174,7 +209,7 @@ export const boardCells: CellVariant[] = [
     id: 15,
     order: 15,
     position: 'right',
-    image: 'Audi',
+    image: audiImage,
     price: 2000,
     priceColor: '#be5053',
     type: 'company',
@@ -183,7 +218,7 @@ export const boardCells: CellVariant[] = [
     id: 16,
     order: 16,
     position: 'right',
-    image: 'CocaCola',
+    image: cocaColaImage,
     price: 1800,
     priceColor: '#5787c7',
     type: 'company',
@@ -192,14 +227,14 @@ export const boardCells: CellVariant[] = [
     id: 17,
     order: 17,
     position: 'right',
-    image: 'riddle',
+    image: chanceImage,
     type: 'riddle',
   },
   {
     id: 18,
     order: 18,
     position: 'right',
-    image: 'Pepsi',
+    image: pepsiImage,
     price: 1800,
     priceColor: '#5787c7',
     type: 'company',
@@ -208,7 +243,7 @@ export const boardCells: CellVariant[] = [
     id: 19,
     order: 19,
     position: 'right',
-    image: 'Pepsi',
+    image: fantaImage,
     price: 2000,
     priceColor: '#5787c7',
     type: 'company',
@@ -217,7 +252,7 @@ export const boardCells: CellVariant[] = [
     id: 20,
     order: 20,
     position: 'bottom',
-    image: 'JackPot',
+    image: jackpotImage,
     type: 'jackpot',
     square: true,
   },
@@ -225,7 +260,7 @@ export const boardCells: CellVariant[] = [
     id: 21,
     order: 21,
     position: 'bottom',
-    image: 'American Airline',
+    image: americanAirlinesImage,
     price: 2200,
     priceColor: '#98bd5d',
     type: 'company',
@@ -234,14 +269,14 @@ export const boardCells: CellVariant[] = [
     id: 22,
     order: 22,
     position: 'bottom',
-    image: 'riddle',
+    image: chanceImage,
     type: 'riddle',
   },
   {
     id: 23,
     order: 23,
     position: 'bottom',
-    image: 'Lufttaines',
+    image: lufthansaImage,
     price: 2200,
     priceColor: '#98bd5d',
     type: 'company',
@@ -250,7 +285,7 @@ export const boardCells: CellVariant[] = [
     id: 24,
     order: 24,
     position: 'bottom',
-    image: 'British Airline',
+    image: britishAirwaysImage,
     price: 2400,
     priceColor: '#98bd5d',
     type: 'company',
@@ -259,7 +294,7 @@ export const boardCells: CellVariant[] = [
     id: 25,
     order: 25,
     position: 'bottom',
-    image: 'Ford',
+    image: fordImage,
     price: 2000,
     priceColor: '#be5053',
     type: 'company',
@@ -268,7 +303,7 @@ export const boardCells: CellVariant[] = [
     id: 26,
     order: 26,
     position: 'bottom',
-    image: 'Macdonadls',
+    image: mcdonaldsImage,
     price: 2600,
     priceColor: '#6fbde1',
     type: 'company',
@@ -277,7 +312,7 @@ export const boardCells: CellVariant[] = [
     id: 27,
     order: 27,
     position: 'bottom',
-    image: 'Burger King',
+    image: burgerKingImage,
     price: 2600,
     priceColor: '#6fbde1',
     type: 'company',
@@ -286,7 +321,7 @@ export const boardCells: CellVariant[] = [
     id: 28,
     order: 28,
     position: 'bottom',
-    image: 'Arovio',
+    image: rovioImage,
     price: 1500,
     priceColor: '#722918',
     type: 'company',
@@ -295,7 +330,7 @@ export const boardCells: CellVariant[] = [
     id: 29,
     order: 29,
     position: 'bottom',
-    image: 'KFC',
+    image: kfcImage,
     price: 2800,
     priceColor: '#6fbde1',
     type: 'company',
@@ -304,7 +339,7 @@ export const boardCells: CellVariant[] = [
     id: 30,
     order: 30,
     position: 'bottom',
-    image: 'Vacation',
+    image: goToJailImage,
     type: 'vacation',
     square: true,
   },
@@ -312,7 +347,7 @@ export const boardCells: CellVariant[] = [
     id: 31,
     order: 31,
     position: 'left',
-    image: 'Holiday Inn',
+    image: holidayInnImage,
     price: 3000,
     priceColor: '#8f7dd1',
     type: 'company',
@@ -321,7 +356,7 @@ export const boardCells: CellVariant[] = [
     id: 32,
     order: 32,
     position: 'left',
-    image: 'Radisson',
+    image: radissonImage,
     price: 3000,
     priceColor: '#8f7dd1',
     type: 'company',
@@ -330,14 +365,14 @@ export const boardCells: CellVariant[] = [
     id: 33,
     order: 33,
     position: 'left',
-    image: 'riddle',
+    image: chanceImage,
     type: 'riddle',
   },
   {
     id: 34,
     order: 34,
     position: 'left',
-    image: 'Novotel',
+    image: novotelImage,
     price: 3200,
     priceColor: '#8f7dd1',
     type: 'company',
@@ -346,7 +381,7 @@ export const boardCells: CellVariant[] = [
     id: 35,
     order: 35,
     position: 'left',
-    image: 'Land Rover',
+    image: landRoverImage,
     price: 2000,
     priceColor: '#be5053',
     type: 'company',
@@ -355,14 +390,14 @@ export const boardCells: CellVariant[] = [
     id: 36,
     order: 36,
     position: 'left',
-    image: 'riddle',
+    image: taxLuxuryImage,
     type: 'riddle',
   },
   {
     id: 37,
     order: 37,
     position: 'left',
-    image: 'Apple',
+    image: nokiaImage,
     price: 3500,
     priceColor: '#6d717a',
     type: 'company',
@@ -371,14 +406,14 @@ export const boardCells: CellVariant[] = [
     id: 38,
     order: 38,
     position: 'left',
-    image: 'riddle',
+    image: chanceImage,
     type: 'riddle',
   },
   {
     id: 39,
     order: 39,
     position: 'left',
-    image: 'Nokia',
+    image: appleImage,
     price: 4000,
     priceColor: '#6d717a',
     type: 'company',
