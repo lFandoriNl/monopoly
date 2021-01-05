@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import styled from 'styled-components/macro';
@@ -13,11 +13,14 @@ import { InputNameModal } from './input-name-modal';
 import { getSearchParam } from '../lib/search-param';
 
 const Wrapper = styled.div`
+  position: absolute;
   display: flex;
-  justify-content: space-around;
 `;
 
 export const Game = observer(() => {
+  const [scale, setScale] = useState(1);
+  const gameRef = useRef<HTMLDivElement>(null);
+
   const { search } = useLocation();
 
   useEffect(() => {
@@ -28,8 +31,31 @@ export const Game = observer(() => {
     }
   }, [search]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      console.log(window.innerWidth, window.innerHeight);
+
+      if (gameRef.current) {
+        setScale(
+          Math.min(
+            window.innerWidth / gameRef.current.clientWidth,
+            window.innerHeight / gameRef.current.clientHeight,
+          ),
+        );
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <Wrapper>
+    <Wrapper style={{ transform: `scale(${scale})` }} ref={gameRef}>
       <Players />
 
       <Board />

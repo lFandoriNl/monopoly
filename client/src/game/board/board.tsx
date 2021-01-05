@@ -40,49 +40,47 @@ export const Board = observer(() => {
 
   return (
     <BoardWrapper>
-      <div className="responsive">
-        <div className="mainSquare" ref={boardRef}>
-          <Chip color="#ff4e4e" points={points} />
+      <div className="mainSquare" ref={boardRef}>
+        <Chip color="#ff4e4e" points={points} />
 
-          <div className="row top cells-top">
+        <div className="row top cells-top">
+          {boardCells
+            .filter((cell) => cell.position === 'top')
+            .map((cell) => (
+              <Cell key={cell.id} {...cell} />
+            ))}
+        </div>
+
+        <div className="row center">
+          <div className="square2 cells-left">
             {boardCells
-              .filter((cell) => cell.position === 'top')
-              .map((cell) => (
-                <Cell key={cell.id} {...cell} />
-              ))}
-          </div>
-
-          <div className="row center">
-            <div className="square2 cells-left">
-              {boardCells
-                .filter((cell) => cell.position === 'left')
-                .reverse()
-                .map((cell) => (
-                  <Cell key={cell.id} {...cell} />
-                ))}
-            </div>
-
-            <div className="square9" style={{ position: 'relative' }}>
-              <ActionsPopup />
-            </div>
-
-            <div className="square2 cells-right">
-              {boardCells
-                .filter((cell) => cell.position === 'right')
-                .map((cell) => (
-                  <Cell key={cell.id} {...cell} />
-                ))}
-            </div>
-          </div>
-
-          <div className="row top cells-bottom">
-            {boardCells
-              .filter((cell) => cell.position === 'bottom')
+              .filter((cell) => cell.position === 'left')
               .reverse()
               .map((cell) => (
                 <Cell key={cell.id} {...cell} />
               ))}
           </div>
+
+          <div className="square9" style={{ position: 'relative' }}>
+            <ActionsPopup />
+          </div>
+
+          <div className="square2 cells-right">
+            {boardCells
+              .filter((cell) => cell.position === 'right')
+              .map((cell) => (
+                <Cell key={cell.id} {...cell} />
+              ))}
+          </div>
+        </div>
+
+        <div className="row top cells-bottom">
+          {boardCells
+            .filter((cell) => cell.position === 'bottom')
+            .reverse()
+            .map((cell) => (
+              <Cell key={cell.id} {...cell} />
+            ))}
         </div>
       </div>
     </BoardWrapper>

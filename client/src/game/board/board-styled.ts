@@ -1,18 +1,14 @@
 import styled from 'styled-components/macro';
 
 export const BoardWrapper = styled.div`
-  display: block;
-
-  .responsive {
-    width: calc(120vh - 2rem);
-    height: calc(100vh - 2rem);
-    margin: 10px auto;
-  }
+  margin: 22px 22px 22px 32px;
+  width: 695px;
+  height: 695px;
 
   .mainSquare {
     position: relative;
+    width: 100%;
     height: 100%;
-    outline-offset: -13px;
   }
 
   .row {

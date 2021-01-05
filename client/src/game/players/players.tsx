@@ -5,7 +5,9 @@ import styled from 'styled-components/macro';
 import { playerStore } from '../../core/player-store';
 
 const Wrapper = styled.div`
-  padding-top: 1rem;
+  width: 180px;
+  height: 695px;
+  margin: 22px 0 22px 22px;
 `;
 
 const PlayerCard = styled.div`
