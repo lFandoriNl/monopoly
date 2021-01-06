@@ -26,12 +26,14 @@
 - В начеле коммита указывай его тип:
 
   - `bugfix` - баг фикс
+  - `fix` - незначительный фикс чего-либо
   - `feat` - фича
   - `refactor` - рефакторинг
   - `docs` - документация
 
 - Примеры:
   - `bugfix: reconnect after refresh`
+  - `fix: style button roll-dice`
   - `feat: create order move players`
   - `refactor: reorganize server/index.ts`
   - `docs: update readme`
