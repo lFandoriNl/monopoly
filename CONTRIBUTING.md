@@ -25,13 +25,13 @@
 
 - В начеле коммита указывай его тип:
 
-  - `fix` - фикс бага
+  - `bugfix` - баг фикс
   - `feat` - фича
   - `refactor` - рефакторинг
   - `docs` - документация
 
 - Примеры:
-  - `fix: reconnect after refresh`
+  - `bugfix: reconnect after refresh`
   - `feat: create order move players`
   - `refactor: reorganize server/index.ts`
   - `docs: update readme`
