@@ -1,6 +1,6 @@
 # Monopoly
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Как запустить
@@ -51,6 +51,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/lFandoriNl"><img src="https://avatars0.githubusercontent.com/u/23149596?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Maxim Koylo</b></sub></a><br /><a href="https://github.com/lFandoriNl/monopoly/commits?author=lFandoriNl" title="Code">💻</a> <a href="https://github.com/lFandoriNl/monopoly/commits?author=lFandoriNl" title="Tests">⚠️</a> <a href="#data-lFandoriNl" title="Data">🔣</a> <a href="#ideas-lFandoriNl" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-lFandoriNl" title="Project Management">📆</a> <a href="https://github.com/lFandoriNl/monopoly/pulls?q=is%3Apr+reviewed-by%3AlFandoriNl" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/NothingToSayLGFM"><img src="https://avatars0.githubusercontent.com/u/62837832?v=4?s=100" width="100px;" alt=""/><br /><sub><b>NothingToSayLGFM</b></sub></a><br /><a href="https://github.com/lFandoriNl/monopoly/commits?author=NothingToSayLGFM" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Extwazer"><img src="https://avatars1.githubusercontent.com/u/43049398?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Extwazer</b></sub></a><br /><a href="https://github.com/lFandoriNl/monopoly/commits?author=Extwazer" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/nevstafev"><img src="https://avatars0.githubusercontent.com/u/16920632?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nevstafev</b></sub></a><br /><a href="https://github.com/lFandoriNl/monopoly/commits?author=nevstafev" title="Code">💻</a></td>
   </tr>
 </table>
 
