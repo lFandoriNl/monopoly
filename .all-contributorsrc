@@ -1,0 +1,29 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "lFandoriNl",
+      "name": "Maxim Koylo",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/23149596?v=4",
+      "profile": "https://github.com/lFandoriNl",
+      "contributions": [
+        "code",
+        "test",
+        "data",
+        "ideas",
+        "projectManagement",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "monopoly",
+  "projectOwner": "lFandoriNl",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
