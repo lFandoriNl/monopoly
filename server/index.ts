@@ -55,6 +55,7 @@ io.on('connection', (client: Socket) => {
         const game = gameManager.getGame(gameId);
 
         if (game && game.hasPlayer(clientId)) {
+          client.join(gameId);
           client.emit('session.recovery.response', JSON.stringify(game));
         }
       }
