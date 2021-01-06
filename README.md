@@ -1,4 +1,7 @@
 # Monopoly
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Как запустить
 
@@ -35,3 +38,23 @@
 Эти скриншоты из https://monopoly-one.com/
 
 Но есть еще https://monopolystar.ru/ и по мне она более ламповая, у каждой из них есть свои минусы по UX, мы же возьмем только лучшее из них обеих.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/lFandoriNl"><img src="https://avatars0.githubusercontent.com/u/23149596?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Maxim Koylo</b></sub></a><br /><a href="https://github.com/lFandoriNl/monopoly/commits?author=lFandoriNl" title="Code">💻</a> <a href="https://github.com/lFandoriNl/monopoly/commits?author=lFandoriNl" title="Tests">⚠️</a> <a href="#data-lFandoriNl" title="Data">🔣</a> <a href="#ideas-lFandoriNl" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-lFandoriNl" title="Project Management">📆</a> <a href="https://github.com/lFandoriNl/monopoly/pulls?q=is%3Apr+reviewed-by%3AlFandoriNl" title="Reviewed Pull Requests">👀</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
