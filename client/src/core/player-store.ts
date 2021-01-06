@@ -1,4 +1,4 @@
-import { IGame, PlayerType } from 'shared-types';
+import { CellType, IGame, IPlayer } from 'shared-types';
 
 import { makeAutoObservable } from 'mobx';
 
@@ -9,10 +9,16 @@ class Player {
   joined = false;
   currentPlayerId? = '';
   currentPlayerName? = '';
-  players?: PlayerType[] = [];
+  currentMovePlayerId? = '';
+  players?: IPlayer[] = [];
+  moveCells: CellType[] = [];
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  get isCurrentPlayerMove() {
+    return this.currentPlayerId === this.currentMovePlayerId;
   }
 
   setJoined(joined: boolean) {
@@ -23,7 +29,7 @@ class Player {
     this.currentPlayerName = name;
   }
 
-  addPlayer(player: PlayerType) {
+  addPlayer(player: IPlayer) {
     if (!this.players) {
       this.players = [];
     }
@@ -53,6 +59,7 @@ class Player {
     this.joined = true;
     this.currentPlayerId = currentPlayer?.id;
     this.currentPlayerName = currentPlayer?.name;
+    this.currentMovePlayerId = game.currentPlayerId;
     this.players = game.players;
   }
 }

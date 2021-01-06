@@ -33,8 +33,6 @@ export const Game = observer(() => {
 
   useEffect(() => {
     const handleResize = () => {
-      console.log(window.innerWidth, window.innerHeight);
-
       if (gameRef.current) {
         setScale(
           Math.min(

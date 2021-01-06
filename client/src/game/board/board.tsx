@@ -1,10 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
-import { autorun } from 'mobx';
+import { useState, useRef } from 'react';
 import { observer } from 'mobx-react';
-
-import { CellType } from 'shared-types';
-
-import { gameStore } from '../../core/game-store';
 
 import { ActionsPopup } from './actions-popup';
 import { Cell } from './cell';
@@ -15,33 +10,26 @@ import { BoardWrapper } from './board-styled';
 import { boardCells } from './board-cells';
 
 import { getPointsFromCells } from '../../lib/dom';
+import { playerStore } from '../../core/player-store';
 
 export const Board = observer(() => {
-  const [points, setPoints] = useState<PointType[]>([]);
-
   const boardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const disposer = autorun(() => {
-      const boardElement = boardRef.current;
-
-      if (boardElement) {
-        const newPositions = getPointsFromCells(
-          boardElement,
-          gameStore.moveCells,
-        );
-
-        setPoints(newPositions);
-      }
-    });
-
-    return disposer;
-  }, []);
 
   return (
     <BoardWrapper>
       <div className="mainSquare" ref={boardRef}>
-        <Chip color="#ff4e4e" points={points} />
+        {playerStore.players?.map((player) => {
+          const boardElement = boardRef.current;
+
+          if (boardElement) {
+            const newPositions = getPointsFromCells(
+              boardElement,
+              player.moveCells,
+            );
+
+            return <Chip color={player.color} points={newPositions} />;
+          }
+        })}
 
         <div className="row top cells-top">
           {boardCells
