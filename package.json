@@ -7,9 +7,7 @@
     "start": "concurrently \"cd server && npm start\" \"cd client && npm start\""
   },
   "dependencies": {
-    "concurrently": "^5.3.0",
-    "reflect-metadata": "^0.1.13",
-    "socket-controllers": "0.0.5"
+    "concurrently": "^5.3.0"
   },
   "devDependencies": {
     "lerna": "^3.22.1"
