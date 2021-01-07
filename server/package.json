@@ -13,8 +13,11 @@
     "@types/node": "^14.14.16",
     "@types/socket.io": "^2.1.12",
     "@types/uuid": "^8.3.0",
+    "reflect-metadata": "^0.1.13",
     "shared-types": "0.1.0",
+    "socket-controllers": "0.0.5",
     "socket.io": "^3.0.4",
+    "typedi": "^0.8.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

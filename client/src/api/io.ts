@@ -22,7 +22,7 @@ events.on('connect', () => {
   const clientId = localStorage.getItem('clientId');
 
   if (clientId) {
-    events.emit('session.recovery.request', gameId, clientId);
+    events.emit('session.recovery.request', { gameId, clientId });
   }
 
   if (!clientId) {
