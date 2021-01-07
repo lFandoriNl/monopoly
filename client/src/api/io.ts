@@ -22,7 +22,7 @@ events.on('connect', () => {
   const clientId = localStorage.getItem('clientId');
 
   if (clientId) {
-    events.emit('session.recovery.request', gameId, clientId);
+    events.emit('session.recovery.request', { gameId, clientId });
   }
 
   if (!clientId) {
@@ -39,6 +39,8 @@ events.on('session.recovery.response', (gameRaw: string) => {
 });
 
 events.on('game.created', ({ id }: { id: string }) => {
+  console.log('game created on clients');
+
   gameSettingStore.setGameId(id);
   gameSettingStore.setGameCreated(true);
 });

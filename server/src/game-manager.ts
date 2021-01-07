@@ -1,49 +1,29 @@
 import { IGame } from 'shared-types';
+import { Service } from 'typedi';
 import { Game } from './game';
+import { GameRepository } from './game-repository';
 
-type GameMap = { [key: string]: Game };
-
+@Service()
 export class GameManager {
-  gameMap: GameMap = {};
-
-  constructor(raw: string, private saveToDB: (raw: string) => void) {
-    this.gameMap = GameManager.deserialize(raw);
-  }
+  constructor(private gameRepository: GameRepository) {}
 
   createGame(id: string, game: IGame) {
-    this.gameMap[id] = new Game(game);
+    this.gameRepository.save(id, new Game(game));
+  }
+
+  updateGame(id: string, game: Game) {
+    this.gameRepository.save(id, game);
   }
 
   getGame(id: string) {
-    return this.gameMap[id];
+    return this.gameRepository.findById(id);
   }
 
   hasGame(id: string) {
-    return Boolean(this.gameMap[id]);
+    return Boolean(this.gameRepository.findById(id));
   }
 
   hasFreeGame(id: string) {
-    return this.gameMap[id].hasFreeSlot();
-  }
-
-  serialize() {
-    // const plainGameMap: { [key: string]: IGame } = {};
-
-    // Object.keys(this.gameMap).forEach((key) => {
-    //   plainGameMap[key] = this.gameMap[key];
-    // });
-
-    this.saveToDB(JSON.stringify(this));
-  }
-
-  static deserialize(raw: string) {
-    const gameMap: GameMap = {};
-    const parsed: { gameMap: { [key: string]: IGame } } = JSON.parse(raw);
-
-    Object.keys(parsed.gameMap).forEach((key) => {
-      gameMap[key] = new Game(parsed.gameMap[key]);
-    });
-
-    return gameMap;
+    return this.gameRepository.findById(id)?.hasFreeSlot();
   }
 }
