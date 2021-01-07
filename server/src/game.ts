@@ -1,14 +1,23 @@
-import { CellType, IGame, PlayerType } from 'shared-types';
+import { CellType, IGame, IPlayer } from 'shared-types';
 import { CubesValueType } from 'shared-types';
 import { calcCellsPath } from './lib/calc-cells-path';
 import { Player } from './player';
+
+const initMoveCells: CellType[] = [{ path: 'top', order: 0 }];
+
+const colors: { [key: number]: string } = {
+  0: '#d80606',
+  1: '#179cea',
+  2: '#fdf801',
+  3: '#a602e6',
+};
 
 export class Game implements IGame {
   currentPlayerId = '';
   countPlayers: number = 0;
   players: Player[] = [];
+
   currentDiceValue: CubesValueType = { firstCube: 0, secondCube: 0 };
-  moveCells: CellType[] = [];
 
   constructor(game: Partial<IGame>) {
     const players = game.players?.map((player) => new Player(player)) || [];
@@ -22,22 +31,39 @@ export class Game implements IGame {
 
   startGame() {
     this.currentPlayerId = this.players[0].id;
-    this.moveCells = [{ path: 'top', order: 0 }];
+
+    this.players.forEach((player) => {
+      player.setMoveCells(initMoveCells);
+    });
   }
 
-  addPlayer(player: PlayerType) {
-    this.players.push(new Player(player));
+  addPlayer(player: Partial<IPlayer>) {
+    const createdPlayer = new Player(player);
+    createdPlayer.setColor(colors[this.players.length]);
+    this.players.push(createdPlayer);
 
-    // if (this.hasFreeSlot() === false) {
-    this.startGame();
-    // }
+    if (this.hasFreeSlot() === false) {
+      this.startGame();
+    }
   }
 
-  getPlayer(id: PlayerType['id']) {
+  getPlayer(id: IPlayer['id']) {
     return this.players.find((player) => player.id === id);
   }
 
-  hasPlayer(id: PlayerType['id']) {
+  getNextPlayer() {
+    const indexCurrentPlayer = this.players.findIndex(
+      (player) => player.id === this.currentPlayerId,
+    );
+
+    if (indexCurrentPlayer + 1 === this.players.length) {
+      return this.players[0];
+    } else {
+      return this.players[indexCurrentPlayer + 1];
+    }
+  }
+
+  hasPlayer(id: IPlayer['id']) {
     return Boolean(this.players.find((player) => player.id === id));
   }
 
@@ -54,7 +80,11 @@ export class Game implements IGame {
       const sumDiceValue =
         this.currentDiceValue.firstCube + this.currentDiceValue.secondCube;
 
-      this.moveCells = calcCellsPath(this.moveCells, sumDiceValue);
+      const moveCells = calcCellsPath(player.moveCells, sumDiceValue);
+      player.setMoveCells(moveCells);
+
+      const nextPlayer = this.getNextPlayer();
+      this.currentPlayerId = nextPlayer.id;
     }
   }
 

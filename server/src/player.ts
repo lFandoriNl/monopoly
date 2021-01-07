@@ -1,12 +1,22 @@
-import { IPlayer } from 'shared-types';
+import { IPlayer, CellType } from 'shared-types';
 import { Cubes } from './cubes';
 
 export class Player implements IPlayer {
   id: string = '';
   name: string = '';
+  color: string = '';
+  moveCells: CellType[] = [];
 
-  constructor(player: IPlayer) {
+  constructor(player: Partial<IPlayer>) {
     Object.assign(this, player);
+  }
+
+  setColor(color: IPlayer['color']) {
+    this.color = color;
+  }
+
+  setMoveCells(cells: CellType[]) {
+    this.moveCells = cells;
   }
 
   rollDice() {

@@ -21,30 +21,37 @@ type ChipProps = {
   points: PointType[];
 };
 
-export const Chip = memo(({ points, color }: ChipProps) => {
-  const handleEndAnimation = () => {
-    console.log('animation end');
-  };
+export const Chip = memo(
+  ({ points, color }: ChipProps) => {
+    const handleEndAnimation = () => {
+      console.log('animation end');
+    };
 
-  const props = useSpring({
-    // @ts-ignore
-    to: async (animate: any) => {
-      for (const point of points) {
-        await animate({
-          transform: `translate(${point.x}px, ${point.y}px)`,
-          config: {
-            easing: easeQuadInOut,
-            duration: point.duration,
-            precision: 0.01,
-          },
-        });
-      }
-    },
-    from: {
-      transform: `translate(${0}px, ${0}px)`,
-    },
-    onRest: handleEndAnimation,
-  });
+    const props = useSpring({
+      // @ts-ignore
+      to: async (animate: any) => {
+        for (const point of points) {
+          await animate({
+            transform: `translate(${point.x}px, ${point.y}px)`,
+            config: {
+              easing: easeQuadInOut,
+              duration: point.duration,
+              precision: 0.01,
+            },
+          });
+        }
+      },
+      from: {
+        transform: `translate(${0}px, ${0}px)`,
+      },
+      onRest: handleEndAnimation,
+    });
 
-  return <ChipWrapper color={color} style={props} />;
-});
+    return <ChipWrapper color={color} style={props} />;
+  },
+  (prevProps, nextProps) => {
+    return (
+      JSON.stringify(prevProps.points) === JSON.stringify(nextProps.points)
+    );
+  },
+);

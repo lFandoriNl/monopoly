@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 
 import { gameStore } from '../../../core/game-store';
 import { playerEvents } from '../../../core/player-events';
+import { playerStore } from '../../../core/player-store';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -39,9 +40,11 @@ export const ActionsPopup = observer(() => {
         {gameStore.currentDiceValue.secondCube}
       </div>
 
-      <ActionButton onClick={playerEvents.roleDice}>
-        Бросить кубики
-      </ActionButton>
+      {playerStore.isCurrentPlayerMove && (
+        <ActionButton onClick={playerEvents.roleDice}>
+          Бросить кубики
+        </ActionButton>
+      )}
     </Wrapper>
   );
 });
