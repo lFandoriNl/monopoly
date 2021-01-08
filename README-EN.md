@@ -3,10 +3,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[:us: / :uk: version](./README-EN.md)
-
-
-## Как запустить
+## How to run
 
 ```
 1. npx lerna bootstrap
@@ -14,33 +11,34 @@
 3. npm start
 ```
 
-Могут возникать ошибки при использовании новых версий npm и yarn, желательно не использывать следующие версии: npm 7, yarn 2
+There might be some issues while running it on newer versions of npm and yarn.
+It's recommended **not** to use nmp 7 and yarn 2.
 
 ---
 
-## Как я могу внести свой вклад?
+## How can I contribute?
 
-Прочти пожалуйста это [руководство](./CONTRIBUTING.md)
+Please read the following [guide](./CONTRIBUTING-EN.md)
 
 ---
 
-## Что мы хотим на вид
+## How we want it to look
 
-1. Начало игры
+1. Start of the game
    ![image](./docs/assets/images/start-game.jpg)
 
-2. Предложение хода
+2. Move suggestion
    ![image](./docs/assets/images/roll-dice.png)
 
-3. Решение о покупки компании
+3. Company purchase decision
    ![image](./docs/assets/images/buy-company.png)
 
-4. Обзор компании при клике на ее ячейку
+4. Company overview on cell click
    ![image](./docs/assets/images/view-company.png)
 
-Эти скриншоты из https://monopoly-one.com/
+These are the screenshots from https://monopoly-one.com/
 
-Но есть еще https://monopolystar.ru/ и по мне она более ламповая, у каждой из них есть свои минусы по UX, мы же возьмем только лучшее из них обеих.
+There's also https://monopolystar.ru/, which looks more atmospheric, and although both of them have their pros and cons, we're going to take the best from them.
 
 ## Contributors ✨
 
