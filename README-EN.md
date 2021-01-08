@@ -18,7 +18,7 @@ It's recommended **not** to use nmp 7 and yarn 2.
 
 ## How can I contribute?
 
-Please read the following [guide](./CONTRIBUTING.md)
+Please read the following [guide](./CONTRIBUTING-EN.md)
 
 ---
 
