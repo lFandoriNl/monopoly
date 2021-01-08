@@ -1,5 +1,5 @@
 import { IPlayer, CellType } from 'shared';
-import { Cubes } from './cubes';
+import { Cube } from './cube';
 
 export class Player implements IPlayer {
   id: string = '';
@@ -20,7 +20,7 @@ export class Player implements IPlayer {
   }
 
   rollDice() {
-    return Cubes.generateCubes();
+    return Cube.generateCubes();
   }
 
   toPlain() {
