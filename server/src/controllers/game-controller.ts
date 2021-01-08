@@ -49,7 +49,7 @@ export class GameController {
 
     if (game?.hasFreeSlot()) {
       game.addPlayer({ id: playerId, name: namePlayer });
-      this.gameManager.save();
+      this.gameManager.updateGame(gameId, game);
 
       client.join(gameId);
 
