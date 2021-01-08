@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { IGame } from 'shared-types';
+import { IGame } from 'shared';
 import { Service } from 'typedi';
 import { Game } from './game';
 
@@ -44,6 +44,7 @@ export class GameRepository {
 
   saveToFile() {
     const raw = JSON.stringify(this.cache);
+
     fs.writeFile('db.json', raw, (error) => {
       if (error) {
         console.error(error);

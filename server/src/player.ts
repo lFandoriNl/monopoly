@@ -1,4 +1,4 @@
-import { IPlayer, CellType } from 'shared-types';
+import { IPlayer, CellType } from 'shared';
 import { Cubes } from './cubes';
 
 export class Player implements IPlayer {

@@ -1,3 +1,4 @@
+import { Socket } from 'socket.io';
 import {
   ConnectedSocket,
   MessageBody,
@@ -6,8 +7,9 @@ import {
   OnMessage,
   SocketController,
 } from 'socket-controllers';
-import { Socket } from 'socket.io';
+
 import { GameManager } from '../game-manager';
+import { cellsPriceData } from '../common/cells-data';
 
 @SocketController()
 export class SessionController {
@@ -35,6 +37,8 @@ export class SessionController {
       if (game && game.hasPlayer(clientId)) {
         client.join(gameId);
         client.emit('session.recovery.response', JSON.stringify(game));
+
+        client.emit('game.board.price', cellsPriceData);
       }
     }
   }

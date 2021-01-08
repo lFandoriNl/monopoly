@@ -1,10 +1,11 @@
+import { Server as SocketServer } from 'socket.io';
 import {
   MessageBody,
   OnMessage,
   SocketController,
   SocketIO,
 } from 'socket-controllers';
-import { Server as SocketServer } from 'socket.io';
+
 import { GameManager } from '../game-manager';
 
 @SocketController()

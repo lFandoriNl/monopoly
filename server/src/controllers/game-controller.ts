@@ -1,4 +1,4 @@
-import { IGame } from 'shared-types';
+import { Server as SocketServer, Socket } from 'socket.io';
 import {
   ConnectedSocket,
   MessageBody,
@@ -6,10 +6,12 @@ import {
   SocketController,
   SocketIO,
 } from 'socket-controllers';
-import { Server as SocketServer, Socket } from 'socket.io';
+import { IGame } from 'shared';
 import { v4 as uuidv4 } from 'uuid';
-import { Game } from '../game';
+
 import { GameManager } from '../game-manager';
+import { Game } from '../game';
+import { cellsPriceData } from '../common/cells-data';
 
 @SocketController()
 export class GameController {
@@ -47,13 +49,13 @@ export class GameController {
 
     if (game?.hasFreeSlot()) {
       game.addPlayer({ id: playerId, name: namePlayer });
+      this.gameManager.save();
 
       client.join(gameId);
 
       client.emit('game.joined.self');
-      io.to(gameId).emit('game.joined', JSON.stringify(game));
+      client.emit('game.board.price', cellsPriceData);
+      io.to(gameId).emit('game.joined', game);
     }
-
-    console.log('Game not found');
   }
 }

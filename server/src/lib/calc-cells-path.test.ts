@@ -1,4 +1,4 @@
-import { CellType } from 'shared-types';
+import { CellType } from 'shared';
 import { calcCellsPath } from './calc-cells-path';
 
 describe('calcCellsPath', () => {

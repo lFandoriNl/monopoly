@@ -1,6 +1,5 @@
-import { IGame } from 'shared-types';
-
 import { io } from 'socket.io-client';
+import { IGame, CellsPriceData } from 'shared';
 
 import { playerStore } from '../core/player-store';
 
@@ -21,7 +20,7 @@ events.on('connect', () => {
   const gameId = getSearchParam('id');
   const clientId = localStorage.getItem('clientId');
 
-  if (clientId) {
+  if (gameId && clientId) {
     events.emit('session.recovery.request', { gameId, clientId });
   }
 
@@ -47,9 +46,7 @@ events.on('game.joined.self', () => {
   playerStore.setJoined(true);
 });
 
-events.on('game.joined', (gameRaw: string) => {
-  const game: IGame = JSON.parse(gameRaw);
-
+events.on('game.joined', (game: IGame) => {
   playerStore.update(game);
   gameStore.update(game);
 });
@@ -59,4 +56,8 @@ events.on('game.update', (gameRaw: string) => {
 
   playerStore.update(game);
   gameStore.update(game);
+});
+
+events.on('game.board.price', (cellsPriceData: CellsPriceData) => {
+  console.log(cellsPriceData);
 });

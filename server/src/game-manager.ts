@@ -1,4 +1,4 @@
-import { IGame } from 'shared-types';
+import { IGame } from 'shared';
 import { Service } from 'typedi';
 import { Game } from './game';
 import { GameRepository } from './game-repository';
@@ -25,5 +25,9 @@ export class GameManager {
 
   hasFreeGame(id: string) {
     return this.gameRepository.findById(id)?.hasFreeSlot();
+  }
+
+  save() {
+    this.gameRepository.saveToFile();
   }
 }

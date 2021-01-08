@@ -1,4 +1,4 @@
-import { CellType, IGame, IPlayer } from 'shared-types';
+import { CellType, IGame, IPlayer } from 'shared';
 
 import { makeAutoObservable } from 'mobx';
 

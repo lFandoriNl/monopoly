@@ -1,8 +1,6 @@
-import { IGame } from 'shared-types';
-
 import { makeAutoObservable } from 'mobx';
 
-import { CubesValueType } from 'shared-types';
+import { IGame, CubesValueType } from 'shared';
 
 class Game {
   currentDiceValue: CubesValueType = { firstCube: 0, secondCube: 0 };

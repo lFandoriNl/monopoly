@@ -1,4 +1,4 @@
-import { CubesValueType } from 'shared-types';
+import { CubesValueType } from 'shared';
 import { getRandomInt } from './lib/random';
 
 export class Cubes {

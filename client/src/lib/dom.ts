@@ -1,4 +1,4 @@
-import { CellType } from 'shared-types';
+import { CellType } from 'shared';
 import { PointType } from '../game/board/chip';
 
 export function getPositionRelativeOfParent(
