@@ -6,22 +6,22 @@ import {
   SocketIO,
 } from 'socket-controllers';
 
-import { GameManager } from '../game-manager';
+import { GameService } from '../services/game-service';
 
 @SocketController()
 export class GameEventsController {
-  constructor(private gameManager: GameManager) {}
+  constructor(private gameService: GameService) {}
 
   @OnMessage('game.events.roll-dice')
   rollDice(
     @MessageBody() { gameId }: { gameId: string },
     @SocketIO() io: SocketServer,
   ) {
-    const game = this.gameManager.getGame(gameId);
+    const game = this.gameService.getGame(gameId);
 
     if (game) {
       game.rollDice();
-      this.gameManager.updateGame(gameId, game);
+      this.gameService.updateGame(gameId, game);
 
       io.to(gameId).emit('game.update', JSON.stringify(game));
     }

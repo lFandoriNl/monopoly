@@ -1,10 +1,10 @@
 import { IGame } from 'shared';
 import { Service } from 'typedi';
-import { Game } from './domains/game';
-import { GameRepository } from './repositories/game-repository';
+import { Game } from '../domains/game';
+import { GameRepository } from '../repositories/game-repository';
 
 @Service()
-export class GameManager {
+export class GameService {
   constructor(private gameRepository: GameRepository) {}
 
   createGame(id: string, game: IGame) {

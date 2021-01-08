@@ -9,13 +9,13 @@ import {
 import { IGame } from 'shared';
 import { v4 as uuidv4 } from 'uuid';
 
-import { GameManager } from '../game-manager';
+import { GameService } from '../services/game-service';
 import { Game } from '../domains/game';
 import { cellsPriceData } from '../common/cells-data';
 
 @SocketController()
 export class GameController {
-  constructor(private gameManager: GameManager) {}
+  constructor(private gameService: GameService) {}
 
   @OnMessage('game.create')
   create(
@@ -26,7 +26,7 @@ export class GameController {
   ) {
     const uuid = uuidv4();
 
-    this.gameManager.createGame(uuid, new Game({ countPlayers }));
+    this.gameService.createGame(uuid, new Game({ countPlayers }));
     client.emit('game.created', { id: uuid });
   }
 
@@ -45,11 +45,11 @@ export class GameController {
     @ConnectedSocket() client: Socket,
     @SocketIO() io: SocketServer,
   ) {
-    const game = this.gameManager.getGame(gameId);
+    const game = this.gameService.getGame(gameId);
 
     if (game?.hasFreeSlot()) {
       game.addPlayer({ id: playerId, name: namePlayer });
-      this.gameManager.updateGame(gameId, game);
+      this.gameService.updateGame(gameId, game);
 
       client.join(gameId);
 

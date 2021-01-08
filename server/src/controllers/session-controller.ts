@@ -8,12 +8,12 @@ import {
   SocketController,
 } from 'socket-controllers';
 
-import { GameManager } from '../game-manager';
+import { GameService } from '../services/game-service';
 import { cellsPriceData } from '../common/cells-data';
 
 @SocketController()
 export class SessionController {
-  constructor(private gameManager: GameManager) {}
+  constructor(private gameService: GameService) {}
 
   @OnConnect()
   connection() {
@@ -32,7 +32,7 @@ export class SessionController {
     @ConnectedSocket() client: Socket,
   ) {
     if (clientId && gameId) {
-      const game = this.gameManager.getGame(gameId);
+      const game = this.gameService.getGame(gameId);
 
       if (game && game.hasPlayer(clientId)) {
         client.join(gameId);
