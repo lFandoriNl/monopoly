@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { IGame } from 'shared';
 import { Service } from 'typedi';
-import { Game } from './game';
+import { Game } from '../domains/game';
 
 type GameMap = { [key: string]: Game };
 

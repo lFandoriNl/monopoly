@@ -1,7 +1,7 @@
 import { CellType, IGame, IPlayer, CubesValueType } from 'shared';
 
 import { Player } from './player';
-import { calcCellsPath } from './lib/calc-cells-path';
+import { calcCellsPath } from '../lib/calc-cells-path';
 
 const initMoveCells: CellType[] = [{ path: 'top', order: 0 }];
 

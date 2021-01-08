@@ -10,7 +10,7 @@ import { IGame } from 'shared';
 import { v4 as uuidv4 } from 'uuid';
 
 import { GameManager } from '../game-manager';
-import { Game } from '../game';
+import { Game } from '../domains/game';
 import { cellsPriceData } from '../common/cells-data';
 
 @SocketController()

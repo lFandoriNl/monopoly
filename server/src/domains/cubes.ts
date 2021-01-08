@@ -1,5 +1,5 @@
 import { CubesValueType } from 'shared';
-import { getRandomInt } from './lib/random';
+import { getRandomInt } from '../lib/random';
 
 export class Cubes {
   static generateCubes(): CubesValueType {

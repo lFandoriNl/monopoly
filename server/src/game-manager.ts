@@ -1,7 +1,7 @@
 import { IGame } from 'shared';
 import { Service } from 'typedi';
-import { Game } from './game';
-import { GameRepository } from './game-repository';
+import { Game } from './domains/game';
+import { GameRepository } from './repositories/game-repository';
 
 @Service()
 export class GameManager {
