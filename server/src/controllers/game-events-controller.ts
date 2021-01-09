@@ -23,7 +23,22 @@ export class GameEventsController {
       game.rollDice();
       this.gameService.updateGame(gameId, game);
 
-      io.to(gameId).emit('game.update', JSON.stringify(game));
+      io.to(gameId).emit('game.update', game);
+    }
+  }
+
+  @OnMessage('game.events.buy-company')
+  buyCompany(
+    @MessageBody() { gameId }: { gameId: string },
+    @SocketIO() io: SocketServer,
+  ) {
+    const game = this.gameService.getGame(gameId);
+
+    if (game) {
+      game.buyCompany();
+      this.gameService.updateGame(gameId, game);
+
+      io.to(gameId).emit('game.update', game);
     }
   }
 }

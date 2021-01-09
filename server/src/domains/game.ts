@@ -32,15 +32,19 @@ export class Game implements IGame {
 
   startGame() {
     this.currentPlayerId = this.players[0].id;
-
+    this.players[0].setShowRollDice(true);
     this.players.forEach((player) => {
       player.setMoveCells(initMoveCells);
     });
   }
 
   addPlayer(player: Partial<IPlayer>) {
-    const createdPlayer = new Player(player);
-    createdPlayer.setColor(colors[this.players.length]);
+    const createdPlayer = new Player({
+      ...player,
+      joined: true,
+      color: colors[this.players.length],
+    });
+
     this.players.push(createdPlayer);
 
     if (this.hasFreeSlot() === false) {
@@ -49,7 +53,7 @@ export class Game implements IGame {
   }
 
   getPlayer(id: IPlayer['id']) {
-    return this.players.find((player) => player.id === id);
+    return this.players.find((player) => player.id === id)!;
   }
 
   getCurrentPlayer() {
@@ -70,6 +74,7 @@ export class Game implements IGame {
 
   setNextPlayerId() {
     const nextPlayer = this.getNextPlayer();
+    nextPlayer.setShowRollDice(true);
     this.currentPlayerId = nextPlayer.id;
   }
 
@@ -81,20 +86,38 @@ export class Game implements IGame {
     return this.countPlayers !== this.players.length;
   }
 
+  buyCompany() {
+    const currentPlayer = this.getCurrentPlayer();
+
+    currentPlayer.balance -= currentPlayer.buyPrice;
+
+    currentPlayer.setShowRollDice(false);
+    currentPlayer.setShowBuyCompany(false);
+    currentPlayer.setBuyPrice(0);
+
+    this.players.forEach((player) => {
+      if (player.id !== currentPlayer.id) {
+        player.setShowRollDice(false);
+        player.setShowBuyCompany(false);
+        player.setBuyPrice(0);
+      }
+    });
+
+    this.setNextPlayerId();
+  }
+
   rollDice() {
-    const player = this.getCurrentPlayer();
+    const currentPlayer = this.getCurrentPlayer();
 
-    if (player) {
-      this.currentDiceValue = player.rollDice();
+    this.currentDiceValue = currentPlayer.rollDice();
 
-      const sumDiceValue =
-        this.currentDiceValue.firstCube + this.currentDiceValue.secondCube;
+    const sumDiceValue =
+      this.currentDiceValue.firstCube + this.currentDiceValue.secondCube;
 
-      const moveCells = calcCellsPath(player.moveCells, sumDiceValue);
-      player.setMoveCells(moveCells);
+    const moveCells = calcCellsPath(currentPlayer.moveCells, sumDiceValue);
+    currentPlayer.setMoveCells(moveCells);
 
-      this.executeActions(moveCells);
-    }
+    this.executeActions(moveCells);
   }
 
   executeActions(moveCells: CellPosition[]) {
@@ -104,14 +127,22 @@ export class Game implements IGame {
 
     if (cellData.type === 'company') {
       const company = Board.getCompanyByPosition(currentCell);
-      const player = this.getCurrentPlayer();
+      const currentPlayer = this.getCurrentPlayer();
 
-      player?.setReviewBuyCompany(true);
-      player?.setBuyPrice(company.cost);
-      return;
+      currentPlayer.setShowRollDice(false);
+      currentPlayer.setShowBuyCompany(true);
+      currentPlayer.setBuyPrice(company.cost);
+
+      return this.players.forEach((player) => {
+        if (player.id !== currentPlayer.id) {
+          player.setShowRollDice(false);
+          player.setShowBuyCompany(false);
+          player.setBuyPrice(0);
+        }
+      });
     }
 
-    this.setNextPlayerId();
+    return this.setNextPlayerId();
   }
 
   static fromPlain(object: IGame) {

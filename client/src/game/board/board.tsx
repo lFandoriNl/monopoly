@@ -1,16 +1,17 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { observer } from 'mobx-react';
+
+import { gameStore } from '../../core/game-store';
 
 import { ActionsPopup } from './actions-popup';
 import { Cell } from './cell';
-import { Chip, PointType } from './chip';
+import { Chip } from './chip';
 
 import { BoardWrapper } from './board-styled';
 
 import { boardCells } from './board-cells';
 
 import { getPointsFromCells } from '../../lib/dom';
-import { playerStore } from '../../core/player-store';
 
 export const Board = observer(() => {
   const boardRef = useRef<HTMLDivElement>(null);
@@ -18,7 +19,7 @@ export const Board = observer(() => {
   return (
     <BoardWrapper>
       <div className="mainSquare" ref={boardRef}>
-        {playerStore.players?.map((player) => {
+        {gameStore.players?.map((player) => {
           const boardElement = boardRef.current;
 
           if (boardElement) {
@@ -29,6 +30,8 @@ export const Board = observer(() => {
 
             return <Chip color={player.color} points={newPositions} />;
           }
+
+          return null;
         })}
 
         <div className="row top cells-top">

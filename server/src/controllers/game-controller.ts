@@ -36,11 +36,11 @@ export class GameController {
     {
       gameId,
       playerId,
-      namePlayer,
+      playerName,
     }: {
       gameId: string;
       playerId: string;
-      namePlayer: string;
+      playerName: string;
     },
     @ConnectedSocket() client: Socket,
     @SocketIO() io: SocketServer,
@@ -48,7 +48,7 @@ export class GameController {
     const game = this.gameService.getGame(gameId);
 
     if (game?.hasFreeSlot()) {
-      game.addPlayer({ id: playerId, name: namePlayer });
+      game.addPlayer({ id: playerId, name: playerName });
       this.gameService.updateGame(gameId, game);
 
       client.join(gameId);

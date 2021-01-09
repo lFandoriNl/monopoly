@@ -1,7 +1,7 @@
-import { observer } from 'mobx-react';
+import { useState } from 'react';
 
 import styled from 'styled-components/macro';
-import { playerStore } from '../../core/player-store';
+import { playerEvents } from '../../core/player-events';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -45,14 +45,17 @@ const Button = styled.button`
   }
 `;
 
-export const InputNameModal = observer(() => {
+export const InputNameModal = () => {
+  const [playerName, setPlayerName] = useState('');
+
   const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    playerStore.setCurrentPlayerName(event.target.value);
+    setPlayerName(event.target.value);
   };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    playerStore.joinToGame();
+
+    playerEvents.joinToGame(playerName);
   };
 
   return (
@@ -61,17 +64,14 @@ export const InputNameModal = observer(() => {
         <form onSubmit={handleSubmit}>
           <Title>Введите свое имя</Title>
 
-          <Input
-            value={playerStore.currentPlayerName}
-            onChange={handleChangeName}
-          />
+          <Input value={playerName} onChange={handleChangeName} />
           <br />
 
-          <Button type="submit" disabled={!playerStore.currentPlayerName}>
+          <Button type="submit" disabled={!playerName}>
             Готово
           </Button>
         </form>
       </Modal>
     </Wrapper>
   );
-});
+};

@@ -1,8 +1,6 @@
 import { io } from 'socket.io-client';
 import { IGame, CellsPriceData } from 'shared';
 
-import { playerStore } from '../core/player-store';
-
 import { uuidv4 } from '../lib/uuid';
 import { ls } from '../lib/local-storage';
 import { getSearchParam } from '../lib/search-param';
@@ -34,7 +32,7 @@ events.on('connect', () => {
 events.on('session.recovery.response', (gameRaw: string) => {
   const game: IGame = JSON.parse(gameRaw);
 
-  playerStore.update(game);
+  // playerStore.update(game);
   gameStore.update(game);
 });
 
@@ -43,19 +41,19 @@ events.on('game.created', ({ id }: { id: string }) => {
   gameSettingStore.setGameCreated(true);
 });
 
-events.on('game.joined.self', () => {
-  playerStore.setJoined(true);
-});
+// events.on('game.joined.self', () => {
+//   playerStore.setJoined(true);
+// });
 
 events.on('game.joined', (game: IGame) => {
-  playerStore.update(game);
+  // playerStore.update(game);
   gameStore.update(game);
 });
 
-events.on('game.update', (gameRaw: string) => {
-  const game: IGame = JSON.parse(gameRaw);
+events.on('game.update', (game: IGame) => {
+  // const game: IGame = JSON.parse(gameRaw);
 
-  playerStore.update(game);
+  // playerStore.update(game);
   gameStore.update(game);
 });
 

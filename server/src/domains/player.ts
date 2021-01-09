@@ -3,30 +3,39 @@ import { Cube } from './cube';
 
 export class Player implements IPlayer {
   id = '';
+  joined = false;
   name = '';
   color = '';
+  balance = 15000;
+  isMove = false;
   moveCells: CellPosition[] = [];
-  isReviewBuyCompany = false;
-  buyPrice?: number;
+  buyPrice = 0;
+
+  showRollDice = false;
+  showBuyCompany = false;
 
   constructor(player: Partial<IPlayer>) {
     Object.assign(this, player);
   }
 
-  setColor(color: IPlayer['color']) {
-    this.color = color;
+  setMove(move: boolean) {
+    this.isMove = move;
   }
 
   setMoveCells(cells: CellPosition[]) {
     this.moveCells = cells;
   }
 
-  setReviewBuyCompany(isReview: boolean) {
-    this.isReviewBuyCompany = isReview;
-  }
-
   setBuyPrice(price: number) {
     this.buyPrice = price;
+  }
+
+  setShowRollDice(show: boolean) {
+    this.showRollDice = show;
+  }
+
+  setShowBuyCompany(show: boolean) {
+    this.showBuyCompany = show;
   }
 
   rollDice() {

@@ -3,11 +3,16 @@ import { CellPosition } from '../board/cell';
 
 export interface IPlayer {
   id: string;
+  joined: boolean;
   name: string;
   color: string;
+  balance: number;
+  isMove: boolean;
   moveCells: CellPosition[];
-  isReviewBuyCompany: boolean;
-  buyPrice?: number;
+  buyPrice: number;
+
+  showRollDice: boolean;
+  showBuyCompany: boolean;
 }
 
 export interface IGame {

@@ -1,8 +1,9 @@
 import { observer } from 'mobx-react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components/macro';
+import { playerEvents } from '../core/player-events';
 
 import { Radio } from '../ui/radio';
 
@@ -44,17 +45,24 @@ const Button = styled.button`
 `;
 
 export const CreateGame = observer(() => {
+  const [countPlayers, setCountPlayers] = useState<number | undefined>(
+    undefined,
+  );
+
   const history = useHistory();
 
   const handleChangeCountPlayers = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    gameSettingStore.setCountPlayers(Number(event.target.value));
+    setCountPlayers(Number(event.target.value));
   };
 
   const handleSubmitCreateGame = (event: React.FormEvent) => {
     event.preventDefault();
-    gameSettingStore.createGame();
+
+    if (countPlayers) {
+      playerEvents.createGame(countPlayers);
+    }
   };
 
   useEffect(() => {
@@ -82,7 +90,7 @@ export const CreateGame = observer(() => {
                 name="count-players"
                 label={value}
                 value={value}
-                checked={value === gameSettingStore.countPlayers}
+                checked={value === countPlayers}
                 onChange={handleChangeCountPlayers}
               />
             ))}
@@ -91,7 +99,7 @@ export const CreateGame = observer(() => {
 
         <Button
           type="submit"
-          disabled={!gameSettingStore.countPlayers}
+          disabled={!countPlayers}
           onClick={handleSubmitCreateGame}
         >
           Создать
