@@ -28,11 +28,11 @@ export class Board implements IBoard {
     }
   }
 
-  static getCellDataByPosition(cell: CellPosition) {
-    return cellsData[cell.order];
+  getCellDataByPosition(cell: CellPosition) {
+    return this.cellsData[cell.order];
   }
 
-  static getCompanyByPosition(cell: CellPosition) {
-    return cellsPriceData[cell.order];
+  getCompanyByPosition(cell: CellPosition) {
+    return this.cellsPriceData[cell.order];
   }
 }
