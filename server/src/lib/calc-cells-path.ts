@@ -1,13 +1,13 @@
-import { CellType } from 'shared';
+import { CellPosition } from 'shared';
 import { cellsData } from '../common/cells-data';
 
 export function calcCellsPath(
-  currentCells: CellType[],
+  currentCells: CellPosition[],
   numberSteps: number,
-): CellType[] {
+): CellPosition[] {
   const currentCell = currentCells[currentCells.length - 1];
 
-  const resultCells: CellType[] = [{ ...currentCell }];
+  const resultCells: CellPosition[] = [{ ...currentCell }];
 
   let { order } = currentCell;
 

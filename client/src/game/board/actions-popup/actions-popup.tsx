@@ -33,6 +33,14 @@ const ActionButton = styled.button`
 `;
 
 export const ActionsPopup = observer(() => {
+  const showRollDice =
+    playerStore.isCurrentPlayerMove &&
+    !playerStore.currentPlayer?.isReviewBuyCompany;
+
+  const showBuyCompany =
+    playerStore.isCurrentPlayerMove &&
+    playerStore.currentPlayer?.isReviewBuyCompany;
+
   return (
     <Wrapper>
       <div style={{ marginRight: '1rem' }}>
@@ -40,11 +48,13 @@ export const ActionsPopup = observer(() => {
         {gameStore.currentDiceValue.secondCube}
       </div>
 
-      {playerStore.isCurrentPlayerMove && (
+      {showRollDice && (
         <ActionButton onClick={playerEvents.roleDice}>
           Бросить кубики
         </ActionButton>
       )}
+
+      {showBuyCompany && <ActionButton>Купить</ActionButton>}
     </Wrapper>
   );
 });

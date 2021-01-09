@@ -1,4 +1,4 @@
-import { CellType, IGame, IPlayer } from 'shared';
+import { CellPosition, IGame, IPlayer } from 'shared';
 
 import { makeAutoObservable } from 'mobx';
 
@@ -8,11 +8,12 @@ import { ls } from '../lib/local-storage';
 
 class Player {
   joined = false;
+  currentPlayer?: IPlayer;
   currentPlayerId? = '';
   currentPlayerName? = '';
   currentMovePlayerId? = '';
   players?: IPlayer[] = [];
-  moveCells: CellType[] = [];
+  moveCells: CellPosition[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -58,6 +59,7 @@ class Player {
       (player) => player.id === clientId,
     );
     this.joined = true;
+    this.currentPlayer = currentPlayer;
     this.currentPlayerId = currentPlayer?.id;
     this.currentPlayerName = currentPlayer?.name;
     this.currentMovePlayerId = game.currentPlayerId;

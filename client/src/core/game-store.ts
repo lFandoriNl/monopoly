@@ -10,7 +10,7 @@ class Game {
   }
 
   update(game: IGame) {
-    console.log(game);
+    console.log(game.players[0], game.players[1]);
     this.currentDiceValue = game.currentDiceValue;
   }
 }

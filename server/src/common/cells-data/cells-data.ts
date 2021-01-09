@@ -1,4 +1,4 @@
-import { CellType } from 'shared';
+import { CellPosition } from 'shared';
 
 type CellDataSquare = {
   next: number;
@@ -10,14 +10,14 @@ type CellDataSquare = {
 type CellDataCompany = {
   next: number;
   square: boolean;
-  path: CellType['path'];
+  path: CellPosition['path'];
   type: 'company';
 };
 
 type CellDataRandom = {
   next: number;
   square: boolean;
-  path: CellType['path'];
+  path: CellPosition['path'];
   type: 'riddle' | 'tax';
 };
 

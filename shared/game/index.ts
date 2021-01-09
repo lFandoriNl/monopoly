@@ -1,11 +1,13 @@
 import { CubesValueType } from '../board/cube';
-import { CellType } from '../board/cell';
+import { CellPosition } from '../board/cell';
 
 export interface IPlayer {
   id: string;
   name: string;
   color: string;
-  moveCells: CellType[];
+  moveCells: CellPosition[];
+  isReviewBuyCompany: boolean;
+  buyPrice?: number;
 }
 
 export interface IGame {

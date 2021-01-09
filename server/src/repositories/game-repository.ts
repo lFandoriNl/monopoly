@@ -24,12 +24,10 @@ export class GameRepository {
 
   deserialize() {
     const gameMap: GameMap = {};
-    const parsed: { gameMap: { [key: string]: IGame } } = JSON.parse(
-      this.readFromFile(),
-    );
+    const parsed: { [key: string]: IGame } = JSON.parse(this.readFromFile());
 
-    Object.keys(parsed.gameMap).forEach((key) => {
-      gameMap[key] = new Game(parsed.gameMap[key]);
+    Object.keys(parsed).forEach((key) => {
+      gameMap[key] = new Game(parsed[key]);
     });
     this.cache = gameMap;
   }
@@ -39,7 +37,7 @@ export class GameRepository {
       const db = fs.readFileSync('db.json', 'utf8');
       return db;
     } catch (error) {
-      return '{"gameMap":{}}';
+      return '{}';
     }
   }
 

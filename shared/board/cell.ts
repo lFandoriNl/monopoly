@@ -1,6 +1,6 @@
 export type Position = 'top' | 'right' | 'bottom' | 'left';
 
-export type CellType = {
+export type CellPosition = {
   path: Position;
   order: number;
 };

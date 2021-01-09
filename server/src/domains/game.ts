@@ -1,9 +1,10 @@
-import { CellType, IGame, IPlayer, CubesValueType } from 'shared';
+import { CellPosition, IGame, IPlayer, CubesValueType } from 'shared';
 
 import { Player } from './player';
 import { calcCellsPath } from '../lib/calc-cells-path';
+import { Board } from './board';
 
-const initMoveCells: CellType[] = [{ path: 'top', order: 0 }];
+const initMoveCells: CellPosition[] = [{ path: 'top', order: 0 }];
 
 const colors: { [key: number]: string } = {
   0: '#d80606',
@@ -51,6 +52,10 @@ export class Game implements IGame {
     return this.players.find((player) => player.id === id);
   }
 
+  getCurrentPlayer() {
+    return this.getPlayer(this.currentPlayerId);
+  }
+
   getNextPlayer() {
     const indexCurrentPlayer = this.players.findIndex(
       (player) => player.id === this.currentPlayerId,
@@ -63,6 +68,11 @@ export class Game implements IGame {
     }
   }
 
+  setNextPlayerId() {
+    const nextPlayer = this.getNextPlayer();
+    this.currentPlayerId = nextPlayer.id;
+  }
+
   hasPlayer(id: IPlayer['id']) {
     return Boolean(this.players.find((player) => player.id === id));
   }
@@ -72,7 +82,7 @@ export class Game implements IGame {
   }
 
   rollDice() {
-    const player = this.getPlayer(this.currentPlayerId);
+    const player = this.getCurrentPlayer();
 
     if (player) {
       this.currentDiceValue = player.rollDice();
@@ -83,9 +93,25 @@ export class Game implements IGame {
       const moveCells = calcCellsPath(player.moveCells, sumDiceValue);
       player.setMoveCells(moveCells);
 
-      const nextPlayer = this.getNextPlayer();
-      this.currentPlayerId = nextPlayer.id;
+      this.executeActions(moveCells);
     }
+  }
+
+  executeActions(moveCells: CellPosition[]) {
+    const currentCell = moveCells[moveCells.length - 1];
+
+    const cellData = Board.getCellDataByPosition(currentCell);
+
+    if (cellData.type === 'company') {
+      const company = Board.getCompanyByPosition(currentCell);
+      const player = this.getCurrentPlayer();
+
+      player?.setReviewBuyCompany(true);
+      player?.setBuyPrice(company.cost);
+      return;
+    }
+
+    this.setNextPlayerId();
   }
 
   static fromPlain(object: IGame) {
