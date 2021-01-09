@@ -51,7 +51,7 @@ export class Game implements IGame {
     }
   }
 
-  getPlayer(id: IPlayer['id']) {
+  getPlayer(id: Player['id']) {
     return this.players.find((player) => player.id === id)!;
   }
 
@@ -80,7 +80,7 @@ export class Game implements IGame {
     this.currentPlayerId = nextPlayer.id;
   }
 
-  hasPlayer(id: IPlayer['id']) {
+  hasPlayer(id: Player['id']) {
     return Boolean(this.players.find((player) => player.id === id));
   }
 
