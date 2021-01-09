@@ -4,6 +4,7 @@ import { makeAutoObservable } from 'mobx';
 
 import { gameSettingStore } from '../create-game/game-setting-store';
 import { events } from '../api/io';
+import { ls } from '../lib/local-storage';
 
 class Player {
   joined = false;
@@ -38,9 +39,9 @@ class Player {
   }
 
   joinToGame() {
-    const playerId = localStorage.getItem('clientId');
+    const playerId = ls.get('clientId');
 
-    if (playerId) {
+    if (typeof playerId === 'string') {
       this.currentPlayerId = playerId;
 
       events.emit('game.join', {
@@ -52,7 +53,7 @@ class Player {
   }
 
   update(game: IGame) {
-    const clientId = localStorage.getItem('clientId');
+    const clientId = ls.get('clientId');
     const currentPlayer = game.players?.find(
       (player) => player.id === clientId,
     );

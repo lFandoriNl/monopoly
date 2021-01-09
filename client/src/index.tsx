@@ -4,8 +4,15 @@ import ReactDOM from 'react-dom';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { ls } from './lib/local-storage';
+
 import './normalize.css';
 import './index.css';
+
+// FYI: In dev mode, one tab === one player
+if (process.env.NODE_ENV === 'development') {
+  ls.setStorage(sessionStorage);
+}
 
 ReactDOM.render(
   <React.StrictMode>

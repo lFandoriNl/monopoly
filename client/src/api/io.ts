@@ -4,6 +4,7 @@ import { IGame, CellsPriceData } from 'shared';
 import { playerStore } from '../core/player-store';
 
 import { uuidv4 } from '../lib/uuid';
+import { ls } from '../lib/local-storage';
 import { getSearchParam } from '../lib/search-param';
 import { gameSettingStore } from '../create-game/game-setting-store';
 import { gameStore } from '../core/game-store';
@@ -18,7 +19,7 @@ export const events = io(isDev ? 'http://localhost:8080' : '/', {
 
 events.on('connect', () => {
   const gameId = getSearchParam('id');
-  const clientId = localStorage.getItem('clientId');
+  const clientId = ls.get('clientId');
 
   if (gameId && clientId) {
     events.emit('session.recovery.request', { gameId, clientId });
@@ -26,7 +27,7 @@ events.on('connect', () => {
 
   if (!clientId) {
     const uuid = uuidv4();
-    localStorage.setItem('clientId', uuid);
+    ls.set('clientId', uuid);
   }
 });
 
