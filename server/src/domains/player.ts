@@ -1,6 +1,11 @@
 import { IPlayer, CellPosition } from 'shared';
 import { Cube } from './cube';
 
+type PlayerUI = {
+  showRollDice: boolean;
+  showBuyCompany: boolean;
+};
+
 export class Player implements IPlayer {
   id = '';
   joined = false;
@@ -36,6 +41,15 @@ export class Player implements IPlayer {
 
   setShowBuyCompany(show: boolean) {
     this.showBuyCompany = show;
+  }
+
+  setUI(ui: Partial<PlayerUI>) {
+    Object.assign(this, ui);
+  }
+
+  resetUI() {
+    this.setShowRollDice(false);
+    this.setShowBuyCompany(false);
   }
 
   rollDice() {

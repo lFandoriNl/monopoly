@@ -73,6 +73,9 @@ export class Game implements IGame {
   }
 
   setNextPlayerId() {
+    const currentPlayer = this.getCurrentPlayer();
+    currentPlayer.resetUI();
+
     const nextPlayer = this.getNextPlayer();
     nextPlayer.setShowRollDice(true);
     this.currentPlayerId = nextPlayer.id;
@@ -90,18 +93,7 @@ export class Game implements IGame {
     const currentPlayer = this.getCurrentPlayer();
 
     currentPlayer.balance -= currentPlayer.buyPrice;
-
-    currentPlayer.setShowRollDice(false);
-    currentPlayer.setShowBuyCompany(false);
-    currentPlayer.setBuyPrice(0);
-
-    this.players.forEach((player) => {
-      if (player.id !== currentPlayer.id) {
-        player.setShowRollDice(false);
-        player.setShowBuyCompany(false);
-        player.setBuyPrice(0);
-      }
-    });
+    currentPlayer.resetUI();
 
     this.setNextPlayerId();
   }
@@ -129,17 +121,10 @@ export class Game implements IGame {
       const company = Board.getCompanyByPosition(currentCell);
       const currentPlayer = this.getCurrentPlayer();
 
-      currentPlayer.setShowRollDice(false);
-      currentPlayer.setShowBuyCompany(true);
       currentPlayer.setBuyPrice(company.cost);
+      currentPlayer.setUI({ showRollDice: false, showBuyCompany: true });
 
-      return this.players.forEach((player) => {
-        if (player.id !== currentPlayer.id) {
-          player.setShowRollDice(false);
-          player.setShowBuyCompany(false);
-          player.setBuyPrice(0);
-        }
-      });
+      return;
     }
 
     return this.setNextPlayerId();
