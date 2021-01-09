@@ -25,6 +25,38 @@ Please read the following [guide](./CONTRIBUTING-EN.md)
 
 ---
 
+## Feature List
+
+- ✅ Game creation
+- ✅ Connecting players to the game session
+- ✅ Game board
+- Viewing company data
+- ✅ Roll of the dice
+  - In 3d
+- ✅ Animation of moving chips across the board
+- Timer on limit of turn
+- Actions with companies
+  - Rent payment
+  - Buying companies
+  - Putting companies up for auction
+  - Company pledge
+  - Company redemption
+  - Construction of branches
+  - Sale of branches
+- Offer of deals
+- Implementation of cells
+  - Start
+  - Prison
+  - Jackpot
+  - Vacation
+  - Chance
+  - Tax
+- Chat between players
+- Logging events to chat
+- The opportunity to surrender
+
+---
+
 ## How we want it to look
 
 1. Start of the game

@@ -8,6 +8,7 @@ type GameMap = { [key: string]: Game };
 @Service()
 export class GameRepository {
   cache: GameMap = {};
+
   constructor() {
     this.deserialize();
   }
