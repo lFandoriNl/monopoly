@@ -4,14 +4,9 @@ import { Player } from './player';
 import { calcCellsPath } from '../lib/calc-cells-path';
 import { Board } from './board';
 
-const initMoveCells: CellPosition[] = [{ path: 'top', order: 0 }];
+import { colors } from '../common/colors';
 
-const colors: { [key: number]: string } = {
-  0: '#d80606',
-  1: '#179cea',
-  2: '#fdf801',
-  3: '#a602e6',
-};
+const initMoveCells: CellPosition[] = [{ path: 'top', order: 0 }];
 
 export class Game implements IGame {
   currentPlayerId = '';
@@ -20,13 +15,17 @@ export class Game implements IGame {
 
   currentDiceValue: CubesValueType = { firstCube: 0, secondCube: 0 };
 
+  board?: Board;
+
   constructor(game: Partial<IGame>) {
     const players = game.players?.map((player) => new Player(player)) || [];
+    const board = new Board(game?.board || {});
 
     Object.assign(this, {
       ...game,
       currentPlayerId: players[0]?.id || '',
       players,
+      board,
     });
   }
 
@@ -92,8 +91,11 @@ export class Game implements IGame {
   buyCompany() {
     const currentPlayer = this.getCurrentPlayer();
 
-    currentPlayer.balance -= currentPlayer.buyPrice;
+    currentPlayer.withdraw(currentPlayer.buyPrice);
     currentPlayer.resetUI();
+
+    const { order } = currentPlayer.getCurrentCell();
+    this.board?.buyCompany(order, currentPlayer);
 
     this.setNextPlayerId();
   }

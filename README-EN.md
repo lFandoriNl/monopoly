@@ -37,7 +37,7 @@ Please read the following [guide](./CONTRIBUTING-EN.md)
 - Timer on limit of turn
 - Actions with companies
   - Rent payment
-  - Buying companies
+  - ✅ Buying companies
   - Putting companies up for auction
   - Company pledge
   - Company redemption

@@ -43,6 +43,18 @@ export class Player implements IPlayer {
     this.showBuyCompany = show;
   }
 
+  getCurrentCell() {
+    return this.moveCells[this.moveCells.length - 1];
+  }
+
+  withdraw(money: number) {
+    this.balance -= money;
+  }
+
+  deposit(money: number) {
+    this.balance += money;
+  }
+
   setUI(ui: Partial<PlayerUI>) {
     Object.assign(this, ui);
   }

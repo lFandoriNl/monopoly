@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 
-import { IGame, CubesValueType, IPlayer } from 'shared';
+import { IGame, IBoard, IPlayer, CubesValueType } from 'shared';
 import { ls } from '../lib/local-storage';
 
 class Game implements IGame {
@@ -9,6 +9,7 @@ class Game implements IGame {
   players: IPlayer[] = [];
 
   currentDiceValue: CubesValueType = { firstCube: 0, secondCube: 0 };
+  board: IBoard | undefined;
 
   constructor() {
     makeAutoObservable(this);

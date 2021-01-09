@@ -1,5 +1,6 @@
 import { CubesValueType } from '../board/cube';
 import { CellPosition } from '../board/cell';
+import { IBoard } from '../board/board';
 
 export interface IPlayer {
   id: string;
@@ -20,4 +21,5 @@ export interface IGame {
   countPlayers: number;
   players: IPlayer[];
   currentDiceValue: CubesValueType;
+  board?: IBoard;
 }

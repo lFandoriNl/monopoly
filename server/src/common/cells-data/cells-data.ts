@@ -1,29 +1,4 @@
-import { CellPosition } from 'shared';
-
-type CellDataSquare = {
-  next: number;
-  square: boolean;
-  path: 'top' | 'bottom';
-  type: 'start' | 'prison' | 'jackpot' | 'vacation';
-};
-
-type CellDataCompany = {
-  next: number;
-  square: boolean;
-  path: CellPosition['path'];
-  type: 'company';
-};
-
-type CellDataRandom = {
-  next: number;
-  square: boolean;
-  path: CellPosition['path'];
-  type: 'riddle' | 'tax';
-};
-
-type CellsData = {
-  [key: number]: CellDataSquare | CellDataCompany | CellDataRandom;
-};
+import { CellsData } from 'shared';
 
 export const cellsData: CellsData = {
   0: {
