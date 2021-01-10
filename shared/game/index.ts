@@ -8,7 +8,6 @@ export interface IPlayer {
   name: string;
   color: string;
   balance: number;
-  isMove: boolean;
   moveCells: CellPosition[];
   buyPrice: number;
 

@@ -12,7 +12,6 @@ export class Player implements IPlayer {
   name = '';
   color = '';
   balance = 15000;
-  isMove = false;
   moveCells: CellPosition[] = [];
   buyPrice = 0;
 
@@ -21,10 +20,6 @@ export class Player implements IPlayer {
 
   constructor(player: Partial<IPlayer>) {
     Object.assign(this, player);
-  }
-
-  setMove(move: boolean) {
-    this.isMove = move;
   }
 
   setMoveCells(cells: CellPosition[]) {

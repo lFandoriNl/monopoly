@@ -106,3 +106,7 @@ dist
 
 # VSCode foler
 .vscode
+
+build
+
+db.json
