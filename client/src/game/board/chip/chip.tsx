@@ -3,6 +3,7 @@ import { useSpring, animated } from 'react-spring';
 import { easeQuadInOut } from 'd3-ease';
 
 import styled from 'styled-components/macro';
+import { ls } from '../../../lib/local-storage';
 
 const ChipWrapper = styled(animated.div)`
   position: absolute;
@@ -23,6 +24,8 @@ type ChipProps = {
 
 export const Chip = memo(
   ({ points, color }: ChipProps) => {
+    const chipAnimatedDisabled = !!ls.get('chipAnimatedDisabled');
+
     const handleEndAnimation = () => {
       console.log('animation end');
     };
@@ -35,7 +38,7 @@ export const Chip = memo(
             transform: `translate(${point.x}px, ${point.y}px)`,
             config: {
               easing: easeQuadInOut,
-              duration: point.duration,
+              duration: chipAnimatedDisabled ? 0 : point.duration,
               precision: 0.01,
             },
           });

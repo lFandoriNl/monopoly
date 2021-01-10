@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { observer } from 'mobx-react';
 
 import { gameStore } from '../../core/game-store';
@@ -12,9 +12,19 @@ import { BoardWrapper } from './board-styled';
 import { boardCells } from './board-cells';
 
 import { getPointsFromCells } from '../../lib/dom';
+import { gameSettingStore } from '../../create-game/game-setting-store';
 
 export const Board = observer(() => {
   const boardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!gameSettingStore.chipAnimatedDisabled) {
+      const chipTO = setTimeout(() => {
+        gameSettingStore.setDisabledChipAnimation();
+        clearTimeout(chipTO);
+      }, 2000);
+    }
+  }, []);
 
   return (
     <BoardWrapper>
