@@ -7,6 +7,7 @@ class GameSetting {
   gameId: string = '';
   gameCreated: boolean = false;
   chipAnimatedDisabled: boolean = false;
+  chipMoveActive: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -28,6 +29,14 @@ class GameSetting {
   enableChipAnimation = () => {
     this.chipAnimatedDisabled = false;
     ls.remove(chipAnimatedKey);
+  }
+
+  setChipMoveActive = (status: boolean) => {
+    this.chipMoveActive = status
+  }
+
+  get chipInMove() {
+    return this.chipMoveActive
   }
 }
 

@@ -4,6 +4,7 @@ import { easeQuadInOut } from 'd3-ease';
 
 import styled from 'styled-components/macro';
 import { ls } from '../../../lib/local-storage';
+import { gameSettingStore } from '../../../create-game/game-setting-store';
 
 const ChipWrapper = styled(animated.div)`
   position: absolute;
@@ -26,19 +27,25 @@ export const Chip = memo(
   ({ points, color }: ChipProps) => {
     const chipAnimatedDisabled = ls.get('chipAnimatedDisabled');
 
+    const handleStartAnimation = () => {
+      console.log('animation start');
+      gameSettingStore.setChipMoveActive(true);
+    };
+
     const handleEndAnimation = () => {
       console.log('animation end');
+      gameSettingStore.setChipMoveActive(false);
     };
 
     const props = useSpring({
       // @ts-ignore
       to: async (animate: any) => {
-        for (const point of points) {
+        for (const { x, y, duration } of points) {
           await animate({
-            transform: `translate(${point.x}px, ${point.y}px)`,
+            transform: `translate(${x}px, ${y}px)`,
             config: {
               easing: easeQuadInOut,
-              duration: chipAnimatedDisabled ? 0 : point.duration,
+              duration: chipAnimatedDisabled ? 0 : duration,
               precision: 0.01,
             },
           });
@@ -47,6 +54,7 @@ export const Chip = memo(
       from: {
         transform: `translate(${0}px, ${0}px)`,
       },
+      onStart: handleStartAnimation,
       onRest: handleEndAnimation,
     });
 
