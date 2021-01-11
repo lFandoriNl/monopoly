@@ -1,9 +1,7 @@
 # Monopoly
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [:us: / :uk: version](./README-EN.md)
@@ -90,6 +88,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/Extwazer"><img src="https://avatars1.githubusercontent.com/u/43049398?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Extwazer</b></sub></a><br /><a href="https://github.com/lFandoriNl/monopoly/commits?author=Extwazer" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/nevstafev"><img src="https://avatars0.githubusercontent.com/u/16920632?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nevstafev</b></sub></a><br /><a href="https://github.com/lFandoriNl/monopoly/commits?author=nevstafev" title="Code">💻</a> <a href="#ideas-nevstafev" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="http://nchechulin.github.io"><img src="https://avatars1.githubusercontent.com/u/38015818?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nikolay Chechulin</b></sub></a><br /><a href="#translation-NChechulin" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/alexey-pd"><img src="https://avatars1.githubusercontent.com/u/12380196?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alexey Pudnikov</b></sub></a><br /><a href="https://github.com/lFandoriNl/monopoly/commits?author=alexey-pd" title="Code">💻</a> <a href="https://github.com/lFandoriNl/monopoly/commits?author=alexey-pd" title="Documentation">📖</a></td>
   </tr>
 </table>
 
