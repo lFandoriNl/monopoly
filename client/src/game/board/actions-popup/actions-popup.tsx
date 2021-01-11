@@ -33,6 +33,8 @@ const ActionButton = styled.button`
 `;
 
 export const ActionsPopup = observer(() => {
+  const { chipInMove, enableChipAnimation } = gameSettingStore;
+
   return (
     <Wrapper>
       <div style={{ marginRight: '1rem' }}>
@@ -42,14 +44,14 @@ export const ActionsPopup = observer(() => {
 
       {gameStore.currentPlayer?.showRollDice && (
         <ActionButton onClick={() => {
-            gameSettingStore.enableChipAnimation();
+            enableChipAnimation();
             playerEvents.roleDice();
         }}>
           Бросить кубики
         </ActionButton>
       )}
 
-      {gameStore.currentPlayer?.showBuyCompany && (
+      {!chipInMove && gameStore.currentPlayer?.showBuyCompany && (
         <ActionButton onClick={playerEvents.buyCompany}>Купить</ActionButton>
       )}
     </Wrapper>
