@@ -15,7 +15,7 @@
 ```
 
 There might be some issues while running it on newer versions of npm and yarn.
-It's recommended **not** to use nmp 7 and yarn 2.
+It's recommended **not** to use npm 7 and yarn 2.
 
 ---
 

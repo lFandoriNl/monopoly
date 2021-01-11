@@ -61,6 +61,7 @@ export const CreateGame = observer(() => {
     event.preventDefault();
 
     if (countPlayers) {
+      gameSettingStore.enableChipAnimation();
       playerEvents.createGame(countPlayers);
     }
   };
