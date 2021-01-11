@@ -22,9 +22,3 @@ export interface IGame {
   currentDiceValue: CubesValueType;
   board?: IBoard;
 }
-
-export interface IGameSettings {
-  gameId: string;
-  gameCreated: boolean;
-  chipAnimatedDisabled: boolean;
-}

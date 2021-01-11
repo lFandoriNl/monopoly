@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 
 import { gameStore } from '../../../core/game-store';
 import { playerEvents } from '../../../core/player-events';
+import { gameSettingStore } from '../../../create-game/game-setting-store';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -40,7 +41,10 @@ export const ActionsPopup = observer(() => {
       </div>
 
       {gameStore.currentPlayer?.showRollDice && (
-        <ActionButton onClick={playerEvents.roleDice}>
+        <ActionButton onClick={() => {
+            gameSettingStore.enableChipAnimation();
+            playerEvents.roleDice();
+        }}>
           Бросить кубики
         </ActionButton>
       )}

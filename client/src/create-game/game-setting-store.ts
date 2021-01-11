@@ -1,11 +1,12 @@
 import { makeAutoObservable } from 'mobx';
 import { ls } from '../lib/local-storage';
-import { IGameSettings } from 'shared';
 
-class GameSetting implements IGameSettings {
-  gameId = '';
-  gameCreated = false;
-  chipAnimatedDisabled = false;
+const chipAnimatedKey = 'chipAnimatedDisabled';
+
+class GameSetting {
+  gameId: string = '';
+  gameCreated: boolean = false;
+  chipAnimatedDisabled: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -19,9 +20,14 @@ class GameSetting implements IGameSettings {
     this.gameCreated = created;
   }
 
-  setDisabledChipAnimation = () => {
+  disableChipAnimation = () => {
     this.chipAnimatedDisabled = true;
-    ls.set('chipAnimatedDisabled', 'true');
+    ls.set(chipAnimatedKey, true);
+  }
+
+  enableChipAnimation = () => {
+    this.chipAnimatedDisabled = false;
+    ls.remove(chipAnimatedKey);
   }
 }
 

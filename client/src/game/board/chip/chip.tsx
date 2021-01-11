@@ -24,7 +24,7 @@ type ChipProps = {
 
 export const Chip = memo(
   ({ points, color }: ChipProps) => {
-    const chipAnimatedDisabled = !!ls.get('chipAnimatedDisabled');
+    const chipAnimatedDisabled = ls.get('chipAnimatedDisabled');
 
     const handleEndAnimation = () => {
       console.log('animation end');
