@@ -18,11 +18,11 @@ export const Board = observer(() => {
   const boardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!gameSettingStore.chipAnimatedDisabled && gameStore.currentPlayer?.moveCells.length) {
-      const chipTO = setTimeout(() => {
-        gameSettingStore.disableChipAnimation();
-        clearTimeout(chipTO);
-      }, 2000);
+    if (
+      !gameSettingStore.chipAnimatedDisabled &&
+      gameStore.currentPlayer?.moveCells.length
+    ) {
+      gameSettingStore.disableChipAnimation();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameStore.currentPlayer?.moveCells]);
