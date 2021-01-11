@@ -3,7 +3,7 @@ export const ls = {
   setStorage(storage: Storage) {
     this.storage = storage;
   },
-  set(key: string, value: string | boolean) {
+  set(key: string, value: string | number | boolean | object) {
     this.storage.setItem(key, JSON.stringify(value));
   },
   get(key: string): unknown | undefined {
