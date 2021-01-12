@@ -88,18 +88,6 @@ export class Game implements IGame {
     return this.countPlayers !== this.players.length;
   }
 
-  buyCompany() {
-    const currentPlayer = this.getCurrentPlayer();
-
-    currentPlayer.withdraw(currentPlayer.buyPrice);
-    currentPlayer.resetUI();
-
-    const { order } = currentPlayer.getCurrentCell();
-    this.board?.buyCompany(order, currentPlayer);
-
-    this.setNextPlayerId();
-  }
-
   rollDice() {
     const currentPlayer = this.getCurrentPlayer();
 
@@ -130,6 +118,18 @@ export class Game implements IGame {
     }
 
     return this.setNextPlayerId();
+  }
+
+  buyCompany() {
+    const currentPlayer = this.getCurrentPlayer();
+
+    currentPlayer.withdraw(currentPlayer.buyPrice);
+    currentPlayer.resetUI();
+
+    const { order } = currentPlayer.getCurrentCell();
+    this.board?.buyCompany(order, currentPlayer);
+
+    this.setNextPlayerId();
   }
 
   static fromPlain(object: IGame) {
