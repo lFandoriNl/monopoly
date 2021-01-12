@@ -2,7 +2,7 @@ import { Game } from './game';
 import { Player } from './player';
 
 describe('Game logic', () => {
-  it('executeActions', () => {
+  it('executeActions > move to the company', () => {
     const game = new Game({});
 
     game.addPlayer(new Player({ id: '1', balance: 5000, buyPrice: 1000 }));
