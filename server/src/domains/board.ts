@@ -32,7 +32,7 @@ export class Board implements IBoard {
     return this.cellsData[cell.order];
   }
 
-  getCompanyByPosition(cell: CellPosition) {
+  getCompanyPriceByPosition(cell: CellPosition) {
     return this.cellsPriceData[cell.order];
   }
 }

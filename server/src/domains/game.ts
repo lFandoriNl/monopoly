@@ -108,7 +108,7 @@ export class Game implements IGame {
     const cellData = this.board?.getCellDataByPosition(currentCell)!;
 
     if (cellData.type === 'company') {
-      const company = this.board?.getCompanyByPosition(currentCell)!;
+      const company = this.board?.getCompanyPriceByPosition(currentCell)!;
       const currentPlayer = this.getCurrentPlayer();
 
       currentPlayer.setBuyPrice(company.cost);
