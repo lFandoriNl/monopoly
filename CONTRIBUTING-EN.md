@@ -27,12 +27,14 @@ This will help to prevent having multiple Pull Requests for one issue.
   - `bugfix` - bug fix
   - `fix` - a small fix
   - `feat` - feature
+  - `test` - writing tests
   - `refactor` - refactoring
   - `docs` - documentation
 - Examples:
   - `bugfix: reconnect after refresh`
   - `fix: style button roll-dice`
   - `feat: create order move players`
+  - `test: add test buyCompany`
   - `refactor: reorganize server/index.ts`
   - `docs: update readme`
 
@@ -41,6 +43,7 @@ This will help to prevent having multiple Pull Requests for one issue.
 All of the JavaScript code is formatted using Prettier.
 
 - Do **not** use `export default` if possible
+
   ```js
   // Use this:
   export class ClassName {}
@@ -48,4 +51,5 @@ All of the JavaScript code is formatted using Prettier.
   // Instead of:
   export default class ClassName {}
   ```
+
 - All of the files and folders should be named in `kebab-case`

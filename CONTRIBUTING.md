@@ -30,6 +30,7 @@
   - `bugfix` - баг фикс
   - `fix` - незначительный фикс чего-либо
   - `feat` - фича
+  - `test` - написание тестов
   - `refactor` - рефакторинг
   - `docs` - документация
 
@@ -37,6 +38,7 @@
   - `bugfix: reconnect after refresh`
   - `fix: style button roll-dice`
   - `feat: create order move players`
+  - `test: add test buyCompany`
   - `refactor: reorganize server/index.ts`
   - `docs: update readme`
 
