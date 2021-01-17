@@ -4,6 +4,7 @@ import { Cube } from './cube';
 type PlayerUI = {
   showRollDice: boolean;
   showBuyCompany: boolean;
+  showPayRent: boolean;
 };
 
 export class Player implements IPlayer {
@@ -14,9 +15,11 @@ export class Player implements IPlayer {
   balance = 15000;
   moveCells: CellPosition[] = [];
   buyPrice = 0;
+  payRentPrice = 0;
 
   showRollDice = false;
   showBuyCompany = false;
+  showPayRent = false;
 
   constructor(player: Partial<IPlayer>) {
     Object.assign(this, player);
@@ -30,12 +33,20 @@ export class Player implements IPlayer {
     this.buyPrice = price;
   }
 
+  setPayRentPrice(price: number) {
+    this.payRentPrice = price;
+  }
+
   setShowRollDice(show: boolean) {
     this.showRollDice = show;
   }
 
   setShowBuyCompany(show: boolean) {
     this.showBuyCompany = show;
+  }
+
+  setShowPayRent(show: boolean) {
+    this.showPayRent = show;
   }
 
   getCurrentCell() {

@@ -15,7 +15,7 @@ export class Game implements IGame {
 
   currentDiceValue: CubesValueType = { firstCube: 0, secondCube: 0 };
 
-  board?: Board;
+  board = new Board({});
 
   constructor(game: Partial<IGame>) {
     const players = game.players?.map((player) => new Player(player)) || [];
@@ -105,14 +105,26 @@ export class Game implements IGame {
   executeActions(moveCells: CellPosition[]) {
     const currentCell = moveCells[moveCells.length - 1];
 
-    const cellData = this.board?.getCellDataByPosition(currentCell)!;
+    const cellData = this.board.getCellDataByPosition(currentCell)!;
 
     if (cellData.type === 'company') {
-      const company = this.board?.getCompanyPriceByPosition(currentCell)!;
+      const company = this.board.getCompanyPriceByPosition(currentCell)!;
       const currentPlayer = this.getCurrentPlayer();
 
-      currentPlayer.setBuyPrice(company.cost);
-      currentPlayer.setUI({ showRollDice: false, showBuyCompany: true });
+      const { ownerId } = cellData;
+
+      if (!ownerId) {
+        currentPlayer.setBuyPrice(company.cost);
+        currentPlayer.setUI({ showRollDice: false, showBuyCompany: true });
+      }
+
+      if (ownerId) {
+        if (ownerId !== currentPlayer.id) {
+          const rentPrice = this.board.getRentPrice(cellData, company);
+          currentPlayer.setPayRentPrice(rentPrice);
+          currentPlayer.setUI({ showRollDice: false, showPayRent: true });
+        }
+      }
 
       return;
     }
@@ -127,7 +139,7 @@ export class Game implements IGame {
     currentPlayer.resetUI();
 
     const { order } = currentPlayer.getCurrentCell();
-    this.board?.buyCompany(order, currentPlayer);
+    this.board.buyCompany(currentPlayer, order);
 
     this.setNextPlayerId();
   }
