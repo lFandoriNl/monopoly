@@ -40,6 +40,10 @@ export class SessionController {
 
         client.emit('game.board.price', cellsPriceData);
       }
+
+      if (!game) {
+        client.emit('session.recovery.error', 'invalid game id');
+      }
     }
   }
 }
