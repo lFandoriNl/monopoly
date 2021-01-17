@@ -9,7 +9,7 @@ class Game implements IGame {
   players: IPlayer[] = [];
 
   currentDiceValue: CubesValueType = { firstCube: 0, secondCube: 0 };
-  board: IBoard | undefined;
+  board: IBoard = { cellsData: {}, cellsPriceData: {} };
 
   constructor() {
     makeAutoObservable(this);
