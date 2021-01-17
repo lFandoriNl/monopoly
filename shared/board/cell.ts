@@ -1,4 +1,5 @@
 import { IPlayer } from '../game';
+import { RentLevel } from './cells-price';
 
 export type Position = 'top' | 'right' | 'bottom' | 'left';
 
@@ -23,13 +24,14 @@ type CellDataSquare = {
   type: 'start' | 'prison' | 'jackpot' | 'vacation';
 };
 
-type CellDataCompany = {
+export type CellDataCompany = {
   next: number;
   square: boolean;
   path: CellPosition['path'];
   type: 'company';
   ownerId?: IPlayer['id'];
   ownerColor?: string;
+  rentLevel?: RentLevel;
 };
 
 type CellDataRandom = {
@@ -39,6 +41,8 @@ type CellDataRandom = {
   type: 'riddle' | 'tax';
 };
 
+export type CellData = CellDataSquare | CellDataCompany | CellDataRandom;
+
 export type CellsData = {
-  [key: number]: CellDataSquare | CellDataCompany | CellDataRandom;
+  [key: number]: CellData;
 };

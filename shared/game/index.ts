@@ -10,9 +10,11 @@ export interface IPlayer {
   balance: number;
   moveCells: CellPosition[];
   buyPrice: number;
+  payRentPrice: number;
 
   showRollDice: boolean;
   showBuyCompany: boolean;
+  showPayRent: boolean;
 }
 
 export interface IGame {
@@ -20,5 +22,5 @@ export interface IGame {
   countPlayers: number;
   players: IPlayer[];
   currentDiceValue: CubesValueType;
-  board?: IBoard;
+  board: IBoard;
 }

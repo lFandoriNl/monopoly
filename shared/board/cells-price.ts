@@ -1,3 +1,11 @@
+export type RentLevel =
+  | 'rent0'
+  | 'rent1'
+  | 'rent2'
+  | 'rent3'
+  | 'rent4'
+  | 'rent5';
+
 type CompanyPrice = {
   type: 'Company';
   rent0: number;
@@ -32,6 +40,11 @@ type DiceSumCompanyPrice = {
   redemption: number;
 };
 
+export type CellPriceData =
+  | CompanyPrice
+  | SumCompanyPrice
+  | DiceSumCompanyPrice;
+
 export type CellsPriceData = {
-  [key: number]: CompanyPrice | SumCompanyPrice | DiceSumCompanyPrice;
+  [key: number]: CellPriceData;
 };
