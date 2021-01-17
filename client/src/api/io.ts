@@ -36,6 +36,14 @@ events.on('session.recovery.response', (gameRaw: string) => {
   gameStore.update(game);
 });
 
+events.on('session.recovery.error', (message: string) => {
+  gameSettingStore.setGameId('');
+  gameSettingStore.setGameCreated(false);
+  window.location.href = '/';
+
+  console.error('session.recovery.error', message);
+});
+
 events.on('game.created', ({ id }: { id: string }) => {
   gameSettingStore.setGameId(id);
   gameSettingStore.setGameCreated(true);
