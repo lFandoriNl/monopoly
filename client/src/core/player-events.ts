@@ -33,6 +33,12 @@ export class PlayerEvents {
 
     events.emit('game.events.buy-company', { gameId });
   }
+
+  payRent() {
+    const gameId = getSearchParam('id');
+
+    events.emit('game.events.pay-rent', { gameId });
+  }
 }
 
 export const playerEvents = new PlayerEvents();

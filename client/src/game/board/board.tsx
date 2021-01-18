@@ -64,7 +64,7 @@ export const Board = observer(() => {
           </div>
 
           <div className="square9" style={{ position: 'relative' }}>
-            <ActionsPopup />
+            {!gameSettingStore.chipInMove && <ActionsPopup />}
           </div>
 
           <div className="square2 cells-right">
