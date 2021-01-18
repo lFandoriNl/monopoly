@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import styled from 'styled-components/macro';
 
@@ -22,14 +22,18 @@ export const Game = observer(() => {
   const gameRef = useRef<HTMLDivElement>(null);
 
   const { search } = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     const gameId = getSearchParam('id');
 
     if (gameId) {
       gameSettingStore.setGameId(gameId);
+      return;
     }
-  }, [search]);
+
+    history.push('/');
+  }, [search, history]);
 
   useEffect(() => {
     const handleResize = () => {
