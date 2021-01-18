@@ -77,4 +77,33 @@ describe('Game logic', () => {
 
     expect(game.currentPlayerId).toBe('2');
   });
+
+  it('payRent', () => {
+    const game = new Game({});
+
+    game.addPlayer(
+      new Player({
+        id: '1',
+        color: '#fff',
+        balance: 5000,
+        payRentPrice: 60,
+        moveCells: [
+          { path: 'top', order: 1 },
+          { path: 'top', order: 6 },
+        ],
+      }),
+    );
+
+    game.addPlayer(new Player({ id: '2', balance: 5000, buyPrice: 1000 }));
+
+    game.currentPlayerId = '1';
+
+    game.board.buyCompany(game.players[1], 6);
+
+    game.payRent();
+
+    expect(game.players[0].balance).toBe(4940);
+    expect(game.players[1].balance).toBe(5060);
+    expect(game.currentPlayerId).toBe('2');
+  });
 });

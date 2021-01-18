@@ -53,6 +53,16 @@ export class Board implements IBoard {
     return 0;
   }
 
+  getOwnerIdByPosition(cell: CellPosition) {
+    const cellData = this.cellsData[cell.order];
+
+    if (cellData.type === 'company') {
+      return cellData.ownerId;
+    }
+
+    return undefined;
+  }
+
   getCellDataByPosition(cell: CellPosition) {
     return this.cellsData[cell.order];
   }

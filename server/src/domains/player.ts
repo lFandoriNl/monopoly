@@ -68,6 +68,7 @@ export class Player implements IPlayer {
   resetUI() {
     this.setShowRollDice(false);
     this.setShowBuyCompany(false);
+    this.setShowPayRent(false);
   }
 
   rollDice() {

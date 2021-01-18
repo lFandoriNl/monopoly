@@ -41,4 +41,19 @@ export class GameEventsController {
       io.to(gameId).emit('game.update', game);
     }
   }
+
+  @OnMessage('game.events.pay-rent')
+  payRent(
+    @MessageBody() { gameId }: { gameId: string },
+    @SocketIO() io: SocketServer,
+  ) {
+    const game = this.gameService.getGame(gameId);
+
+    if (game) {
+      game.payRent();
+      this.gameService.updateGame(gameId, game);
+
+      io.to(gameId).emit('game.update', game);
+    }
+  }
 }

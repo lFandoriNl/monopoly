@@ -144,6 +144,25 @@ export class Game implements IGame {
     this.setNextPlayerId();
   }
 
+  payRent() {
+    const currentPlayer = this.getCurrentPlayer();
+
+    currentPlayer.withdraw(currentPlayer.payRentPrice);
+    currentPlayer.resetUI();
+
+    const ownerId = this.board.getOwnerIdByPosition(
+      currentPlayer.getCurrentCell(),
+    );
+
+    if (ownerId) {
+      const playerOwner = this.getPlayer(ownerId);
+
+      playerOwner.deposit(currentPlayer.payRentPrice);
+    }
+
+    this.setNextPlayerId();
+  }
+
   static fromPlain(object: IGame) {
     return new Game(object);
   }
