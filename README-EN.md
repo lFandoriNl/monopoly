@@ -1,7 +1,9 @@
 # Monopoly
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## How to run
@@ -34,7 +36,7 @@ Please read the following [guide](./CONTRIBUTING-EN.md)
 - ✅ Animation of moving chips across the board
 - Timer on limit of turn
 - Actions with companies
-  - Rent payment
+  - ✅ Rent payment
   - ✅ Buying companies
   - Putting companies up for auction
   - Company pledge

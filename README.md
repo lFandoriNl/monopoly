@@ -1,7 +1,9 @@
 # Monopoly
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [:us: / :uk: version](./README-EN.md)
@@ -35,7 +37,7 @@
 - ✅ Анимация перемещения фишек по доске
 - Таймер на ограничение хода
 - Действия с компаниями
-  - Оплата аренды
+  - ✅ Оплата аренды
   - ✅ Покупка компаний
   - Выставление компаний на аукцион
   - Заложение компаний
