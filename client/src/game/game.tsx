@@ -1,16 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import styled from 'styled-components/macro';
 
 import { observer } from 'mobx-react';
-import { playerStore } from '../core/player-store';
 import { gameSettingStore } from '../create-game/game-setting-store';
 
 import { Players } from './players';
 import { Board } from './board';
 import { InputNameModal } from './input-name-modal';
 import { getSearchParam } from '../lib/search-param';
+import { gameStore } from '../core/game-store';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -22,14 +22,18 @@ export const Game = observer(() => {
   const gameRef = useRef<HTMLDivElement>(null);
 
   const { search } = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     const gameId = getSearchParam('id');
 
     if (gameId) {
       gameSettingStore.setGameId(gameId);
+      return;
     }
-  }, [search]);
+
+    history.push('/');
+  }, [search, history]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -58,7 +62,7 @@ export const Game = observer(() => {
 
       <Board />
 
-      {playerStore.joined === false && <InputNameModal />}
+      {gameStore.joined === false && <InputNameModal />}
     </Wrapper>
   );
 });

@@ -1,4 +1,4 @@
-import { CellType } from 'shared-types';
+import { CellPosition } from 'shared';
 import { PointType } from '../game/board/chip';
 
 export function getPositionRelativeOfParent(
@@ -21,14 +21,14 @@ export function getPositionRelativeOfParent(
 
 function getCellElementByPathAndOrder(
   container: HTMLDivElement,
-  { path, order }: CellType,
+  { path, order }: CellPosition,
 ) {
   return container.querySelector<HTMLDivElement>(`.${path}-${order}`);
 }
 
 export function getPointsFromCells(
   boardElement: HTMLDivElement,
-  cells: CellType[],
+  cells: CellPosition[],
 ): PointType[] {
   const prevCellCorrect = cells[cells.length - 1];
   return cells.map((cell) => {

@@ -137,8 +137,8 @@ export const BoardWrapper = styled.div`
     position: relative;
     top: 0;
     bottom: 0;
-    left: 21%;
-    width: 77%;
+    left: 24%;
+    width: 76%;
     height: 100%;
 
     .cell-image {
@@ -151,8 +151,8 @@ export const BoardWrapper = styled.div`
     position: relative;
     left: 0;
     right: 0;
-    top: 21%;
-    height: 77%;
+    top: 24%;
+    height: 76%;
 
     .cell-image {
       width: 90%;
@@ -164,7 +164,7 @@ export const BoardWrapper = styled.div`
     position: relative;
     top: 0px;
     bottom: 0px;
-    width: 77%;
+    width: 76%;
     height: 100%;
 
     .cell-image {

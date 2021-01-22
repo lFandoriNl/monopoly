@@ -1,4 +1,4 @@
-import { IGame } from 'shared-types';
+import { Server as SocketServer, Socket } from 'socket.io';
 import {
   ConnectedSocket,
   MessageBody,
@@ -6,14 +6,16 @@ import {
   SocketController,
   SocketIO,
 } from 'socket-controllers';
-import { Server as SocketServer, Socket } from 'socket.io';
+import { IGame } from 'shared';
 import { v4 as uuidv4 } from 'uuid';
-import { Game } from '../game';
-import { GameManager } from '../game-manager';
+
+import { GameService } from '../services/game-service';
+import { Game } from '../domains/game';
+import { cellsPriceData } from '../common/cells-data';
 
 @SocketController()
 export class GameController {
-  constructor(private gameManager: GameManager) {}
+  constructor(private gameService: GameService) {}
 
   @OnMessage('game.create')
   create(
@@ -24,7 +26,7 @@ export class GameController {
   ) {
     const uuid = uuidv4();
 
-    this.gameManager.createGame(uuid, new Game({ countPlayers }));
+    this.gameService.createGame(uuid, new Game({ countPlayers }));
     client.emit('game.created', { id: uuid });
   }
 
@@ -34,26 +36,26 @@ export class GameController {
     {
       gameId,
       playerId,
-      namePlayer,
+      playerName,
     }: {
       gameId: string;
       playerId: string;
-      namePlayer: string;
+      playerName: string;
     },
     @ConnectedSocket() client: Socket,
     @SocketIO() io: SocketServer,
   ) {
-    const game = this.gameManager.getGame(gameId);
+    const game = this.gameService.getGame(gameId);
 
     if (game?.hasFreeSlot()) {
-      game.addPlayer({ id: playerId, name: namePlayer });
+      game.addPlayer({ id: playerId, name: playerName });
+      this.gameService.updateGame(gameId, game);
 
       client.join(gameId);
 
       client.emit('game.joined.self');
-      io.to(gameId).emit('game.joined', JSON.stringify(game));
+      client.emit('game.board.price', cellsPriceData);
+      io.to(gameId).emit('game.joined', game);
     }
-
-    console.log('Game not found');
   }
 }

@@ -1,3 +1,4 @@
+import { Socket } from 'socket.io';
 import {
   ConnectedSocket,
   MessageBody,
@@ -6,12 +7,13 @@ import {
   OnMessage,
   SocketController,
 } from 'socket-controllers';
-import { Socket } from 'socket.io';
-import { GameManager } from '../game-manager';
+
+import { GameService } from '../services/game-service';
+import { cellsPriceData } from '../common/cells-data';
 
 @SocketController()
 export class SessionController {
-  constructor(private gameManager: GameManager) {}
+  constructor(private gameService: GameService) {}
 
   @OnConnect()
   connection() {
@@ -30,11 +32,17 @@ export class SessionController {
     @ConnectedSocket() client: Socket,
   ) {
     if (clientId && gameId) {
-      const game = this.gameManager.getGame(gameId);
+      const game = this.gameService.getGame(gameId);
 
       if (game && game.hasPlayer(clientId)) {
         client.join(gameId);
         client.emit('session.recovery.response', JSON.stringify(game));
+
+        client.emit('game.board.price', cellsPriceData);
+      }
+
+      if (!game) {
+        client.emit('session.recovery.error', 'invalid game id');
       }
     }
   }

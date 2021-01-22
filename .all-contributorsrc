@@ -1,6 +1,7 @@
 {
   "files": [
-    "README.md"
+    "README.md",
+    "README-EN.md"
   ],
   "imageSize": 100,
   "commit": false,
@@ -45,6 +46,25 @@
       "contributions": [
         "code",
         "ideas"
+      ]
+    },
+    {
+      "login": "NChechulin",
+      "name": "Nikolay Chechulin",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/38015818?v=4",
+      "profile": "http://nchechulin.github.io",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "alexey-pd",
+      "name": "Alexey Pudnikov",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12380196?v=4",
+      "profile": "https://github.com/alexey-pd",
+      "contributions": [
+        "code",
+        "doc"
       ]
     }
   ],

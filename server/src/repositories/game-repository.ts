@@ -1,13 +1,14 @@
 import fs from 'fs';
-import { IGame } from 'shared-types';
+import { IGame } from 'shared';
 import { Service } from 'typedi';
-import { Game } from './game';
+import { Game } from '../domains/game';
 
 type GameMap = { [key: string]: Game };
 
 @Service()
 export class GameRepository {
   cache: GameMap = {};
+
   constructor() {
     this.deserialize();
   }
@@ -23,12 +24,10 @@ export class GameRepository {
 
   deserialize() {
     const gameMap: GameMap = {};
-    const parsed: { gameMap: { [key: string]: IGame } } = JSON.parse(
-      this.readFromFile(),
-    );
+    const parsed: { [key: string]: IGame } = JSON.parse(this.readFromFile());
 
-    Object.keys(parsed.gameMap).forEach((key) => {
-      gameMap[key] = new Game(parsed.gameMap[key]);
+    Object.keys(parsed).forEach((key) => {
+      gameMap[key] = new Game(parsed[key]);
     });
     this.cache = gameMap;
   }
@@ -38,12 +37,13 @@ export class GameRepository {
       const db = fs.readFileSync('db.json', 'utf8');
       return db;
     } catch (error) {
-      return '{"gameMap":{}}';
+      return '{}';
     }
   }
 
   saveToFile() {
     const raw = JSON.stringify(this.cache);
+
     fs.writeFile('db.json', raw, (error) => {
       if (error) {
         console.error(error);

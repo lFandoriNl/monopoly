@@ -1,10 +1,13 @@
 import { makeAutoObservable } from 'mobx';
-import { events } from '../api/io';
+import { ls } from '../lib/local-storage';
+
+const chipAnimatedKey = 'chipAnimatedDisabled';
 
 class GameSetting {
-  gameId = '';
-  gameCreated = false;
-  countPlayers?: number = 0;
+  gameId: string = '';
+  gameCreated: boolean = false;
+  chipAnimatedDisabled: boolean = false;
+  chipMoveActive: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -18,14 +21,22 @@ class GameSetting {
     this.gameCreated = created;
   }
 
-  setCountPlayers(count: number) {
-    this.countPlayers = count;
+  disableChipAnimation = () => {
+    this.chipAnimatedDisabled = true;
+    ls.set(chipAnimatedKey, true);
   }
 
-  createGame() {
-    if (this.countPlayers) {
-      events.emit('game.create', { countPlayers: this.countPlayers });
-    }
+  enableChipAnimation = () => {
+    this.chipAnimatedDisabled = false;
+    ls.remove(chipAnimatedKey);
+  }
+
+  setChipMoveActive = (status: boolean) => {
+    this.chipMoveActive = status
+  }
+
+  get chipInMove() {
+    return this.chipMoveActive
   }
 }
 

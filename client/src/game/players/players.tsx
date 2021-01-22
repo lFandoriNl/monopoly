@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 
 import styled from 'styled-components/macro';
 
-import { playerStore } from '../../core/player-store';
+import { gameStore } from '../../core/game-store';
 
 const Wrapper = styled.div`
   width: 180px;
@@ -20,10 +20,10 @@ const PlayerCard = styled.div`
 export const Players = observer(() => {
   return (
     <Wrapper>
-      {playerStore.players?.map((player) => (
+      {gameStore.players?.map((player) => (
         <PlayerCard>
           <div>{player.name}</div>
-          <div>{15000}$</div>
+          <div>{player.balance}$</div>
         </PlayerCard>
       ))}
     </Wrapper>

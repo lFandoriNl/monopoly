@@ -1,5 +1,16 @@
+import { gameStore } from '../../core/game-store';
 import { CellVariant } from './board-cells';
 import { Price } from './cell-styled';
+
+const getColorForCell = (order: number) => {
+  const currentCell = gameStore.board?.cellsData[order];
+
+  if (currentCell?.type === 'company' && currentCell.ownerId) {
+    return `${currentCell.ownerColor}b0`;
+  }
+
+  return 'transparent';
+};
 
 type CellProps = CellVariant;
 
@@ -66,7 +77,10 @@ export const Cell = (props: CellProps) => {
             {props.price}$
           </Price>
         )}
-        <div className="side side-top">
+        <div
+          className="side side-top"
+          style={{ backgroundColor: getColorForCell(props.order) }}
+        >
           <div
             className="cell-image left-rotation"
             style={{ backgroundImage: `url(${props.image})` }}
@@ -84,7 +98,10 @@ export const Cell = (props: CellProps) => {
             <span className="price">{props.price}$</span>
           </Price>
         )}
-        <div className="side side-right">
+        <div
+          className="side side-right"
+          style={{ backgroundColor: getColorForCell(props.order) }}
+        >
           <div
             className="cell-image"
             style={{ backgroundImage: `url(${props.image})` }}
@@ -102,7 +119,10 @@ export const Cell = (props: CellProps) => {
             {props.price}$
           </Price>
         )}
-        <div className="side side-bottom">
+        <div
+          className="side side-bottom"
+          style={{ backgroundColor: getColorForCell(props.order) }}
+        >
           <div
             className="cell-image left-rotation"
             style={{ backgroundImage: `url(${props.image})` }}
@@ -120,7 +140,10 @@ export const Cell = (props: CellProps) => {
             <span className="price">{props.price}$</span>
           </Price>
         )}
-        <div className="side side-left">
+        <div
+          className="side side-left"
+          style={{ backgroundColor: getColorForCell(props.order) }}
+        >
           <div
             className="cell-image"
             style={{ backgroundImage: `url(${props.image})` }}

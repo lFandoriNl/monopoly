@@ -1,13 +1,13 @@
-import { CellType } from 'shared-types';
+import { CellPosition } from 'shared';
 import { calcCellsPath } from './calc-cells-path';
 
 describe('calcCellsPath', () => {
   it('calc top > right', () => {
-    const currentCells: CellType[] = [{ path: 'top', order: 0 }];
+    const currentCells: CellPosition[] = [{ path: 'top', order: 0 }];
 
     const numberSteps = 12;
 
-    const result: CellType[] = [
+    const result: CellPosition[] = [
       { path: 'top', order: 0 },
       { path: 'top', order: 10 },
       { path: 'right', order: 12 },
@@ -17,7 +17,7 @@ describe('calcCellsPath', () => {
   });
 
   it('calc right > right', () => {
-    const currentCells: CellType[] = [
+    const currentCells: CellPosition[] = [
       { path: 'top', order: 0 },
       { path: 'top', order: 10 },
       { path: 'right', order: 12 },
@@ -25,7 +25,7 @@ describe('calcCellsPath', () => {
 
     const numberSteps = 5;
 
-    const result: CellType[] = [
+    const result: CellPosition[] = [
       { path: 'right', order: 12 },
       { path: 'right', order: 17 },
     ];
@@ -34,14 +34,14 @@ describe('calcCellsPath', () => {
   });
 
   it('calc right > start bottom', () => {
-    const currentCells: CellType[] = [
+    const currentCells: CellPosition[] = [
       { path: 'right', order: 12 },
       { path: 'right', order: 17 },
     ];
 
     const numberSteps = 3;
 
-    const result: CellType[] = [
+    const result: CellPosition[] = [
       { path: 'right', order: 17 },
       { path: 'bottom', order: 20 },
     ];
@@ -50,14 +50,14 @@ describe('calcCellsPath', () => {
   });
 
   it('calc right > bottom', () => {
-    const currentCells: CellType[] = [
+    const currentCells: CellPosition[] = [
       { path: 'right', order: 15 },
       { path: 'right', order: 19 },
     ];
 
     const numberSteps = 7;
 
-    const result: CellType[] = [
+    const result: CellPosition[] = [
       { path: 'right', order: 19 },
       { path: 'bottom', order: 20 },
       { path: 'bottom', order: 26 },
@@ -67,14 +67,14 @@ describe('calcCellsPath', () => {
   });
 
   it('calc bottom > end bottom', () => {
-    const currentCells: CellType[] = [
+    const currentCells: CellPosition[] = [
       { path: 'right', order: 15 },
       { path: 'bottom', order: 27 },
     ];
 
     const numberSteps = 3;
 
-    const result: CellType[] = [
+    const result: CellPosition[] = [
       { path: 'bottom', order: 27 },
       { path: 'bottom', order: 30 },
     ];
@@ -83,14 +83,14 @@ describe('calcCellsPath', () => {
   });
 
   it('calc end bottom > start top', () => {
-    const currentCells: CellType[] = [
+    const currentCells: CellPosition[] = [
       { path: 'bottom', order: 27 },
       { path: 'bottom', order: 30 },
     ];
 
     const numberSteps = 10;
 
-    const result: CellType[] = [
+    const result: CellPosition[] = [
       { path: 'bottom', order: 30 },
       { path: 'top', order: 0 },
     ];

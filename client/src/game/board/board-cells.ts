@@ -1,4 +1,4 @@
-import { Position } from 'shared-types';
+import { Position } from 'shared';
 
 import startImage from './images/start.png';
 import chanelImage from './images/chanel.svg';

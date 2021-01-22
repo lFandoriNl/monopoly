@@ -6,9 +6,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[:us: / :uk: version](./README-EN.md)
-
-## Как запустить
+## How to run
 
 ```
 1. npx lerna bootstrap
@@ -16,65 +14,66 @@
 3. npm start
 ```
 
-Могут возникать ошибки при использовании новых версий npm и yarn, желательно не использовать следующие версии: npm 7, yarn 2
+There might be some issues while running it on newer versions of npm and yarn.
+It's recommended **not** to use npm 7 and yarn 2.
 
 ---
 
-## Как я могу внести свой вклад?
+## How can I contribute?
 
-Прочти пожалуйста это [руководство](./CONTRIBUTING.md)
-
----
-
-## Список возможностей
-
-- ✅ Создание игры
-- ✅ Подключения игроков к сессии игры
-- ✅ Игровое поле
-- Просмотр данных о компании
-- ✅ Бросок кубиков
-  - В 3d
-- ✅ Анимация перемещения фишек по доске
-- Таймер на ограничение хода
-- Действия с компаниями
-  - ✅ Оплата аренды
-  - ✅ Покупка компаний
-  - Выставление компаний на аукцион
-  - Заложение компаний
-  - Выкуп компаний
-  - Постройка филиалов
-  - Продажа филиалов
-- Предложение сделок
-- Реализация ячеек
-  - Старт
-  - Тюрьма
-  - Джекпот
-  - Отпуск
-  - Шанс
-  - Налог
-- Чат между игроками
-- Логирование событий в чат
-- Возможность сдаться
+Please read the following [guide](./CONTRIBUTING-EN.md)
 
 ---
 
-## Что мы хотим на вид
+## Feature List
 
-1. Начало игры
+- ✅ Game creation
+- ✅ Connecting players to the game session
+- ✅ Game board
+- Viewing company data
+- ✅ Roll of the dice
+  - In 3d
+- ✅ Animation of moving chips across the board
+- Timer on limit of turn
+- Actions with companies
+  - ✅ Rent payment
+  - ✅ Buying companies
+  - Putting companies up for auction
+  - Company pledge
+  - Company redemption
+  - Construction of branches
+  - Sale of branches
+- Offer of deals
+- Implementation of cells
+  - Start
+  - Prison
+  - Jackpot
+  - Vacation
+  - Chance
+  - Tax
+- Chat between players
+- Logging events to chat
+- The opportunity to surrender
+
+---
+
+## How we want it to look
+
+1. Start of the game
    ![image](./docs/assets/images/start-game.jpg)
 
-2. Предложение хода
+2. Move suggestion
    ![image](./docs/assets/images/roll-dice.png)
 
-3. Решение о покупки компании
+3. Company purchase decision
    ![image](./docs/assets/images/buy-company.png)
 
-4. Обзор компании при клике на ее ячейку
+4. Company overview on cell click
    ![image](./docs/assets/images/view-company.png)
 
-Эти скриншоты из https://monopoly-one.com/
+These are the screenshots from https://monopoly-one.com/
 
-Но есть еще https://monopolystar.ru/ и по мне она более ламповая, у каждой из них есть свои минусы по UX, мы же возьмем только лучшее из них обеих.
+There's also https://monopolystar.ru/, which looks more atmospheric, and although both of them have their pros and cons, we're going to take the best from them.
 
 ## Contributors ✨
 

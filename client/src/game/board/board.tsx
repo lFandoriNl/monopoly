@@ -1,24 +1,36 @@
-import { useState, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { observer } from 'mobx-react';
+
+import { gameStore } from '../../core/game-store';
 
 import { ActionsPopup } from './actions-popup';
 import { Cell } from './cell';
-import { Chip, PointType } from './chip';
+import { Chip } from './chip';
 
 import { BoardWrapper } from './board-styled';
 
 import { boardCells } from './board-cells';
 
 import { getPointsFromCells } from '../../lib/dom';
-import { playerStore } from '../../core/player-store';
+import { gameSettingStore } from '../../create-game/game-setting-store';
 
 export const Board = observer(() => {
   const boardRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (
+      !gameSettingStore.chipAnimatedDisabled &&
+      gameStore.currentPlayer?.moveCells.length
+    ) {
+      gameSettingStore.disableChipAnimation();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameStore.currentPlayer?.moveCells]);
+
   return (
     <BoardWrapper>
       <div className="mainSquare" ref={boardRef}>
-        {playerStore.players?.map((player) => {
+        {gameStore.players?.map((player) => {
           const boardElement = boardRef.current;
 
           if (boardElement) {
@@ -29,6 +41,8 @@ export const Board = observer(() => {
 
             return <Chip color={player.color} points={newPositions} />;
           }
+
+          return null;
         })}
 
         <div className="row top cells-top">
@@ -50,7 +64,7 @@ export const Board = observer(() => {
           </div>
 
           <div className="square9" style={{ position: 'relative' }}>
-            <ActionsPopup />
+            {!gameSettingStore.chipInMove && <ActionsPopup />}
           </div>
 
           <div className="square2 cells-right">

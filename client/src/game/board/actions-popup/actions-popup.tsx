@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 
 import { gameStore } from '../../../core/game-store';
 import { playerEvents } from '../../../core/player-events';
-import { playerStore } from '../../../core/player-store';
+import { gameSettingStore } from '../../../create-game/game-setting-store';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -33,6 +33,8 @@ const ActionButton = styled.button`
 `;
 
 export const ActionsPopup = observer(() => {
+  const { enableChipAnimation } = gameSettingStore;
+
   return (
     <Wrapper>
       <div style={{ marginRight: '1rem' }}>
@@ -40,10 +42,23 @@ export const ActionsPopup = observer(() => {
         {gameStore.currentDiceValue.secondCube}
       </div>
 
-      {playerStore.isCurrentPlayerMove && (
-        <ActionButton onClick={playerEvents.roleDice}>
+      {gameStore.currentPlayer?.showRollDice && (
+        <ActionButton
+          onClick={() => {
+            enableChipAnimation();
+            playerEvents.roleDice();
+          }}
+        >
           Бросить кубики
         </ActionButton>
+      )}
+
+      {gameStore.currentPlayer?.showBuyCompany && (
+        <ActionButton onClick={playerEvents.buyCompany}>Купить</ActionButton>
+      )}
+
+      {gameStore.currentPlayer?.showPayRent && (
+        <ActionButton onClick={playerEvents.payRent}>Оплатить</ActionButton>
       )}
     </Wrapper>
   );

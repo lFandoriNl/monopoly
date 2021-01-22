@@ -4,7 +4,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\""
+    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\"",
+    "start-server": "cd server && npm start",
+    "start-client": "cd client && npm start"
   },
   "dependencies": {
     "concurrently": "^5.3.0"

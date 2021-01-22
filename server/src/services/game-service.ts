@@ -1,10 +1,10 @@
-import { IGame } from 'shared-types';
+import { IGame } from 'shared';
 import { Service } from 'typedi';
-import { Game } from './game';
-import { GameRepository } from './game-repository';
+import { Game } from '../domains/game';
+import { GameRepository } from '../repositories/game-repository';
 
 @Service()
-export class GameManager {
+export class GameService {
   constructor(private gameRepository: GameRepository) {}
 
   createGame(id: string, game: IGame) {
@@ -25,5 +25,9 @@ export class GameManager {
 
   hasFreeGame(id: string) {
     return this.gameRepository.findById(id)?.hasFreeSlot();
+  }
+
+  save() {
+    this.gameRepository.saveToFile();
   }
 }

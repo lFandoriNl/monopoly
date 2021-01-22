@@ -104,5 +104,12 @@ dist
 # TernJS port file
 .tern-port
 
-# VSCode foler
+# VSCode folder
 .vscode
+
+build
+
+db.json
+
+# WebStorm settings
+.idea
