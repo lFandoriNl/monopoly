@@ -1,11 +1,5 @@
-import { IPlayer, CellPosition } from 'shared';
+import { IPlayer, CellPosition, PlayerActions } from 'shared';
 import { Cube } from './cube';
-
-type PlayerUI = {
-  showRollDice: boolean;
-  showBuyCompany: boolean;
-  showPayRent: boolean;
-};
 
 export class Player implements IPlayer {
   id = '';
@@ -14,12 +8,8 @@ export class Player implements IPlayer {
   color = '';
   balance = 15000;
   moveCells: CellPosition[] = [];
-  buyPrice = 0;
-  payRentPrice = 0;
 
-  showRollDice = false;
-  showBuyCompany = false;
-  showPayRent = false;
+  availableActions: Array<PlayerActions> = [];
 
   constructor(player: Partial<IPlayer>) {
     Object.assign(this, player);
@@ -27,26 +17,6 @@ export class Player implements IPlayer {
 
   setMoveCells(cells: CellPosition[]) {
     this.moveCells = cells;
-  }
-
-  setBuyPrice(price: number) {
-    this.buyPrice = price;
-  }
-
-  setPayRentPrice(price: number) {
-    this.payRentPrice = price;
-  }
-
-  setShowRollDice(show: boolean) {
-    this.showRollDice = show;
-  }
-
-  setShowBuyCompany(show: boolean) {
-    this.showBuyCompany = show;
-  }
-
-  setShowPayRent(show: boolean) {
-    this.showPayRent = show;
   }
 
   getCurrentCell() {
@@ -61,14 +31,8 @@ export class Player implements IPlayer {
     this.balance += money;
   }
 
-  setUI(ui: Partial<PlayerUI>) {
-    Object.assign(this, ui);
-  }
-
-  resetUI() {
-    this.setShowRollDice(false);
-    this.setShowBuyCompany(false);
-    this.setShowPayRent(false);
+  setAvailableActions(actions: Array<PlayerActions>) {
+    this.availableActions = actions;
   }
 
   rollDice() {

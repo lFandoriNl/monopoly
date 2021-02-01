@@ -31,7 +31,7 @@ export class Game implements IGame {
 
   startGame() {
     this.currentPlayerId = this.players[0].id;
-    this.players[0].setShowRollDice(true);
+    this.players[0].setAvailableActions(['rollDice']);
     this.players.forEach((player) => {
       player.setMoveCells(initMoveCells);
     });
@@ -73,10 +73,9 @@ export class Game implements IGame {
 
   setNextPlayerId() {
     const currentPlayer = this.getCurrentPlayer();
-    currentPlayer.resetUI();
-
+    currentPlayer.setAvailableActions([]);
     const nextPlayer = this.getNextPlayer();
-    nextPlayer.setShowRollDice(true);
+    nextPlayer.setAvailableActions(['rollDice']);
     this.currentPlayerId = nextPlayer.id;
   }
 
@@ -108,21 +107,17 @@ export class Game implements IGame {
     const cellData = this.board.getCellDataByPosition(currentCell)!;
 
     if (cellData.type === 'company') {
-      const company = this.board.getCompanyPriceByPosition(currentCell)!;
       const currentPlayer = this.getCurrentPlayer();
 
       const { ownerId } = cellData;
 
       if (!ownerId) {
-        currentPlayer.setBuyPrice(company.cost);
-        currentPlayer.setUI({ showRollDice: false, showBuyCompany: true });
+        currentPlayer.setAvailableActions(['buyCompany']);
       }
 
       if (ownerId) {
         if (ownerId !== currentPlayer.id) {
-          const rentPrice = this.board.getRentPrice(cellData, company);
-          currentPlayer.setPayRentPrice(rentPrice);
-          currentPlayer.setUI({ showRollDice: false, showPayRent: true });
+          currentPlayer.setAvailableActions(['payRent']);
         }
       }
 
@@ -134,9 +129,11 @@ export class Game implements IGame {
 
   buyCompany() {
     const currentPlayer = this.getCurrentPlayer();
-
-    currentPlayer.withdraw(currentPlayer.buyPrice);
-    currentPlayer.resetUI();
+    const currentCell =
+      currentPlayer.moveCells[currentPlayer.moveCells.length - 1];
+    const priceData = this.board.getCompanyPriceByPosition(currentCell)!;
+    currentPlayer.withdraw(priceData.cost);
+    currentPlayer.setAvailableActions([]);
 
     const { order } = currentPlayer.getCurrentCell();
     this.board.buyCompany(currentPlayer, order);
@@ -146,20 +143,25 @@ export class Game implements IGame {
 
   payRent() {
     const currentPlayer = this.getCurrentPlayer();
+    const currentCell =
+      currentPlayer.moveCells[currentPlayer.moveCells.length - 1];
+    const cellData = this.board.getCellDataByPosition(currentCell)!;
+    if (cellData.type === 'company') {
+      const company = this.board.getCompanyPriceByPosition(currentCell)!;
+      const rentPrice = this.board.getRentPrice(cellData, company);
+      currentPlayer.withdraw(rentPrice);
 
-    currentPlayer.withdraw(currentPlayer.payRentPrice);
-    currentPlayer.resetUI();
+      const ownerId = this.board.getOwnerIdByPosition(
+        currentPlayer.getCurrentCell(),
+      );
 
-    const ownerId = this.board.getOwnerIdByPosition(
-      currentPlayer.getCurrentCell(),
-    );
+      if (ownerId) {
+        const playerOwner = this.getPlayer(ownerId);
 
-    if (ownerId) {
-      const playerOwner = this.getPlayer(ownerId);
-
-      playerOwner.deposit(currentPlayer.payRentPrice);
+        playerOwner.deposit(rentPrice);
+      }
     }
-
+    currentPlayer.setAvailableActions([]);
     this.setNextPlayerId();
   }
 

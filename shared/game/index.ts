@@ -2,6 +2,8 @@ import { CubesValueType } from '../board/cube';
 import { CellPosition } from '../board/cell';
 import { IBoard } from '../board/board';
 
+export type PlayerActions = 'rollDice' | 'buyCompany' | 'payRent';
+
 export interface IPlayer {
   id: string;
   joined: boolean;
@@ -9,12 +11,8 @@ export interface IPlayer {
   color: string;
   balance: number;
   moveCells: CellPosition[];
-  buyPrice: number;
-  payRentPrice: number;
 
-  showRollDice: boolean;
-  showBuyCompany: boolean;
-  showPayRent: boolean;
+  availableActions: Array<PlayerActions>;
 }
 
 export interface IGame {
