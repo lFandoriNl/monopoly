@@ -8,8 +8,6 @@ export class Player implements IPlayer {
   color = '';
   balance = 15000;
   moveCells: CellPosition[] = [];
-  buyPrice = 0;
-  payRentPrice = 0;
 
   availableActions: Array<PlayerActions> = [];
 

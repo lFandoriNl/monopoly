@@ -11,8 +11,6 @@ export interface IPlayer {
   color: string;
   balance: number;
   moveCells: CellPosition[];
-  buyPrice: number;
-  payRentPrice: number;
 
   availableActions: Array<PlayerActions>;
 }
