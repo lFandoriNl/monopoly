@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react';
+import { PlayerActions } from 'shared';
 import styled from 'styled-components/macro';
 
 import { gameStore } from '../../../core/game-store';
@@ -42,7 +43,7 @@ export const ActionsPopup = observer(() => {
         {gameStore.currentDiceValue.secondCube}
       </div>
 
-      {gameStore.currentPlayer?.showRollDice && (
+      {gameStore.currentPlayer?.availableActions.includes("rollDice") && (
         <ActionButton
           onClick={() => {
             enableChipAnimation();
@@ -53,11 +54,11 @@ export const ActionsPopup = observer(() => {
         </ActionButton>
       )}
 
-      {gameStore.currentPlayer?.showBuyCompany && (
+      {gameStore.currentPlayer?.availableActions.includes("buyCompany") && (
         <ActionButton onClick={playerEvents.buyCompany}>Купить</ActionButton>
       )}
 
-      {gameStore.currentPlayer?.showPayRent && (
+      {gameStore.currentPlayer?.availableActions.includes("payRent") && (
         <ActionButton onClick={playerEvents.payRent}>Оплатить</ActionButton>
       )}
     </Wrapper>
