@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react';
-import { PlayerActions } from 'shared';
 import styled from 'styled-components/macro';
 
 import { gameStore } from '../../../core/game-store';
@@ -33,8 +32,45 @@ const ActionButton = styled.button`
   }
 `;
 
+const getCurrentPositionPriceData = () => {
+  const { currentPlayer } = gameStore;
+
+  const currentPosition =
+    currentPlayer?.moveCells[currentPlayer.moveCells.length - 1];
+  if (currentPosition) {
+    return gameStore.board.cellsPriceData[currentPosition.order];
+  }
+  return null;
+};
+
+const renderBuyCompany = () => {
+  const priceData = getCurrentPositionPriceData();
+  if (priceData) {
+    return (
+      <ActionButton onClick={playerEvents.buyCompany}>
+        Купить за {priceData.cost} $
+      </ActionButton>
+    );
+  }
+
+  return <ActionButton onClick={playerEvents.buyCompany}>Купить</ActionButton>;
+};
+
+const renderPayRent = () => {
+  const priceData = getCurrentPositionPriceData();
+  if (priceData && priceData.type === 'Company') {
+    return (
+      <ActionButton onClick={playerEvents.payRent}>
+        Оплатить {priceData.rent0} $
+      </ActionButton>
+    );
+  }
+  return <ActionButton onClick={playerEvents.payRent}>Оплатить</ActionButton>;
+};
+
 export const ActionsPopup = observer(() => {
   const { enableChipAnimation } = gameSettingStore;
+  const { currentPlayer } = gameStore;
 
   return (
     <Wrapper>
@@ -43,7 +79,7 @@ export const ActionsPopup = observer(() => {
         {gameStore.currentDiceValue.secondCube}
       </div>
 
-      {gameStore.currentPlayer?.availableActions.includes("rollDice") && (
+      {currentPlayer?.availableActions.includes('rollDice') && (
         <ActionButton
           onClick={() => {
             enableChipAnimation();
@@ -54,13 +90,10 @@ export const ActionsPopup = observer(() => {
         </ActionButton>
       )}
 
-      {gameStore.currentPlayer?.availableActions.includes("buyCompany") && (
-        <ActionButton onClick={playerEvents.buyCompany}>Купить</ActionButton>
-      )}
+      {currentPlayer?.availableActions.includes('buyCompany') &&
+        renderBuyCompany()}
 
-      {gameStore.currentPlayer?.availableActions.includes("payRent") && (
-        <ActionButton onClick={playerEvents.payRent}>Оплатить</ActionButton>
-      )}
+      {currentPlayer?.availableActions.includes('payRent') && renderPayRent()}
     </Wrapper>
   );
 });
